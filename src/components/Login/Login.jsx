@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Select } from 'react-materialize';
 import classnames from "classnames";
-import { loginUser } from "../../actions/actions";
+import { loginUser, fetchUserRoles } from "../../actions/actions";
 
 class Login extends Component {
   constructor() {
@@ -21,7 +21,7 @@ class Login extends Component {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     } else {
-      
+      this.props.fetchUserRoles();
     }
   }
 
@@ -148,7 +148,8 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+const mapDispatchToProps = (dispatch) => ({
+  loginUser,
+  fetchUserRoles: () => dispatch(fetchUserRoles())
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

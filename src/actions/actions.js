@@ -70,3 +70,19 @@ export const logoutUser = () => dispatch => {
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
+
+export const fetchUserRoles = () => {
+  const url = `/api/roles`;
+  const payload = {
+    action: 'FETCH_USER_ROLES',
+    method: 'GET',
+    // apiConfig: {
+    //   headers: {
+    //     Accept: 'application/json'
+    //   }
+    // },
+    url
+
+  };
+  return { type: 'API_INVOCATION', payload };
+};

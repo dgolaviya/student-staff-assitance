@@ -1,0 +1,24 @@
+@function pow($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  }
+  @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+@function to-precision($val, $places) {
+  $x: pow(10, $places);
+  @return round($val * $x) / $x;
+}
+
+// Function to convert points to rem
+@function font-size-converter ($pts-size, $base-size: 16) {
+  @return to-precision(($pts-size * 1.33333 ) / $base-size, 1) + rem;
+}

@@ -1,0 +1,42 @@
+// Max Padding (margin & Padding)
+$maxPadding: 20;
+$paddingUnit: "px";
+
+// Site Font and sizes
+// Font size variables resembles font size in pt, base size considered 16px for rem
+$font: "PT Sans", sans-serif;
+
+
+$fs-label: .68rem;
+$fs-text-input: .875rem;
+$fs-button: .875rem;
+$fs-operation-lable:.875rem;
+$fs-operation-value:1.75rem;
+$fs-operation-value-small: 1.3rem;
+$fs-right-icon: .85rem;
+
+$text-color: #666;
+$input-background-color: #e4e4e4;
+
+//Colors
+$c-blue: #09f;
+$c-black: #333;
+$c-white: #fff;
+// start: tool tips, form validation, error msgs
+$c-green: #0c0;
+$c-red: #c00;
+$c-orange: #f90;
+// end
+$c-medium: #999;
+$c-light: #ccc;
+
+// labels
+$c-label: #666;
+
+// Link
+$c-link: $c-blue;
+$c-link-hover: #999;
+
+// Button
+$c-button: #fff;
+$c-button-bg: #09f;

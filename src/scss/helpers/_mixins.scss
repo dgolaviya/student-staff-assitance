@@ -1,0 +1,85 @@
+@mixin left($prefix, $property, $val) {
+  @if $val>0 {
+    .#{$prefix}l-#{$val} {
+      #{$property}-left: unquote($val + $paddingUnit);
+    }
+    @include left($prefix, $property, $val - 1);
+  }
+}
+
+@mixin right($prefix, $property, $val) {
+  @if $val>0 {
+    .#{$prefix}r-#{$val} {
+      #{$property}-right: unquote($val + $paddingUnit);
+    }
+    @include right($prefix, $property, $val - 1);
+  }
+}
+
+@mixin top($prefix, $property, $val) {
+  @if $val>0 {
+    .#{$prefix}t-#{$val} {
+      #{$property}-top: unquote($val + $paddingUnit);
+    }
+    @include top($prefix, $property, $val - 1);
+  }
+}
+
+@mixin bottom($prefix, $property, $val) {
+  @if $val>0 {
+    .#{$prefix}b-#{$val} {
+      #{$property}-bottom: unquote($val + $paddingUnit);
+    }
+    @include bottom($prefix, $property, $val - 1);
+  }
+}
+
+@mixin x($prefix, $property, $val) {
+  @if $val>0 {
+    .#{$prefix}x-#{$val} {
+      #{$property}-left: unquote($val + $paddingUnit);
+      #{$property}-right: unquote($val + $paddingUnit);
+    }
+    @include x($prefix, $property, $val - 1);
+  }
+}
+
+@mixin y($prefix, $property, $val) {
+  @if $val>0 {
+    .#{$prefix}y-#{$val} {
+      #{$property}-top: unquote($val + $paddingUnit);
+      #{$property}-bottom: unquote($val + $paddingUnit);
+    }
+    @include y($prefix, $property, $val - 1);
+  }
+}
+
+@mixin all($prefix, $property, $val) {
+  @if $val>0 {
+    .#{$prefix}-#{$val} {
+      #{$property}-top: unquote($val + $paddingUnit);
+      #{$property}-right: unquote($val + $paddingUnit);
+      #{$property}-bottom: unquote($val + $paddingUnit);
+      #{$property}-left: unquote($val + $paddingUnit);
+    }
+    @include all($prefix, $property, $val - 1);
+  }
+}
+
+@mixin base($prefix, $property, $max) {
+  @include left($prefix, $property, $max);
+  @include right($prefix, $property, $max);
+  @include top($prefix, $property, $max);
+  @include bottom($prefix, $property, $max);
+  @include x($prefix, $property, $max);
+  @include y($prefix, $property, $max);
+  @include all($prefix, $property, $max);
+}
+
+// Text truncate Mixin
+// Requires inline-block or block for proper styling
+@mixin text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

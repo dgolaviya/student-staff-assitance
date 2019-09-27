@@ -1,0 +1,45 @@
+@import "../../scss/globals";
+.dashboard {
+  height: 100%;
+  .left-menu {
+    padding: 0;
+    height: 100%;
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .avatar-image {
+        padding: 15px;
+        height: 170px;
+      }
+      .user-name {
+        color: white;
+        font-size: 2rem;
+      }
+      .user-skills {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1rem;
+        padding: 10px;
+      }
+    }
+    .menu-items {
+      border: none;
+      margin: 0;
+      .menu-item {
+        border: none;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        &:hover {
+          background-color: lightblue;
+        }
+      }
+    }
+  }
+  .content {
+    height: 100%;
+    overflow: auto;
+  }
+}

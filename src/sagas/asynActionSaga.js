@@ -68,8 +68,10 @@ function* invokeAPI(action) {
 
 function* asynActionSaga() {
   const actionQueue = yield actionChannel('API_INVOCATION');
-  const action = yield take(actionQueue);
-  yield fork(invokeAPI, action);
+  while(true) {
+    const action = yield take(actionQueue);
+    yield fork(invokeAPI, action);
+  }
 }
 
 export default asynActionSaga;

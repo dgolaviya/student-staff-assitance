@@ -1,17 +1,22 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Select } from 'react-materialize';
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { registerUser } from "../../actions/actions";
-import Navbar from '../Navbar';
+import { registerUser, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
 
 class Register extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
+      firstName: "",
+      lastName: "",
+      username: "",
       email: "",
+      mobile: "",
+      dept: "",
+      program: "",
       password: "",
       password2: "",
       errors: {}
@@ -20,16 +25,30 @@ class Register extends Component {
 
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       this.props.history.push("/dashboard");
+    }
+    else {
+      this.props.fetchDepartments();
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
+  fetchProgramsbyDept(e) {
+    this.setState({ [e.target.id]: e.target.value });
+    this.props.fetchProgramsbyDept(e.target.value);
+  }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.errors) {
+  //     this.setState({
+  //       errors: nextProps.errors
+  //     });
+  //   }
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.success) {
+      this.props.history.push("/login");
     }
   }
 
@@ -41,128 +60,203 @@ class Register extends Component {
     e.preventDefault();
 
     const newUser = {
-      name: this.state.name,
-      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      userName: this.state.username,
+      emailId: this.state.email,
+      mobileNo: this.state.mobile,
+      deptId: this.state.dept,
+      progId: this.state.program,
       password: this.state.password,
-      password2: this.state.password2
+      roleId: 3
     };
     this.props.registerUser(newUser, this.props.history);
-    console.log(newUser);
   };
 
   render() {
     const { errors } = this.state;
+    const { departments, programs } = this.props;
 
     return (
-      <>
-        <Navbar />
-        <div className="container">
-          <div className="row">
-            <div className="col s8 offset-s2">
-              <Link to="/" className="btn-flat waves-effect">
-                <i className="material-icons left">keyboard_backspace</i> Back to
-                home
-            </Link>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <h4>
-                  <b>Register</b> below
+      <div className="container">
+        <div className="row" style={{ marginTop: "4rem" }}>
+          <div className="col s8 offset-s2">
+            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <h4>
+                <b>Register</b> below
               </h4>
-                <p className="grey-text text-darken-1">
-                  Already have an account? <Link to="/login">Log in</Link>
-                </p>
-              </div>
-              <form noValidate onSubmit={this.onSubmit}>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.name}
-                    error={errors.name}
-                    id="name"
-                    type="text"
-                    className={classnames("", {
-                      invalid: errors.name
-                    })}
-                  />
-                  <label htmlFor="name">Name</label>
-                  <span className="red-text">{errors.name}</span>
-                </div>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    error={errors.email}
-                    id="email"
-                    className={classnames("", {
-                      invalid: errors.email
-                    })}
-                    type="email"
-                  />
-                  <label htmlFor="email">Email</label>
-                  <span className="red-text">{errors.email}</span>
-                </div>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.password}
-                    error={errors.password}
-                    id="password"
-                    type="password"
-                    className={classnames("", {
-                      invalid: errors.password
-                    })}
-                  />
-                  <label htmlFor="password">Password</label>
-                  <span className="red-text">{errors.password}</span>
-                </div>
-                <div className="input-field col s12">
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.password2}
-                    error={errors.password2}
-                    id="password2"
-                    type="password"
-                    className={classnames("", {
-                      invalid: errors.password2
-                    })}
-                  />
-                  <label htmlFor="password2">Confirm Password</label>
-                  <span className="red-text">{errors.password2}</span>
-                </div>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                  <button
-                    style={{
-                      width: "150px",
-                      borderRadius: "3px",
-                      letterSpacing: "1.5px",
-                      marginTop: "1rem"
-                    }}
-                    type="submit"
-                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                  >
-                    Sign up
-                </button>
-                </div>
-              </form>
+              <p className="grey-text text-darken-1">
+                Already have an account? <Link to="/login">Log in</Link>
+              </p>
             </div>
+            <form onSubmit={this.onSubmit}>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.firstName}
+                  error={errors.firstName}
+                  id="firstName"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.firstName
+                  })}
+                />
+                <label htmlFor="firstName">First Name</label>
+                <span className="red-text">{errors.firstName}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.lastName}
+                  error={errors.lastName}
+                  id="lastName"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.lastName
+                  })}
+                />
+                <label htmlFor="lastName">Last Name</label>
+                <span className="red-text">{errors.lastName}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.username}
+                  error={errors.username}
+                  id="username"
+                  type="text"
+                  className={classnames("", {
+                    invalid: errors.username
+                  })}
+                />
+                <label htmlFor="username">Username</label>
+                <span className="red-text">{errors.username}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  error={errors.email}
+                  id="email"
+                  className={classnames("", {
+                    invalid: errors.email
+                  })}
+                  type="email"
+                  required
+                />
+                <label htmlFor="email">Email</label>
+                <span className="red-text">{errors.email}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.mobile}
+                  error={errors.mobile}
+                  id="mobile"
+                  className={classnames("", {
+                    invalid: errors.mobile
+                  })}
+                  type="tel"
+                  required
+                />
+                <label htmlFor="mobile">Mobile Number</label>
+                <span className="red-text">{errors.mobile}</span>
+              </div>
+              <Select
+                s={12}
+                value={this.state.dept}
+                id="dept"
+                onChange={(event) => this.fetchProgramsbyDept(event)}
+              >
+                <option value="" disabled>Select department</option>
+                {
+                  departments.map((dept) => {
+                    return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>
+                  })
+                }
+              </Select>
+              <Select
+                s={12}
+                value={this.state.program}
+                id="program"
+                onChange={this.onChange}
+              >
+                <option value="" disabled>Select program</option>
+                {
+                  programs.map((prog) => {
+                    return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>
+                  })
+                }
+              </Select>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.password}
+                  error={errors.password}
+                  id="password"
+                  type="password"
+                  className={classnames("", {
+                    invalid: errors.password
+                  })}
+                />
+                <label htmlFor="password">Password</label>
+                <span className="red-text">{errors.password}</span>
+              </div>
+              <div className="input-field col s12">
+                <input
+                  onChange={this.onChange}
+                  value={this.state.password2}
+                  error={errors.password2}
+                  id="password2"
+                  type="password"
+                  className={classnames("", {
+                    invalid: errors.password2
+                  })}
+                />
+                <label htmlFor="password2">Confirm Password</label>
+                <span className="red-text">{errors.password2}</span>
+              </div>
+              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                <button
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem"
+                  }}
+                  type="submit"
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  Sign up
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  fetchDepartments: PropTypes.func.isRequired,
+  fetchProgramsbyDept: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
+  departments: state.auth.departments,
+  programs: state.auth.programs,
   errors: state.errors
 });
 
-export default connect(
-  mapStateToProps,
-  { registerUser }
-)(withRouter(Register));
+
+const mapDispatchToProps = (dispatch) => ({
+  registerUser: (userData, history) => dispatch(registerUser(userData, history)),
+  fetchDepartments: () => dispatch(fetchDepartments()),
+  fetchProgramsbyDept: (deptId) => dispatch(fetchProgramsbyDept(deptId))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

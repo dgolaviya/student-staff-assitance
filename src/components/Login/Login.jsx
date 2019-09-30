@@ -10,7 +10,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
+      userNameOrEmailId: "",
       password: "",
       errors: {}
     };
@@ -18,7 +18,7 @@ class Login extends Component {
 
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       this.props.history.push("/dashboard");
     } else {
       this.props.fetchUserRoles();
@@ -26,7 +26,7 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+    if (nextProps.isAuthenticated) {
       this.props.history.push("/dashboard"); // push user to dashboard when they login
     }
 
@@ -43,13 +43,11 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const userData = {
-      email: this.state.email,
+      userNameOrEmailId: this.state.userNameOrEmailId,
       password: this.state.password
     };
     this.props.loginUser(userData);
-    console.log(userData);
   };
 
   render() {
@@ -67,19 +65,20 @@ class Login extends Component {
                 Don't have an account? <Link to="/register">Register</Link>
               </p>
             </div>
-            <form noValidate onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit}>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
-                  value={this.state.email}
+                  value={this.state.userNameOrEmailId}
                   error={errors.email}
-                  id="email"
-                  type="email"
+                  id="userNameOrEmailId"
+                  type="text"
                   className={classnames("", {
                     invalid: errors.email || errors.emailnotfound
                   })}
+                  required
                 />
-                <label htmlFor="email">Email</label>
+                <label htmlFor="userNameOrEmailId">Email or Username</label>
                 <span className="red-text">
                   {errors.email}
                   {errors.emailnotfound}
@@ -95,6 +94,7 @@ class Login extends Component {
                   className={classnames("", {
                     invalid: errors.password || errors.passwordincorrect
                   })}
+                  required
                 />
                 <label htmlFor="password">Password</label>
                 <span className="red-text">
@@ -102,15 +102,6 @@ class Login extends Component {
                   {errors.passwordincorrect}
                 </span>
               </div>
-              <Select
-                s={12}
-                value=""
-                onChange={() => { }}
-              >
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </Select>
               <span className="red-text">
                 {errors.password}
                 {errors.passwordincorrect}
@@ -139,17 +130,18 @@ class Login extends Component {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
   errors: state.errors
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser,
-  fetchUserRoles: () => dispatch(fetchUserRoles())
+  loginUser: (userData) => dispatch(loginUser(userData)),
+  // loginUser,
+fetchUserRoles: () => dispatch(fetchUserRoles())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

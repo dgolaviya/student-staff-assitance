@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import classNames from 'classnames'
 class MenuItem extends Component {
   render() {
     const {color, icon, title, onClickItem} = this.props;

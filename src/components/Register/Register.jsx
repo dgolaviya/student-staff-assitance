@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Select } from 'react-materialize';
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { registerUser, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
+import { registerUser, fetchUserRoles, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
 
 class Register extends Component {
   constructor() {
@@ -19,7 +19,9 @@ class Register extends Component {
       program: "",
       password: "",
       password2: "",
-      errors: {}
+      userType: "",
+      errors: {},
+      hideDeptProg: false
     };
   }
 
@@ -30,6 +32,7 @@ class Register extends Component {
     }
     else {
       this.props.fetchDepartments();
+      this.props.fetchUserRoles();
     }
   }
 
@@ -53,7 +56,14 @@ class Register extends Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.id]: e.target.value });
+    this.setState({ [e.target.id]: e.target.value }, () => {
+      if (this.state.userType === '2') {
+        this.setState({ hideDeptProg: true });
+      }
+      else {
+        this.setState({ hideDeptProg: false });
+      }
+    });
   };
 
   onSubmit = e => {
@@ -68,14 +78,14 @@ class Register extends Component {
       deptId: this.state.dept,
       progId: this.state.program,
       password: this.state.password,
-      roleId: 3
+      roleId: this.state.userType
     };
     this.props.registerUser(newUser, this.props.history);
   };
 
   render() {
     const { errors } = this.state;
-    const { departments, programs } = this.props;
+    const { departments, programs, userRoles } = this.props;
 
     return (
       <div className="container">
@@ -132,6 +142,19 @@ class Register extends Component {
                 <label htmlFor="username">Username</label>
                 <span className="red-text">{errors.username}</span>
               </div>
+              <Select
+                s={12}
+                value={this.state.userType}
+                id="userType"
+                onChange={this.onChange}
+              >
+                <option value="" disabled>Select user type</option>
+                {
+                  userRoles.map((role) => {
+                    return <option value={role.roleId} key={role.roleId}>{role.type}</option>
+                  })
+                }
+              </Select>
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
@@ -162,32 +185,36 @@ class Register extends Component {
                 <label htmlFor="mobile">Mobile Number</label>
                 <span className="red-text">{errors.mobile}</span>
               </div>
-              <Select
-                s={12}
-                value={this.state.dept}
-                id="dept"
-                onChange={(event) => this.fetchProgramsbyDept(event)}
-              >
-                <option value="" disabled>Select department</option>
-                {
-                  departments.map((dept) => {
-                    return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>
-                  })
-                }
-              </Select>
-              <Select
-                s={12}
-                value={this.state.program}
-                id="program"
-                onChange={this.onChange}
-              >
-                <option value="" disabled>Select program</option>
-                {
-                  programs.map((prog) => {
-                    return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>
-                  })
-                }
-              </Select>
+              {!this.state.hideDeptProg ?
+                <>
+                  <Select
+                    s={12}
+                    value={this.state.dept}
+                    id="dept"
+                    onChange={(event) => this.fetchProgramsbyDept(event)}
+                  >
+                    <option value="" disabled>Select department</option>
+                    {
+                      departments.map((dept) => {
+                        return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>
+                      })
+                    }
+                  </Select>
+                  <Select
+                    s={12}
+                    value={this.state.program}
+                    id="program"
+                    onChange={this.onChange}
+                  >
+                    <option value="" disabled>Select program</option>
+                    {
+                      programs.map((prog) => {
+                        return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>
+                      })
+                    }
+                  </Select>
+                </>
+                : null}
               <div className="input-field col s12">
                 <input
                   onChange={this.onChange}
@@ -243,6 +270,7 @@ Register.propTypes = {
   fetchDepartments: PropTypes.func.isRequired,
   fetchProgramsbyDept: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  userRoles: PropTypes.array.isRequired,
   errors: PropTypes.object.isRequired
 };
 
@@ -250,12 +278,14 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   departments: state.auth.departments,
   programs: state.auth.programs,
+  userRoles: state.auth.userRoles.filter(role => role.type !== 'admin'),
   errors: state.errors
 });
 
 
 const mapDispatchToProps = (dispatch) => ({
   registerUser: (userData, history) => dispatch(registerUser(userData, history)),
+  fetchUserRoles: () => dispatch(fetchUserRoles()),
   fetchDepartments: () => dispatch(fetchDepartments()),
   fetchProgramsbyDept: (deptId) => dispatch(fetchProgramsbyDept(deptId))
 });

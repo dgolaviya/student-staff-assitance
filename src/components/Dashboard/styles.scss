@@ -41,5 +41,16 @@
   .content {
     height: 100%;
     overflow: auto;
+    .item-card {
+      border-radius: 5px;
+      .card-content div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .card-header {
+          font-size: 48px;
+        }
+      }
+    }
   }
 }

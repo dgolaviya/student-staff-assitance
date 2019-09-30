@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Card, Row, Col, Icon } from 'react-materialize';
 import { logoutUser } from "../../actions/actions";
 import MenuItem from '../MenuItem/MenuItem';
 import './styles.scss';
@@ -25,6 +26,11 @@ const menuItems = [
     title: 'Skills',
     icon: 'web',
     color: 'blue-text'
+  },
+  {
+    title: 'Logout',
+    icon: 'exit_to_app',
+    color: 'black-text'
   }
 ];
 
@@ -52,7 +58,7 @@ class Dashboard extends Component {
     return (
       <div className="row dashboard">
         <div className="left-menu col s4 m3 l2">
-          <div className="user-details red">
+          <div className="user-details">
             <img
               className="avatar-image circle responsive-img"
               alt=""
@@ -64,25 +70,90 @@ class Dashboard extends Component {
               <b>Computer Engineer</b>
             </div>
           </div>
-          <ul className="collection menu-items">
-            {menuItems.map(item =>
-              <MenuItem
-                key={item.title}
-                icon={item.icon}
-                color={item.color}
-                title={item.title}
-                onClickItem={this.onClickItem}
-              />)}
-          </ul>
+          <div>
+            <ul className="collection menu-items">
+              {menuItems.map(item =>
+                <MenuItem
+                  key={item.title}
+                  icon={item.icon}
+                  color={item.color}
+                  title={item.title}
+                  onClickItem={this.onClickItem}
+                />)}
+            </ul>
+          </div>
         </div>
         <div className="content col s8 m9 l10">
-          Content to be placed
-          <div
-            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            onClick={this.onLogoutClick}
-          >
-            Logout
-          </div>
+          {/* <Row>
+            <Col>
+              <div
+                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                onClick={this.onLogoutClick}
+              >Logout</div>
+
+            </Col>
+
+          </Row> */}
+          <Row style={{ padding: '0 25px' }}>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>account_circle</Icon>
+                <div className="card-header">30</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>android</Icon>
+                <div className="card-header">40</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>announcement</Icon>
+                <div className="card-header">10</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>assignment</Icon>
+                <div className="card-header">50</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+          </Row>
+          <Row style={{ padding: '0 25px' }}>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>assignment_turned_in</Icon>
+                <div className="card-header">20</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>build</Icon>
+                <div className="card-header">30</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>description</Icon>
+                <div className="card-header">30</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+            <Col m={3} s={6}>
+              <Card className="blue item-card lighten-2">
+                <Icon large>help</Icon>
+                <div className="card-header">30</div>
+                <div>This is simple card</div>
+              </Card>
+            </Col>
+          </Row>
         </div>
       </div>
     );

@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isAuthenticated: !isEmpty(action.payload),
-        user: action.payload
+        user: JSON.parse(action.payload)
       };
     case USER_LOADING:
       return {
@@ -71,6 +71,7 @@ export default function (state = initialState, action) {
         user: {}
       }
     case LOGIN_USER_SUCCESS:
+      localStorage.setItem('user', JSON.stringify(action.payload.data.data));
       return {
         ...state,
         loading: false,

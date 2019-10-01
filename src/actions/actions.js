@@ -64,10 +64,10 @@ export const loginUser = (userData) => {
 // };
 
 // Set logged in user
-export const setCurrentUser = decoded => {
+export const setCurrentUser = user => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    payload: user
   };
 };
 
@@ -79,14 +79,10 @@ export const setUserLoading = () => {
 };
 
 // Log user out
-export const logoutUser = () => dispatch => {
-  console.log('logout');
+export const logoutUser = () => {
   // Remove token from local storage
-  localStorage.removeItem("jwtToken");
-  // Remove auth header for future requests
-  setAuthToken(false);
-  // Set current user to empty object {} which will set isAuthenticated to false
-  dispatch(setCurrentUser({}));
+  localStorage.removeItem("user");
+  // dispatch(setCurrentUser({}));
 };
 
 export const fetchUserRoles = () => {

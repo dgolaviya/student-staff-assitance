@@ -1,0 +1,13 @@
+@import "../../scss/globals";
+.modal-success-icon {
+  color: green;
+}
+.modal-error-icon {
+  color: red;
+}
+.modal-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 32px;
+}

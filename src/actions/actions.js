@@ -5,7 +5,9 @@ import jwt_decode from "jwt-decode";
 import {
   GET_ERRORS,
   SET_CURRENT_USER,
-  USER_LOADING
+  USER_LOADING,
+  LOGOUT_USER,
+  RESET_AUTH_ERROR
 } from "./types";
 
 // Register User
@@ -96,6 +98,7 @@ export const loginUser = (userData) => {
 
 // Set logged in user
 export const setCurrentUser = user => {
+  console.log('user', user);
   return {
     type: SET_CURRENT_USER,
     payload: user
@@ -113,6 +116,7 @@ export const setUserLoading = () => {
 export const logoutUser = () => {
   // Remove token from local storage
   localStorage.removeItem("user");
+  return { type: LOGOUT_USER };;
   // dispatch(setCurrentUser({}));
 };
 
@@ -145,3 +149,4 @@ export const fetchProgramsbyDept = (deptId) => {
   };
   return { type: 'API_INVOCATION', payload };
 };
+export const resetAuthError = () => ({ type: RESET_AUTH_ERROR })

@@ -16,7 +16,7 @@ import './App.css';
 if (!localStorage.getItem('user')) {
   // Logout user
   // store.dispatch(logoutUser());
-  store.dispatch(setCurrentUser({}))
+  store.dispatch(setCurrentUser(JSON.stringify({})))
   // Redirect to login
   // window.location.href = "./login";
 }

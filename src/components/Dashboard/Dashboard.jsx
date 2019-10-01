@@ -48,9 +48,13 @@ class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
+    this.props.history.push("/login");
   };
 
-  onClickItem = (title) => () => {
+  onClickItem = (title) => (e) => {
+    if(title==="Logout") {
+      this.onLogoutClick(e)
+    }
     this.setState({ selectedMenuItem: title });
   };
 
@@ -93,12 +97,6 @@ class Dashboard extends Component {
         </div>
         <div className="content col s8 m9 l10">
           {renderComponent}
-          <div
-            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            onClick={this.onLogoutClick}
-          >
-            Logout
-          </div>
         </div>
       </div>
     );

@@ -5,7 +5,7 @@ import { Select } from 'react-materialize';
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { registerUser, fetchUserRoles, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
-
+import ModalDialog from '../ModalDialog';
 class Register extends Component {
   constructor() {
     super();
@@ -21,7 +21,8 @@ class Register extends Component {
       password2: "",
       userType: "",
       errors: {},
-      hideDeptProg: false
+      hideDeptProg: false,
+      showModal: false
     };
   }
 
@@ -81,12 +82,16 @@ class Register extends Component {
       roleId: this.state.userType
     };
     this.props.registerUser(newUser, this.props.history);
+    this.setState({ showModal: true });
   };
+
+  resetShowModal = () => {
+    this.setState({ showModal: false });
+  }
 
   render() {
     const { errors } = this.state;
     const { departments, programs, userRoles } = this.props;
-
     return (
       <div className="container">
         <div className="row" style={{ marginTop: "4rem" }}>
@@ -252,10 +257,16 @@ class Register extends Component {
                     marginTop: "1rem"
                   }}
                   type="submit"
+                  href="#modal-dialog"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Sign up
                 </button>
+                <ModalDialog
+                  resetShowModal={this.resetShowModal}
+                  history={this.props.history}
+                  open={this.state.showModal}
+                />
               </div>
             </form>
           </div>

@@ -4,7 +4,8 @@ import {
   USER_LOADING,
   FETCH_USER_ROLES_SUCCESS, FETCH_DEPARTMENTS_SUCCESS, FETCH_PROGRAMS_SUCCESS,
   REGISTER_USER_PENDING, REGISTER_USER_SUCCESS, REGISTER_USER_FAILED,
-  LOGIN_USER_PENDING, LOGIN_USER_SUCCESS, LOGIN_USER_FAILED
+  LOGIN_USER_PENDING, LOGIN_USER_SUCCESS, LOGIN_USER_FAILED, LOGOUT_USER,
+  RESET_AUTH_ERROR
 } from "../actions/types";
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
   departments: [],
   programs: [],
   loading: false,
-  success: false
+  success: false,
+  error: undefined
 };
 
 export default function (state = initialState, action) {
@@ -22,7 +24,7 @@ export default function (state = initialState, action) {
     case SET_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: !isEmpty(action.payload),
+        isAuthenticated: !isEmpty(JSON.parse(action.payload)),
         user: JSON.parse(action.payload)
       };
     case USER_LOADING:
@@ -49,21 +51,24 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
-        success: false
+        success: false,
+        error: undefined
       }
     case REGISTER_USER_SUCCESS:
       return {
         ...state,
         loading: false,
-        success: true
+        success: true,
+        error: undefined
       }
     case REGISTER_USER_FAILED:
       return {
         ...state,
         loading: false,
-        success: false
+        success: false,
+        error: action.payload.response.message
       }
-      case LOGIN_USER_PENDING:
+    case LOGIN_USER_PENDING:
       return {
         ...state,
         loading: true,
@@ -84,6 +89,14 @@ export default function (state = initialState, action) {
         loading: false,
         isAsuthenticated: false
       }
+    case LOGOUT_USER:
+      return { ...initialState }
+    case RESET_AUTH_ERROR: {
+      return {
+        ...state,
+        error: undefined
+      };
+    }
     default:
       return state;
   }

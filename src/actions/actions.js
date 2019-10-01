@@ -28,6 +28,37 @@ export const registerUser = (userData, history) => {
   return { type: 'API_INVOCATION', payload };
 };
 
+export const createCourse = (course, deptId, progId) => {
+  const url = `/api/departments/${deptId}/programs/${progId}/courses`;
+  const payload = {
+    action: 'CREATE_COURSE',
+    method: 'POST',
+    url,
+    data: course
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
+export const deleteCourse = (courseId) => {
+  const url = `/api/courses/${courseId}`;
+  const payload = {
+    action: 'DELETE_COURSE',
+    method: 'DELETE',
+    url
+  };
+  return { type: 'API_INVOCATION', payload, courseId };
+};
+
+export const getCourses = () => {
+  const url = `/api/courses`;
+  const payload = {
+    action: 'FETCH_COURSES',
+    method: 'GET',
+    url
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
 export const loginUser = (userData) => {
   const url = `/api/users/login?userNameOrEmailId=${userData.userNameOrEmailId}&password=${userData.password}`;
   const payload = {

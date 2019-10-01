@@ -27,7 +27,7 @@ export class ModalDialog extends Component {
             'modal-success-icon': !error
           })} medium>{error ? 'error' : 'check_circle'}</Icon>
           {error ? <div className="px-10">Opps!! Something went wrong</div> :
-            <div className="px-13">User registerd successfully</div>}
+            <div className="px-13">User registerd successfully. Please Login</div>}
         </div>
       </Modal>
     )

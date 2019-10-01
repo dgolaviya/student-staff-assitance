@@ -1,33 +1,39 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link, Route } from 'react-router-dom';
 import { logoutUser } from "../../actions/actions";
 import MenuItem from '../MenuItem/MenuItem';
 import StudentDashboard from '../StudentDashboard';
 import AdminDashboard from '../AdminDashboard';
 import StaffDashboard from '../StaffDashboard';
+import EditProfile from '../EditProfile';
 import './styles.scss';
 
 const menuItems = [
   {
     title: 'Profile',
-    icon: 'person',
-    color: 'red-text'
+    icon: 'edit',
+    color: 'red-text',
+    url: '/dashboard/profile'
   },
   {
-    title: 'Experience',
+    title: 'Admin',
     icon: 'history',
-    color: 'purple-text'
+    color: 'purple-text',
+    url: '/dashboard/admin'
   },
   {
-    title: 'Projects',
+    title: 'Staff',
     icon: 'collections',
-    color: 'green-text'
+    color: 'green-text',
+    url: '/dashboard/staff'
   },
   {
-    title: 'Skills',
+    title: 'Student',
     icon: 'web',
-    color: 'blue-text'
+    color: 'blue-text',
+    url: '/dashboard/student'
   },
   {
     title: 'Logout',
@@ -52,7 +58,7 @@ class Dashboard extends Component {
   };
 
   onClickItem = (title) => (e) => {
-    if(title==="Logout") {
+    if (title === "Logout") {
       this.onLogoutClick(e)
     }
     this.setState({ selectedMenuItem: title });
@@ -60,13 +66,6 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-    let renderComponent = <StudentDashboard />;
-    if (user.roleId === '1') {
-      renderComponent = <AdminDashboard />;
-    } else if (user.roleId === '2') {
-      renderComponent = <StaffDashboard />;
-    }
-
     return (
       <div className="row dashboard">
         <div className="left-menu col s4 m3 l2">
@@ -85,18 +84,25 @@ class Dashboard extends Component {
           <div>
             <ul className="collection menu-items">
               {menuItems.map(item =>
-                <MenuItem
-                  key={item.title}
-                  icon={item.icon}
-                  color={item.color}
-                  title={item.title}
-                  onClickItem={this.onClickItem}
-                />)}
+                <Link to={item.url}>
+                  <MenuItem
+                    key={item.title}
+                    icon={item.icon}
+                    color={item.color}
+                    title={item.title}
+                    onClickItem={this.onClickItem}
+                  />
+                </Link>
+              )}
             </ul>
           </div>
         </div>
         <div className="content col s8 m9 l10">
-          {renderComponent}
+          {/* {renderComponent} */}
+          <Route exact path="/dashboard/profile" component={EditProfile} />
+          <Route exact path="/dashboard/student" component={StudentDashboard} />
+          <Route exact path="/dashboard/staff" component={StaffDashboard} />
+          <Route exact path="/dashboard/admin" component={AdminDashboard} />
         </div>
       </div>
     );

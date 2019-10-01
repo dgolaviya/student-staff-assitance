@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/actions";
 import MenuItem from '../MenuItem/MenuItem';
+import StudentDashboard from '../StudentDashboard';
+import AdminDashboard from '../AdminDashboard';
+import StaffDashboard from '../StaffDashboard';
 import './styles.scss';
 
 const menuItems = [
@@ -48,6 +51,12 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
+    let renderComponent = <StudentDashboard />;
+    if (user.roleId === '1') {
+      renderComponent = <AdminDashboard />;
+    } else if (user.roleId === '2') {
+      renderComponent = <StaffDashboard />;
+    }
 
     return (
       <div className="row dashboard">
@@ -76,7 +85,7 @@ class Dashboard extends Component {
           </ul>
         </div>
         <div className="content col s8 m9 l10">
-          Content to be placed
+          {renderComponent}
           <div
             className="btn btn-large waves-effect waves-light hoverable blue accent-3"
             onClick={this.onLogoutClick}

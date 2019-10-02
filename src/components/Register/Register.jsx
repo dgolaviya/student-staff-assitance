@@ -81,6 +81,10 @@ class Register extends Component {
       password: this.state.password,
       roleId: this.state.userType
     };
+    if(this.state.userType === "1" || this.state.userType === "2") {
+      delete newUser.deptId;
+      delete newUser.progId;
+    }
     this.props.registerUser(newUser, this.props.history);
     this.setState({ showModal: true });
   };

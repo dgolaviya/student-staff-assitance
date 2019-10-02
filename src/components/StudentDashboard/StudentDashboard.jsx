@@ -6,6 +6,7 @@ import EnrollCourse from '../EnrollCourse';
 import LeftMenu from '../LeftMenu';
 import EditProfile from '../EditProfile';
 import StudentLanding from './StudentLanding';
+import { logoutUser } from "../../actions/actions";
 
 const menuItems = [
   {
@@ -38,7 +39,7 @@ class StudentDashboard extends React.Component {
     const { user } = this.props.auth;
     return (
       <div className="row dashboard">
-        <LeftMenu menuItems={menuItems} user={user} />
+        <LeftMenu menuItems={menuItems} user={user} logoutUser={logoutUser} history={this.props.history} />
         <div className="content col s8 m9 l10">
           <Route exact path="/dashboard" component={StudentLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
@@ -59,5 +60,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { logoutUser }
 )(StudentDashboard);

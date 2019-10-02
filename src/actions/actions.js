@@ -7,7 +7,8 @@ import {
   SET_CURRENT_USER,
   USER_LOADING,
   LOGOUT_USER,
-  RESET_AUTH_ERROR
+  RESET_AUTH_ERROR,
+  UPDATE_USER
 } from "./types";
 
 // Register User
@@ -37,6 +38,17 @@ export const createCourse = (course, deptId, progId) => {
     method: 'POST',
     url,
     data: course
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
+export const updateUser = (userId, userData) => {
+  const url = `/api/users/${userId}`;
+  const payload = {
+    action: UPDATE_USER,
+    method: 'PUT',
+    url,
+    data: userData
   };
   return { type: 'API_INVOCATION', payload };
 };

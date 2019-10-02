@@ -257,7 +257,6 @@ class Register extends Component {
                     marginTop: "1rem"
                   }}
                   type="submit"
-                  href="#modal-dialog"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Sign up

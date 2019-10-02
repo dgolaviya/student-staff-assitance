@@ -6,7 +6,8 @@ import {
   REGISTER_USER_PENDING, REGISTER_USER_SUCCESS, REGISTER_USER_FAILED,
   LOGIN_USER_PENDING, LOGIN_USER_SUCCESS, LOGIN_USER_FAILED, LOGOUT_USER,
   RESET_AUTH_ERROR,
-  FETCH_AVATAR_IMAGE_SUCCESS
+  FETCH_AVATAR_IMAGE_SUCCESS,
+  RESET_PASSWORD_PENDING, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED
 } from "../actions/types";
 
 const initialState = {
@@ -64,6 +65,27 @@ export default function (state = initialState, action) {
         error: undefined
       }
     case REGISTER_USER_FAILED:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: action.payload.response.message
+      }
+      case RESET_PASSWORD_PENDING:
+      return {
+        ...state,
+        loading: true,
+        success: false,
+        error: undefined
+      }
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        error: undefined
+      }
+    case RESET_PASSWORD_FAILED:
       return {
         ...state,
         loading: false,

@@ -34,6 +34,16 @@ export const registerUser = (userData, history) => {
   return { type: 'API_INVOCATION', payload };
 };
 
+export const resetPassword = (emailId) => {
+  const url = `/api/emailId/${emailId}/forgetPassword`;
+  const payload = {
+    action: 'RESET_PASSWORD',
+    method: 'PUT',
+    url,
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
 export const createCourse = (course, deptId, progId) => {
   const url = `/api/departments/${deptId}/programs/${progId}/courses`;
   const payload = {

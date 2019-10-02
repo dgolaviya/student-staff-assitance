@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import jwt_decode from "jwt-decode";
 import Register from './components/Register';
 import Login from './components/Login';
+import ResetPassword from './components/ResetPassword';
 import store from './store';
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/actions";
@@ -45,6 +46,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/reset-password" component={ResetPassword} />
           <Switch>
             <PrivateRoute path="/dashboard" component={selectDashboard()} />
           </Switch>

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Toast } from 'react-materialize';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { loginUser, fetchUserRoles } from "../../actions/actions";
+import { resetPassword } from "../../actions/actions";
 
-class Login extends Component {
+class ResetPassword extends Component {
   constructor() {
     super();
     this.state = {
       userNameOrEmailId: "",
-      password: "",
-      errors: {}
+      errors: {},
+      success: false
     };
   }
 
@@ -19,8 +20,6 @@ class Login extends Component {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.isAuthenticated) {
       this.props.history.push("/dashboard");
-    } else {
-      this.props.fetchUserRoles();
     }
   }
 
@@ -36,17 +35,19 @@ class Login extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.success && !prevProps.success) {
+      this.setState({ success: true });
+    }
+  }
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 
   onSubmit = e => {
     e.preventDefault();
-    const userData = {
-      userNameOrEmailId: this.state.userNameOrEmailId,
-      password: this.state.password
-    };
-    this.props.loginUser(userData);
+    this.props.resetPassword(this.state.userNameOrEmailId);
   };
 
   render() {
@@ -54,14 +55,15 @@ class Login extends Component {
 
     return (
       <div className="container">
+        {this.state.success ? <Toast options={{ html: 'Success! Please check your email.' }} /> : null}
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
-                <b>Login</b> below
+                <b>Reset</b> password
               </h4>
               <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
+                Back to <Link to="/login">Login</Link>
               </p>
             </div>
             <form onSubmit={this.onSubmit}>
@@ -77,34 +79,12 @@ class Login extends Component {
                   })}
                   required
                 />
-                <label htmlFor="userNameOrEmailId">Email or Username</label>
+                <label htmlFor="userNameOrEmailId">Email</label>
                 <span className="red-text">
                   {errors.email}
                   {errors.emailnotfound}
                 </span>
               </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect
-                  })}
-                  required
-                />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">
-                  {errors.password}
-                  {errors.passwordincorrect}
-                </span>
-              </div>
-              <span className="red-text">
-                {errors.password}
-                {errors.passwordincorrect}
-              </span>
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <button
                   style={{
@@ -116,11 +96,8 @@ class Login extends Component {
                   type="submit"
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
-                  Login
+                  Reset
                 </button>
-                <p className="grey-text text-darken-1">
-                  Forgot password? <Link to="/reset-password">Reset password</Link>
-                </p>
               </div>
             </form>
           </div>
@@ -130,20 +107,15 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
-  errors: PropTypes.object.isRequired
+ResetPassword.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  errors: state.errors
+  errors: state.errors,
+  success: state.auth.success
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginUser: (userData) => dispatch(loginUser(userData)),
-  // loginUser,
-  fetchUserRoles: () => dispatch(fetchUserRoles())
+  resetPassword: (userNameOrEmailId) => dispatch(resetPassword(userNameOrEmailId))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);

@@ -12,13 +12,6 @@ const AdminLanding = (props) => {
             <div>Approve enrollment</div>
           </Card>
         </Col>
-        <Col m={3} s={6}>
-          <Card className="blue item-card lighten-2">
-            <Icon large>assignment</Icon>
-            <div className="card-header">50</div>
-            <div>This is simple card</div>
-          </Card>
-        </Col>
       </Row>
     </>
   );

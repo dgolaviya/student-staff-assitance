@@ -19,7 +19,7 @@ const menuItems = [
   {
     title: 'Profile',
     icon: 'edit',
-    color: 'red-text',
+    color: 'green-text',
     url: '/dashboard/profile'
   },
   {

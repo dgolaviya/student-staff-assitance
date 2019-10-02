@@ -8,7 +8,8 @@ import {
   USER_LOADING,
   LOGOUT_USER,
   RESET_AUTH_ERROR,
-  UPDATE_USER
+  UPDATE_USER,
+  UPLOAD_AVATAR
 } from "./types";
 
 // Register User
@@ -52,6 +53,18 @@ export const updateUser = (userId, userData) => {
   };
   return { type: 'API_INVOCATION', payload };
 };
+
+export const uploadAvatar = (userId, file) => {
+  const url = `/api/users/${userId}/avatar-img`;
+  const payload = {
+    action: UPLOAD_AVATAR,
+    method: 'POST',
+    url,
+    data: file
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
 
 export const deleteCourse = (courseId) => {
   const url = `/api/courses/${courseId}`;

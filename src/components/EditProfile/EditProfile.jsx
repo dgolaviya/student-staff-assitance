@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { TextInput, Select, Button } from 'react-materialize';
 
 import { updateUser, fetchUserRoles, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
+import AvatarImageUpload from '../AvatarImageUpload';
 import './styles.scss';
 class EditProfile extends Component {
   state = {
@@ -65,66 +66,69 @@ class EditProfile extends Component {
   render() {
     const { departments, programs } = this.props;
     return (
-      <form onSubmit={this.updateUserInfo} className="edit-profile-form">
-        <TextInput
-          id="firstName"
-          onChange={this.onChange}
-          label="First Name"
-          value={this.state.firstName}
-        />
-        <TextInput
-          id="lastName"
-          onChange={this.onChange}
-          label="Last Name"
-          value={this.state.lastName}
-        />
-        <TextInput
-          id="userName"
-          onChange={this.onChange}
-          label="User Name"
-          value={this.state.userName}
-        />
-        <TextInput
-          id="emailId"
-          onChange={this.onChange}
-          label="Email Id"
-          value={this.state.emailId}
-        />
-        <TextInput
-          id="mobileNo"
-          onChange={this.onChange}
-          label="Mobile No"
-          value={this.state.mobileNo}
-        />
-        <TextInput disabled label="User Type" value={this.state.userType} />
-        <Select
-          id="dept"
-          onChange={(event) => this.fetchProgramsbyDept(event)}
-        >
-          {
-            departments.map((dept) => {
-              return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>
-            })
-          }
-        </Select>
-        <Select
-          id="program"
-          onChange={this.onChange}
-        >
-          {
-            programs.map((prog) => {
-              return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>
-            })
-          }
-        </Select>
-        <Button
-          className="blue"
-          blue
-          large
-          waves="light"
-          type="submit"
-        >Save Changes</Button>
-      </form>
+      <div className="edit-profile">
+        <AvatarImageUpload />
+        <form onSubmit={this.updateUserInfo} className="edit-profile-form">
+          <TextInput
+            id="firstName"
+            onChange={this.onChange}
+            label="First Name"
+            value={this.state.firstName}
+          />
+          <TextInput
+            id="lastName"
+            onChange={this.onChange}
+            label="Last Name"
+            value={this.state.lastName}
+          />
+          <TextInput
+            id="userName"
+            onChange={this.onChange}
+            label="User Name"
+            value={this.state.userName}
+          />
+          <TextInput
+            id="emailId"
+            onChange={this.onChange}
+            label="Email Id"
+            value={this.state.emailId}
+          />
+          <TextInput
+            id="mobileNo"
+            onChange={this.onChange}
+            label="Mobile No"
+            value={this.state.mobileNo}
+          />
+          <TextInput disabled label="User Type" value={this.state.userType} />
+          <Select
+            id="dept"
+            onChange={(event) => this.fetchProgramsbyDept(event)}
+          >
+            {
+              departments.map((dept) => {
+                return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>
+              })
+            }
+          </Select>
+          <Select
+            id="program"
+            onChange={this.onChange}
+          >
+            {
+              programs.map((prog) => {
+                return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>
+              })
+            }
+          </Select>
+          <Button
+            className="blue"
+            blue
+            large
+            waves="light"
+            type="submit"
+          >Save Changes</Button>
+        </form>
+      </div>
     )
   }
 }

@@ -1,71 +1,67 @@
 import React from 'react';
-import { Card, Row, Col, Icon } from 'react-materialize';
+import PropTypes from "prop-types";
+import { Route } from 'react-router-dom';
+import { connect } from "react-redux";
+import EnrollCourse from '../EnrollCourse';
+import LeftMenu from '../LeftMenu';
+import EditProfile from '../EditProfile';
 
-const StudentDashboard = () => {
-  return (
-    <>
-    <Row style={{ padding: '0 25px' }}>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>account_circle</Icon>
-          <div className="card-header">30</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>android</Icon>
-          <div className="card-header">40</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>announcement</Icon>
-          <div className="card-header">10</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>assignment</Icon>
-          <div className="card-header">50</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-    </Row>
-    <Row style={{ padding: '0 25px' }}>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>assignment_turned_in</Icon>
-          <div className="card-header">20</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>build</Icon>
-          <div className="card-header">30</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>description</Icon>
-          <div className="card-header">30</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-      <Col m={3} s={6}>
-        <Card className="blue item-card lighten-2">
-          <Icon large>help</Icon>
-          <div className="card-header">30</div>
-          <div>This is simple card</div>
-        </Card>
-      </Col>
-    </Row>
-    </>
-  );
+const menuItems = [
+  {
+    title: 'Profile',
+    icon: 'edit',
+    color: 'red-text',
+    url: '/dashboard/profile'
+  },
+  {
+    title: 'Enroll Courses',
+    icon: 'history',
+    color: 'purple-text',
+    url: '/dashboard/enroll-course'
+  },
+  {
+    title: 'Staff',
+    icon: 'collections',
+    color: 'green-text',
+    url: '/dashboard/staff'
+  },
+  {
+    title: 'Student',
+    icon: 'web',
+    color: 'blue-text',
+    url: '/dashboard/student'
+  },
+  {
+    title: 'Logout',
+    icon: 'exit_to_app',
+    color: 'black-text',
+    url: ''
+  }
+];
+class StudentDashboard extends React.Component {
+  render() {
+    const { user } = this.props.auth;
+    return (
+      <div className="row dashboard">
+        <LeftMenu menuItems={menuItems} user={user} />
+        <div className="content col s8 m9 l10">
+          <Route exact path="/dashboard/profile" component={EditProfile} />
+          <Route exact path="/dashboard/enroll-course" component={EnrollCourse} />
+        </div>
+      </div>
+    );
+  }
 };
 
-export default StudentDashboard;
+StudentDashboard.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(StudentDashboard);

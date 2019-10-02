@@ -3,13 +3,15 @@ import {
   FETCH_COURSES_PENDING, FETCH_COURSES_SUCCESS, FETCH_COURSES_FAILED,
   CREATE_COURSE_PENDING, CREATE_COURSE_SUCCESS, CREATE_COURSE_FAILED,
   DELETE_COURSE_SUCCESS,
-  FETCH_ENROLLED_COURSES_SUCCESS,
-  FETCH_ENROLLED_COURSES_FAILED
+  FETCH_ENROLLED_COURSES_SUCCESS, FETCH_ENROLLED_COURSES_FAILED,
+  FETCH_AVAILABLE_COURSES_SUCCESS, FETCH_AVAILABLE_COURSES_FAILED,
+  ENROLL_COURSE_PENDING, ENROLL_COURSE_SUCCESS, ENROLL_COURSE_FAILED
 } from "../actions/types";
 
 const initialState = {
   courses: [],
   enrolledCourses: [],
+  availableCourses: [],
   loading: false,
   success: false
 };
@@ -37,16 +39,32 @@ export default function (state = initialState, action) {
         success: false
       }
     case FETCH_ENROLLED_COURSES_SUCCESS:
+      const enrolledCourseIds = action.payload.data.data.map(course => course.enrollCourseId.courseId);
+      const enrolledCourses = state.courses.filter(course => enrolledCourseIds.includes(course.courseId));
       return {
         ...state,
-        enrolledCourses: action.payload.data.data,
+        enrolledCourses,
         loading: false,
         success: true
       }
     case FETCH_ENROLLED_COURSES_FAILED:
       return {
         ...state,
-        enrolledCourses: action.payload.data.data,
+        enrolledCourses: [],
+        loading: false,
+        success: true
+      }
+    case FETCH_AVAILABLE_COURSES_SUCCESS:
+      return {
+        ...state,
+        availableCourses: action.payload.data.data,
+        loading: false,
+        success: true
+      }
+    case FETCH_AVAILABLE_COURSES_FAILED:
+      return {
+        ...state,
+        availableCourses: [],
         loading: false,
         success: true
       }
@@ -64,6 +82,25 @@ export default function (state = initialState, action) {
         success: true
       }
     case CREATE_COURSE_FAILED:
+      return {
+        ...state,
+        loading: false,
+        success: false
+      }
+    case ENROLL_COURSE_SUCCESS:
+      const enrolledCourseId = action.payload.data.data[0].enrollCourseId.courseId;
+      const enrolledCourse = state.courses.filter(course => course.courseId === enrolledCourseId);
+      const newEnrolledCourses = [
+        ...state.enrolledCourses,
+        ...enrolledCourse
+      ];
+      return {
+        ...state,
+        enrolledCourses: newEnrolledCourses,
+        loading: false,
+        success: true
+      }
+    case ENROLL_COURSE_FAILED:
       return {
         ...state,
         loading: false,

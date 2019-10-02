@@ -60,13 +60,34 @@ export const getCourses = () => {
   };
   return { type: 'API_INVOCATION', payload };
 };
-
 export const fetchEnrolledCourses = (userId) => {
   const url = `/api/users/${userId}/enrollCourses`;
   const payload = {
     action: 'FETCH_ENROLLED_COURSES',
     method: 'GET',
     url
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
+export const getAvailableCourses = (deptId, progId) => {
+  const url = `/api/departments/${deptId}/programs/${progId}/courses`;
+
+  const payload = {
+    action: 'FETCH_AVAILABLE_COURSES',
+    method: 'GET',
+    url
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
+export const enrollCourse = (userId, courseIds) => {
+  const url = `/api/users/${userId}/enrollCourses`;
+  const payload = {
+    action: 'ENROLL_COURSE',
+    method: 'POST',
+    url,
+    data: [courseIds]
   };
   return { type: 'API_INVOCATION', payload };
 };

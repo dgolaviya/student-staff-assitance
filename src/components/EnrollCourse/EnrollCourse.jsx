@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Select, Table, Tabs, Tab } from 'react-materialize';
-import { fetchEnrolledCourses } from "../../actions/actions";
+import { fetchEnrolledCourses, getAvailableCourses, enrollCourse, getCourses } from "../../actions/actions";
 
 class EnrollCourse extends React.Component {
   constructor(props) {
@@ -13,11 +13,18 @@ class EnrollCourse extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getCourses();
     this.props.fetchEnrolledCourses(this.props.user.userId);
+    this.props.getAvailableCourses(this.props.user.deptId, this.props.user.progId);
+  }
+
+  enrollCourse = (userId, courseIds) => () => {
+    console.log('enroll', userId, courseIds);
+    this.props.enrollCourse(userId, courseIds);
   }
 
   render() {
-    const { enrolledCourses } = this.props;
+    const { enrolledCourses, availableCourses } = this.props;
     return (
       <div className="container">
         <div className="row" style={{ marginTop: "4rem" }}>
@@ -31,6 +38,7 @@ class EnrollCourse extends React.Component {
                       <th>Sr. no.</th>
                       <th>Course name</th>
                       <th>Description</th>
+                      <th>Approved?</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -41,6 +49,7 @@ class EnrollCourse extends React.Component {
                             <td>{index + 1}</td>
                             <td>{course.courseName}</td>
                             <td>{course.courseDescription}</td>
+                            <th></th>
                           </tr>
                         );
                       })
@@ -49,7 +58,30 @@ class EnrollCourse extends React.Component {
                 </Table>
               </Tab>
               <Tab title="Enroll course">
-                Demo
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Sr. no.</th>
+                      <th>Course name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      availableCourses.map((course, index) => {
+                        return (
+                          <tr key={course.courseId}>
+                            <td>{index + 1}</td>
+                            <td>{course.courseName}</td>
+                            <td>{course.courseDescription}</td>
+                            <td><div onClick={this.enrollCourse(this.props.user.userId, course.courseId)}>Enroll</div></td>
+                          </tr>
+                        );
+                      })
+                    }
+                  </tbody>
+                </Table>
               </Tab>
             </Tabs>
           </div>
@@ -62,13 +94,20 @@ class EnrollCourse extends React.Component {
 EnrollCourse.propTypes = {
 };
 
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  enrolledCourses: state.course.enrolledCourses
-});
+const mapStateToProps = state => {
+  const enrolledCourseIds = state.course.enrolledCourses.map(course => course.courseId)
+  return ({
+    user: state.auth.user,
+    enrolledCourses: state.course.enrolledCourses,
+    availableCourses: state.course.availableCourses.filter(course => !enrolledCourseIds.includes(course.courseId))
+  })
+};
 
 
 const mapDispatchToProps = (dispatch) => ({
+  getCourses: () => dispatch(getCourses()),
   fetchEnrolledCourses: (userId) => dispatch(fetchEnrolledCourses(userId)),
+  enrollCourse: (userId, courseIds) => dispatch(enrollCourse(userId, courseIds)),
+  getAvailableCourses: (deptId, progId) => dispatch(getAvailableCourses(deptId, progId))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(EnrollCourse);

@@ -21,10 +21,10 @@ const menuItems = [
     url: '/dashboard/profile'
   },
   {
-    title: 'Enroll Courses',
+    title: 'Courses',
     icon: 'history',
     color: 'purple-text',
-    url: '/dashboard/enroll-course'
+    url: '/dashboard/courses'
   },
   {
     title: 'Logout',
@@ -42,7 +42,7 @@ class StudentDashboard extends React.Component {
         <div className="content col s8 m9 l10">
           <Route exact path="/dashboard" component={StudentLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
-          <Route exact path="/dashboard/enroll-course" component={EnrollCourse} />
+          <Route exact path="/dashboard/courses" component={EnrollCourse} />
         </div>
       </div>
     );

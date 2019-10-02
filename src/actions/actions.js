@@ -22,11 +22,6 @@ export const registerUser = (userData, history) => {
   const payload = {
     action: 'REGISTER_USER',
     method: 'POST',
-    // apiConfig: {
-    //   headers: {
-    //     Accept: 'application/json'
-    //   }
-    // },
     url,
     data: userData
 
@@ -176,6 +171,16 @@ export const approveEnrollment = (adminId, courseId, enrolledUserId) => {
       userId: enrolledUserId,
       courseId
     }
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
+export const getAllUsers = () => {
+  const url = `/api/users`;
+  const payload = {
+    action: 'GET_ALL_USERS',
+    method: 'GET',
+    url
   };
   return { type: 'API_INVOCATION', payload };
 };

@@ -2,9 +2,11 @@ import { combineReducers } from "redux";
 import authReducer from "./authReducers";
 import courseReducers from "./courseReducers";
 import errorReducer from "./errorReducers";
+import discussionThreadReducer from "./discussionThreadReducer";
 
 export default combineReducers({
   auth: authReducer,
   course: courseReducers,
-  errors: errorReducer
+  errors: errorReducer,
+  discussions: discussionThreadReducer
 });

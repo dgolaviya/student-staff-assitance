@@ -16,12 +16,11 @@ import {
 
 // Register User
 
-
 export const registerUser = (userData, history) => {
   const url = `/api/users`;
   const payload = {
-    action: 'REGISTER_USER',
-    method: 'POST',
+    action: "REGISTER_USER",
+    method: "POST",
     // apiConfig: {
     //   headers: {
     //     Accept: 'application/json'
@@ -29,167 +28,165 @@ export const registerUser = (userData, history) => {
     // },
     url,
     data: userData
-
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
-export const resetPassword = (emailId) => {
+export const resetPassword = emailId => {
   const url = `/api/emailId/${emailId}/forgetPassword`;
   const payload = {
-    action: 'RESET_PASSWORD',
-    method: 'PUT',
-    url,
+    action: "RESET_PASSWORD",
+    method: "PUT",
+    url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const createCourse = (course, deptId, progId) => {
   const url = `/api/departments/${deptId}/programs/${progId}/courses`;
   const payload = {
-    action: 'CREATE_COURSE',
-    method: 'POST',
+    action: "CREATE_COURSE",
+    method: "POST",
     url,
     data: course
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const updateUser = (userId, userData) => {
   const url = `/api/users/${userId}`;
   const payload = {
     action: UPDATE_USER,
-    method: 'PUT',
+    method: "PUT",
     url,
     data: userData
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const uploadAvatar = (userId, file) => {
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append("file", file);
   const url = `/api/users/${userId}/avatar-img`;
   const payload = {
     action: UPLOAD_AVATAR,
-    method: 'POST',
+    method: "POST",
     url,
     apiConfig: {
       headers: {
-        'content-type': 'multipart/form-data'
+        "content-type": "multipart/form-data"
       }
     },
     data: formData
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const changePassword = (userId, newPassword) => {
   const url = `/api/users/${userId}/changePassword?newPassword=${newPassword}`;
   const payload = {
     action: CHANGE_PASSWORD,
-    method: 'PUT',
+    method: "PUT",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
-export const fetchAvatarImage = (userId) => {
+export const fetchAvatarImage = userId => {
   const url = `/api/users/${userId}/avatar-img`;
   const payload = {
     action: FETCH_AVATAR_IMAGE,
-    method: 'GET',
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
-export const deleteCourse = (courseId) => {
+export const deleteCourse = courseId => {
   const url = `/api/courses/${courseId}`;
   const payload = {
-    action: 'DELETE_COURSE',
-    method: 'DELETE',
+    action: "DELETE_COURSE",
+    method: "DELETE",
     url
   };
-  return { type: 'API_INVOCATION', payload, courseId };
+  return { type: "API_INVOCATION", payload, courseId };
 };
 
 export const getCourses = () => {
   const url = `/api/courses`;
   const payload = {
-    action: 'FETCH_COURSES',
-    method: 'GET',
+    action: "FETCH_COURSES",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
-export const fetchEnrolledCourses = (userId) => {
+export const fetchEnrolledCourses = userId => {
   const url = `/api/users/${userId}/enrollCourses`;
   const payload = {
-    action: 'FETCH_ENROLLED_COURSES',
-    method: 'GET',
+    action: "FETCH_ENROLLED_COURSES",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const getAvailableCourses = (deptId, progId) => {
   const url = `/api/departments/${deptId}/programs/${progId}/courses`;
 
   const payload = {
-    action: 'FETCH_AVAILABLE_COURSES',
-    method: 'GET',
+    action: "FETCH_AVAILABLE_COURSES",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const getToApproveCourses = () => {
   const url = `/api/enrollCourses?approved=false`;
   const payload = {
-    action: 'GET_TO_APPROVE_COURSES',
-    method: 'GET',
+    action: "GET_TO_APPROVE_COURSES",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const enrollCourse = (userId, courseIds) => {
   const url = `/api/users/${userId}/enrollCourses`;
   const payload = {
-    action: 'ENROLL_COURSE',
-    method: 'POST',
+    action: "ENROLL_COURSE",
+    method: "POST",
     url,
     data: [courseIds]
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const approveEnrollment = (adminId, courseId, enrolledUserId) => {
   const url = `/api/users/${adminId}/approveCourse`;
   const payload = {
-    action: 'APPROVE_ENROLLMENT',
-    method: 'POST',
+    action: "APPROVE_ENROLLMENT",
+    method: "POST",
     url,
     data: {
       userId: enrolledUserId,
       courseId
     }
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
-export const loginUser = (userData) => {
+export const loginUser = userData => {
   const url = `/api/users/login?userNameOrEmailId=${userData.userNameOrEmailId}&password=${userData.password}`;
   const payload = {
-    action: 'LOGIN_USER',
-    method: 'GET',
+    action: "LOGIN_USER",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
-
 
 // Login - get user token
 // export const loginUser = userData => dispatch => {
@@ -234,37 +231,74 @@ export const setUserLoading = () => {
 export const logoutUser = () => {
   // Remove token from local storage
   localStorage.removeItem("user");
-  return { type: LOGOUT_USER };;
+  return { type: LOGOUT_USER };
   // dispatch(setCurrentUser({}));
 };
 
 export const fetchUserRoles = () => {
   const url = `/api/roles`;
   const payload = {
-    action: 'FETCH_USER_ROLES',
-    method: 'GET',
+    action: "FETCH_USER_ROLES",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
 export const fetchDepartments = () => {
   const url = `/api/departments`;
   const payload = {
-    action: 'FETCH_DEPARTMENTS',
-    method: 'GET',
+    action: "FETCH_DEPARTMENTS",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
 
-export const fetchProgramsbyDept = (deptId) => {
+export const fetchProgramsbyDept = deptId => {
   const url = `/api/departments/${deptId}/programs `;
   const payload = {
-    action: 'FETCH_PROGRAMS',
-    method: 'GET',
+    action: "FETCH_PROGRAMS",
+    method: "GET",
     url
   };
-  return { type: 'API_INVOCATION', payload };
+  return { type: "API_INVOCATION", payload };
 };
-export const resetAuthError = () => ({ type: RESET_AUTH_ERROR })
+export const resetAuthError = () => ({ type: RESET_AUTH_ERROR });
+
+export const fetchDiscussionThreads = () => {
+  const url = `/api/discussionThreads`;
+  const payload = {
+    action: "FETCH_DISCUSSION_THREADS",
+    method: "GET",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const createDiscussionThread = (data, userId) => {
+  const url = `/api/users/${userId}/discussionThreads`;
+  const payload = {
+    action: "CREATE_DISCUSSION_THREAD",
+    method: "POST",
+    url,
+    data: data
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const updateDiscussionThread = (data, userId) => {
+  console.log(data + userId);
+  const url = `/api/users/${userId}/discussionThreads/${data.discussionThreadId}`;
+  const payload = {
+    action: "UPDATE_DISCUSSION_THREAD",
+    method: "PUT",
+    url,
+    data: data
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const setDiscussionThreadEditId = discussionThreadId => {
+  return { type: "SET_DISCUSSION_THREAD_EDIT_ID", payload: discussionThreadId };
+};

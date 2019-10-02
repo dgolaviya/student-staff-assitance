@@ -49,7 +49,7 @@ class EnrollCourse extends React.Component {
                             <td>{index + 1}</td>
                             <td>{course.courseName}</td>
                             <td>{course.courseDescription}</td>
-                            <th></th>
+                            <td>{course.approved ? 'Yes' : 'No'}</td>
                           </tr>
                         );
                       })

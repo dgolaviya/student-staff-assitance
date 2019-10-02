@@ -40,10 +40,20 @@ export default function (state = initialState, action) {
       }
     case FETCH_ENROLLED_COURSES_SUCCESS:
       const enrolledCourseIds = action.payload.data.data.map(course => course.enrollCourseId.courseId);
+      let approveStatuses = {};
+      action.payload.data.data.forEach(course => (
+        approveStatuses = {...approveStatuses, [course.enrollCourseId.courseId]: course.approved}
+      ));
       const enrolledCourses = state.courses.filter(course => enrolledCourseIds.includes(course.courseId));
+      const updatedEnrolledCourses = enrolledCourses.map((course) => {
+        return {
+          ...course,
+          approved: approveStatuses[course.courseId]
+        }
+      });
       return {
         ...state,
-        enrolledCourses,
+        enrolledCourses: updatedEnrolledCourses,
         loading: false,
         success: true
       }

@@ -56,7 +56,7 @@ class EditProfile extends Component {
       emailId: this.state.emailId,
       mobileNo: this.state.mobileNo,
       deptId: e.target['dept'].value,
-      program: e.target['program'].value
+      progId: e.target['program'].value
     }
     this.props.updateUser(this.props.user.userId, userData);
   }

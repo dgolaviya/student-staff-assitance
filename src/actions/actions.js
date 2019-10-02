@@ -72,6 +72,7 @@ export const getCourses = () => {
   };
   return { type: 'API_INVOCATION', payload };
 };
+
 export const fetchEnrolledCourses = (userId) => {
   const url = `/api/users/${userId}/enrollCourses`;
   const payload = {
@@ -93,6 +94,16 @@ export const getAvailableCourses = (deptId, progId) => {
   return { type: 'API_INVOCATION', payload };
 };
 
+export const getToApproveCourses = () => {
+  const url = `/api/enrollCourses?approved=false`;
+  const payload = {
+    action: 'GET_TO_APPROVE_COURSES',
+    method: 'GET',
+    url
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
 export const enrollCourse = (userId, courseIds) => {
   const url = `/api/users/${userId}/enrollCourses`;
   const payload = {
@@ -100,6 +111,20 @@ export const enrollCourse = (userId, courseIds) => {
     method: 'POST',
     url,
     data: [courseIds]
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
+export const approveEnrollment = (adminId, courseId, enrolledUserId) => {
+  const url = `/api/users/${adminId}/approveCourse`;
+  const payload = {
+    action: 'APPROVE_ENROLLMENT',
+    method: 'POST',
+    url,
+    data: {
+      userId: enrolledUserId,
+      courseId
+    }
   };
   return { type: 'API_INVOCATION', payload };
 };

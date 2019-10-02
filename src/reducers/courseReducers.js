@@ -5,13 +5,15 @@ import {
   DELETE_COURSE_SUCCESS,
   FETCH_ENROLLED_COURSES_SUCCESS, FETCH_ENROLLED_COURSES_FAILED,
   FETCH_AVAILABLE_COURSES_SUCCESS, FETCH_AVAILABLE_COURSES_FAILED,
-  ENROLL_COURSE_PENDING, ENROLL_COURSE_SUCCESS, ENROLL_COURSE_FAILED
+  ENROLL_COURSE_PENDING, ENROLL_COURSE_SUCCESS, ENROLL_COURSE_FAILED, GET_TO_APPROVE_COURSES_SUCCESS, GET_TO_APPROVE_COURSES_FAILED,
+  APPROVE_ENROLLMENT_PENDING, APPROVE_ENROLLMENT_SUCCESS, APPROVE_ENROLLMENT_FAILED
 } from "../actions/types";
 
 const initialState = {
   courses: [],
   enrolledCourses: [],
   availableCourses: [],
+  toApproveCourses: [],
   loading: false,
   success: false
 };
@@ -42,7 +44,7 @@ export default function (state = initialState, action) {
       const enrolledCourseIds = action.payload.data.data.map(course => course.enrollCourseId.courseId);
       let approveStatuses = {};
       action.payload.data.data.forEach(course => (
-        approveStatuses = {...approveStatuses, [course.enrollCourseId.courseId]: course.approved}
+        approveStatuses = { ...approveStatuses, [course.enrollCourseId.courseId]: course.approved }
       ));
       const enrolledCourses = state.courses.filter(course => enrolledCourseIds.includes(course.courseId));
       const updatedEnrolledCourses = enrolledCourses.map((course) => {
@@ -78,6 +80,20 @@ export default function (state = initialState, action) {
         loading: false,
         success: true
       }
+    case GET_TO_APPROVE_COURSES_SUCCESS:
+      return {
+        ...state,
+        toApproveCourses: action.payload.data.data,
+        loading: false,
+        success: true
+      }
+    case GET_TO_APPROVE_COURSES_FAILED:
+      return {
+        ...state,
+        toApproveCourses: [],
+        loading: false,
+        success: true
+      }
     case CREATE_COURSE_PENDING:
       return {
         ...state,
@@ -85,9 +101,11 @@ export default function (state = initialState, action) {
         success: false
       }
     case CREATE_COURSE_SUCCESS:
+      console.log('state.courses', state.courses);
+      console.log('action.actioncourses', action.payload.data.data);
       return {
         ...state,
-        courses: [...state.courses, ...action.payload.data.data],
+        courses: [...state.courses, action.payload.data.data],
         loading: false,
         success: true
       }
@@ -111,6 +129,19 @@ export default function (state = initialState, action) {
         success: true
       }
     case ENROLL_COURSE_FAILED:
+      return {
+        ...state,
+        loading: false,
+        success: false
+      }
+    case APPROVE_ENROLLMENT_SUCCESS:
+      return {
+        ...state,
+        //courses: [...state.courses, ...action.payload.data.data],
+        loading: false,
+        success: true
+      }
+    case APPROVE_ENROLLMENT_FAILED:
       return {
         ...state,
         loading: false,

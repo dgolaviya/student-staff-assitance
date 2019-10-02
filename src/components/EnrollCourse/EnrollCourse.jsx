@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Select, Table, Tabs, Tab } from 'react-materialize';
+import { Table, Tabs, Tab } from 'react-materialize';
 import { fetchEnrolledCourses, getAvailableCourses, enrollCourse, getCourses } from "../../actions/actions";
 
 class EnrollCourse extends React.Component {

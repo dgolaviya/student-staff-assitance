@@ -6,6 +6,7 @@ import CreateCourse from '../CreateCourse';
 import LeftMenu from '../LeftMenu';
 import EditProfile from '../EditProfile';
 import AdminLanding from './AdminLanding';
+import ApproveEnrollment from '../ApproveEnrollment';
 import { logoutUser } from "../../actions/actions";
 
 const menuItems = [
@@ -56,6 +57,7 @@ class AdminDashboard extends React.Component {
           <Route exact path="/dashboard" component={AdminLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={CreateCourse} />
+          <Route exact path="/dashboard/approve-enrollment" component={ApproveEnrollment} />
         </div>
       </div>
     );

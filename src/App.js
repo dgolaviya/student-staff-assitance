@@ -29,6 +29,7 @@ else {
 const selectDashboard = () => {
   const { user } = store.getState().auth;
   let renderComponent = StudentDashboard;
+  console.log('user', user);
   if (user.roleId === '1') {
     renderComponent = AdminDashboard;
   } else if (user.roleId === '2') {

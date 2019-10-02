@@ -13,6 +13,7 @@ class ApproveEnrollment extends React.Component {
   }
   approveEnrollment = (courseId) => () => {
     this.props.approveEnrollment(this.props.user.userId, courseId, this.props.enrolledCourseIdUserIdMapping[courseId]);
+    this.props.getToApproveCourses();
   }
   render() {
     const { toApproveCourses, enrolledCourseIdUserIdMapping, studentUsers } = this.props;

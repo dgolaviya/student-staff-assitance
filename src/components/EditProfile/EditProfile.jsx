@@ -34,10 +34,6 @@ class EditProfile extends Component {
       });
     }
   }
-  fetchProgramsbyDept(e) {
-    this.setState({ [e.target.id]: e.target.value });
-    this.props.fetchProgramsbyDept(e.target.value);
-  }
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value }, () => {
       if (this.state.userType === '2') {
@@ -50,14 +46,17 @@ class EditProfile extends Component {
   };
   updateUserInfo = (e) => {
     e.preventDefault();
+    const { departments, programs } = this.props;
+    const department = departments.find(dept => dept.deptId === this.props.user.deptId) ? departments.find(dept => dept.deptId === this.props.user.deptId)['deptId'] : "";
+    const program = programs.find(prog => prog.progId === this.props.user.progId) ? programs.find(prog => prog.progId === this.props.user.progId)['progId'] : "";
     const userData = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       userName: this.state.userName,
       emailId: this.state.emailId,
       mobileNo: this.state.mobileNo,
-      deptId: e.target['dept'].value,
-      progId: e.target['program'].value,
+      deptId: department,
+      progId: program,
       roleId: this.props.user.roleId
     }
     this.props.updateUser(this.props.user.userId, userData);
@@ -65,6 +64,8 @@ class EditProfile extends Component {
 
   render() {
     const { departments, programs } = this.props;
+    const department = departments.find(dept => dept.deptId === this.props.user.deptId) ? departments.find(dept => dept.deptId === this.props.user.deptId)['deptName'] : "";
+    const program = programs.find(prog => prog.progId === this.props.user.progId) ? programs.find(prog => prog.progId === this.props.user.progId)['progName'] : "";
     return (
       <div className="edit-profile">
         <AvatarImageUpload />
@@ -100,26 +101,8 @@ class EditProfile extends Component {
             value={this.state.mobileNo}
           />
           <TextInput disabled label="User Type" value={this.state.userType} />
-          <Select
-            id="dept"
-            onChange={(event) => this.fetchProgramsbyDept(event)}
-          >
-            {
-              departments.map((dept) => {
-                return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>
-              })
-            }
-          </Select>
-          <Select
-            id="program"
-            onChange={this.onChange}
-          >
-            {
-              programs.map((prog) => {
-                return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>
-              })
-            }
-          </Select>
+          <TextInput disabled label="Department" value={department} />
+          <TextInput disabled label="Program" value={program} />
           <Button
             className="blue"
             blue

@@ -288,7 +288,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   departments: state.auth.departments,
   programs: state.auth.programs,
-  userRoles: state.auth.userRoles.filter(role => role.type !== 'admin'),
+  userRoles: state.auth.userRoles.filter(role => role.type.toLowerCase() !== 'admin'),
   errors: state.errors
 });
 

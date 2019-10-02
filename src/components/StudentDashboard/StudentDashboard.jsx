@@ -7,6 +7,7 @@ import LeftMenu from '../LeftMenu';
 import EditProfile from '../EditProfile';
 import StudentLanding from './StudentLanding';
 import { logoutUser } from "../../actions/actions";
+import ChangePassword from "../ChangePassword";
 
 const menuItems = [
   {
@@ -28,6 +29,12 @@ const menuItems = [
     url: '/dashboard/courses'
   },
   {
+    title: 'ChangePassword',
+    icon: 'history',
+    color: 'purple-text',
+    url: '/dashboard/changePassword'
+  },
+  {
     title: 'Logout',
     icon: 'exit_to_app',
     color: 'black-text',
@@ -44,6 +51,7 @@ class StudentDashboard extends React.Component {
           <Route exact path="/dashboard" component={StudentLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={EnrollCourse} />
+          <Route exact path="/dashboard/changePassword" component={ChangePassword} />
         </div>
       </div>
     );

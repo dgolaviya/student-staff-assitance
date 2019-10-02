@@ -10,6 +10,7 @@ import {
   RESET_AUTH_ERROR,
   UPDATE_USER,
   UPLOAD_AVATAR,
+  CHANGE_PASSWORD,
   FETCH_AVATAR_IMAGE
 } from "./types";
 
@@ -69,6 +70,16 @@ export const uploadAvatar = (userId, file) => {
       }
     },
     data: formData
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
+export const changePassword = (userId, newPassword) => {
+  const url = `/api/users/${userId}/changePassword?newPassword=${newPassword}`;
+  const payload = {
+    action: CHANGE_PASSWORD,
+    method: 'PUT',
+    url
   };
   return { type: 'API_INVOCATION', payload };
 };

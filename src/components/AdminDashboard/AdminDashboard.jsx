@@ -8,6 +8,7 @@ import EditProfile from '../EditProfile';
 import AdminLanding from './AdminLanding';
 import ApproveEnrollment from '../ApproveEnrollment';
 import { logoutUser } from "../../actions/actions";
+import ChangePassword from "../ChangePassword";
 
 const menuItems = [
   {
@@ -41,6 +42,12 @@ const menuItems = [
     url: '/dashboard/student'
   },
   {
+    title: 'ChangePassword',
+    icon: 'history',
+    color: 'purple-text',
+    url: '/dashboard/changePassword'
+  },
+  {
     title: 'Logout',
     icon: 'exit_to_app',
     color: 'black-text',
@@ -58,6 +65,7 @@ class AdminDashboard extends React.Component {
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={CreateCourse} />
           <Route exact path="/dashboard/approve-enrollment" component={ApproveEnrollment} />
+          <Route exact path="/dashboard/changePassword" component={ChangePassword} />
         </div>
       </div>
     );

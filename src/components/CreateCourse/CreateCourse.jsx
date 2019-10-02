@@ -56,7 +56,7 @@ class CreateCourse extends React.Component {
                     <tr>
                       <th>Sr. no.</th>
                       <th>Course name</th>
-                      <th>Item Price</th>
+                      <th>Description</th>
                       <th>Action</th>
                     </tr>
                   </thead>

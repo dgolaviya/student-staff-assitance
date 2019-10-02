@@ -61,6 +61,16 @@ export const getCourses = () => {
   return { type: 'API_INVOCATION', payload };
 };
 
+export const fetchEnrolledCourses = (userId) => {
+  const url = `/api/users/${userId}/enrollCourses`;
+  const payload = {
+    action: 'FETCH_ENROLLED_COURSES',
+    method: 'GET',
+    url
+  };
+  return { type: 'API_INVOCATION', payload };
+};
+
 export const loginUser = (userData) => {
   const url = `/api/users/login?userNameOrEmailId=${userData.userNameOrEmailId}&password=${userData.password}`;
   const payload = {

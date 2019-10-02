@@ -1,13 +1,18 @@
 import React from 'react';
 import MenuItem from '../MenuItem/MenuItem';
 import { NavLink } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import defaultAvatar from '../../assets/avatar.png';
+import { fetchAvatarImage } from '../../actions/actions'
 class LeftMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedMenuItem: 'Profile'
     }
+  }
+  componentDidMount() {
+    this.props.fetchAvatarImage(this.props.userId);
   }
 
   onLogoutClick = e => {
@@ -23,15 +28,20 @@ class LeftMenu extends React.Component {
     this.setState({ selectedMenuItem: title });
   };
   render() {
-    const { menuItems, user } = this.props;
+    const { menuItems, user, avatarDetail: { avatar, contentType }  } = this.props;
+    console.log(avatar);
     return (
       <div className="left-menu col s4 m3 l2">
         <div className="user-details">
-          <img
-            className="avatar-image circle responsive-img"
-            alt=""
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
-          />
+          {avatar ? <img
+              className="avatar-image circle responsive-img"
+              alt=""
+              src={`data:${contentType};base64, ${avatar}`}
+            /> : <img
+                className="avatar-image circle responsive-img"
+                alt=""
+                src={defaultAvatar}
+              />}
           <span className="user-name center-align"><b>{user.name}</b></span>
           <div className="user-skills black-text">
             <b>Full Stack Developer</b>
@@ -56,5 +66,12 @@ class LeftMenu extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  avatarDetail: state.auth.avatarDetail,
+  userId: state.auth.user.userId
+});
+const mapDispatchToProps = (dispatch) => ({
+  fetchAvatarImage: (userId) => dispatch(fetchAvatarImage(userId))
+});
 
-export default LeftMenu;
+export default connect(mapStateToProps, mapDispatchToProps)(LeftMenu);

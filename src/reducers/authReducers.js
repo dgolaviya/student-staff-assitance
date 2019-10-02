@@ -5,7 +5,8 @@ import {
   FETCH_USER_ROLES_SUCCESS, FETCH_DEPARTMENTS_SUCCESS, FETCH_PROGRAMS_SUCCESS,
   REGISTER_USER_PENDING, REGISTER_USER_SUCCESS, REGISTER_USER_FAILED,
   LOGIN_USER_PENDING, LOGIN_USER_SUCCESS, LOGIN_USER_FAILED, LOGOUT_USER,
-  RESET_AUTH_ERROR
+  RESET_AUTH_ERROR,
+  FETCH_AVATAR_IMAGE_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -16,7 +17,8 @@ const initialState = {
   programs: [],
   loading: false,
   success: false,
-  error: undefined
+  error: undefined,
+  avatarDetail: {}
 };
 
 export default function (state = initialState, action) {
@@ -74,6 +76,11 @@ export default function (state = initialState, action) {
         loading: true,
         isAuthenticated: false,
         user: {}
+      }
+    case FETCH_AVATAR_IMAGE_SUCCESS:
+      return {
+        ...state,
+        avatarDetail: action.payload.data.data
       }
     case LOGIN_USER_SUCCESS:
       localStorage.setItem('user', JSON.stringify(action.payload.data.data));

@@ -9,7 +9,8 @@ import {
   LOGOUT_USER,
   RESET_AUTH_ERROR,
   UPDATE_USER,
-  UPLOAD_AVATAR
+  UPLOAD_AVATAR,
+  FETCH_AVATAR_IMAGE
 } from "./types";
 
 // Register User
@@ -55,16 +56,32 @@ export const updateUser = (userId, userData) => {
 };
 
 export const uploadAvatar = (userId, file) => {
+  const formData = new FormData();
+  formData.append('file', file);
   const url = `/api/users/${userId}/avatar-img`;
   const payload = {
     action: UPLOAD_AVATAR,
     method: 'POST',
     url,
-    data: file
+    apiConfig: {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    },
+    data: formData
   };
   return { type: 'API_INVOCATION', payload };
 };
 
+export const fetchAvatarImage = (userId) => {
+  const url = `/api/users/${userId}/avatar-img`;
+  const payload = {
+    action: FETCH_AVATAR_IMAGE,
+    method: 'GET',
+    url
+  };
+  return { type: 'API_INVOCATION', payload };
+};
 
 export const deleteCourse = (courseId) => {
   const url = `/api/courses/${courseId}`;

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Select } from 'react-materialize';
 import classnames from "classnames";
 import { loginUser, fetchUserRoles } from "../../actions/actions";
 

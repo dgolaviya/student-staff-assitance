@@ -18,7 +18,6 @@ class AvatarImageUpload extends Component {
   }
   submitImage = (e) => {
     e.preventDefault();
-    console.log(this.props.userId, this.state.fileData);
     this.props.saveAvatar(this.props.userId, this.state.fileData);
   }
   render() {

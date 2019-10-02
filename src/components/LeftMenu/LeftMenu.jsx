@@ -3,7 +3,7 @@ import MenuItem from '../MenuItem/MenuItem';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import defaultAvatar from '../../assets/avatar.png';
-import { fetchAvatarImage } from '../../actions/actions'
+import { fetchAvatarImage, logoutUser } from '../../actions/actions'
 class LeftMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +29,6 @@ class LeftMenu extends React.Component {
   };
   render() {
     const { menuItems, user, avatarDetail: { avatar, contentType }  } = this.props;
-    console.log(avatar);
     return (
       <div className="left-menu col s4 m3 l2">
         <div className="user-details">
@@ -71,7 +70,8 @@ const mapStateToProps = (state) => ({
   userId: state.auth.user.userId
 });
 const mapDispatchToProps = (dispatch) => ({
-  fetchAvatarImage: (userId) => dispatch(fetchAvatarImage(userId))
+  fetchAvatarImage: (userId) => dispatch(fetchAvatarImage(userId)),
+  logoutUser: () => dispatch(logoutUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftMenu);

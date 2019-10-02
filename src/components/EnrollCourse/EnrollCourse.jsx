@@ -19,7 +19,6 @@ class EnrollCourse extends React.Component {
   }
 
   enrollCourse = (userId, courseIds) => () => {
-    console.log('enroll', userId, courseIds);
     this.props.enrollCourse(userId, courseIds);
   }
 

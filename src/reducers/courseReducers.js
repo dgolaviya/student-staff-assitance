@@ -101,8 +101,6 @@ export default function (state = initialState, action) {
         success: false
       }
     case CREATE_COURSE_SUCCESS:
-      console.log('state.courses', state.courses);
-      console.log('action.actioncourses', action.payload.data.data);
       return {
         ...state,
         courses: [...state.courses, action.payload.data.data],

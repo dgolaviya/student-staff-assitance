@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, Row, Col, Icon } from 'react-materialize';
 
 const AdminLanding = (props) => {
-  console.log('props', props);
   return (
     <>
       <Row style={{ padding: '0 25px' }}>

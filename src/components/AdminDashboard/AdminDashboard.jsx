@@ -1,13 +1,19 @@
 import React from 'react';
-import { Card, Row, Col, Icon } from 'react-materialize';
 import PropTypes from "prop-types";
 import { Route } from 'react-router-dom';
 import { connect } from "react-redux";
 import CreateCourse from '../CreateCourse';
 import LeftMenu from '../LeftMenu';
 import EditProfile from '../EditProfile';
+import AdminLanding from './AdminLanding';
 
 const menuItems = [
+  {
+    title: 'Home',
+    icon: 'home',
+    color: 'red-text',
+    url: '/dashboard'
+  },
   {
     title: 'Profile',
     icon: 'edit',
@@ -46,6 +52,7 @@ class AdminDashboard extends React.Component {
       <div className="row dashboard">
         <LeftMenu menuItems={menuItems} user={user} />
         <div className="content col s8 m9 l10">
+          <Route exact path="/dashboard" component={AdminLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={CreateCourse} />
         </div>

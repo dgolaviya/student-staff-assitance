@@ -5,8 +5,15 @@ import { connect } from "react-redux";
 import EnrollCourse from '../EnrollCourse';
 import LeftMenu from '../LeftMenu';
 import EditProfile from '../EditProfile';
+import StaffLanding from './StaffLanding';
 
 const menuItems = [
+  {
+    title: 'Home',
+    icon: 'home',
+    color: 'red-text',
+    url: '/dashboard'
+  },
   {
     title: 'Profile',
     icon: 'edit',
@@ -27,6 +34,7 @@ class StaffDashboard extends React.Component {
       <div className="row dashboard">
         <LeftMenu menuItems={menuItems} user={user} />
         <div className="content col s8 m9 l10">
+          <Route exact path="/dashboard" component={StaffLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/enroll-course" component={EnrollCourse} />
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuItem from '../MenuItem/MenuItem';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class LeftMenu extends React.Component {
   constructor(props) {
@@ -23,7 +23,6 @@ class LeftMenu extends React.Component {
     this.setState({ selectedMenuItem: title });
   };
   render() {
-    console.log(this.props);
     const { menuItems, user } = this.props;
     return (
       <div className="left-menu col s4 m3 l2">
@@ -42,14 +41,14 @@ class LeftMenu extends React.Component {
         <div>
           <ul className="collection menu-items">
             {menuItems.map(item =>
-              <Link to={item.url} key={item.title}>
+              <NavLink to={item.url} key={item.title} activeClassName="active" exact>
                 <MenuItem
                   icon={item.icon}
                   color={item.color}
                   title={item.title}
                   onClickItem={this.onClickItem}
                 />
-              </Link>
+              </NavLink>
             )}
           </ul>
         </div>

@@ -27,6 +27,9 @@
     .menu-items {
       border: none;
       margin: 0;
+      .active .menu-item{
+        background-color: lightblue;
+      }
       .menu-item {
         border: none;
         display: flex;

@@ -172,6 +172,19 @@ export const approveEnrollment = (adminId, courseId, enrolledUserId) => {
   };
   return { type: "API_INVOCATION", payload };
 };
+export const rejectEnrollment = (adminId, courseId, enrolledUserId) => {
+  const url = `/api/enrolledCourse`;
+  const payload = {
+    action: 'REJECT_ENROLLMENT',
+    method: 'DELETE',
+    url,
+    data: {
+      userId: enrolledUserId,
+      courseId
+    }
+  };
+  return { type: 'API_INVOCATION', payload };
+};
 
 export const getAllUsers = () => {
   const url = `/api/users`;

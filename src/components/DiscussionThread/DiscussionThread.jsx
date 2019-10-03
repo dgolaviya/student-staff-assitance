@@ -29,6 +29,7 @@ class DiscussionThread extends React.Component {
               <td>Topic Description</td>
               <td>Created By</td>
               <td>Timestamp</td>
+              <td></td>
             </tr>
           </thead>
           <tbody>
@@ -52,7 +53,7 @@ class DiscussionThread extends React.Component {
               ))
             ) : (
               <tr>
-                <td>No Data Yet!</td>
+                <td colspan="5">No Data Yet!</td>
               </tr>
             )}
           </tbody>

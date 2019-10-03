@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-materialize';
 import { connect } from "react-redux";
 
-import { getToApproveCourses, getCourses, approveEnrollment, getAllUsers } from "../../actions/actions";
+import { getToApproveCourses, getCourses, approveEnrollment, rejectEnrollment, getAllUsers } from "../../actions/actions";
 
 
 class ApproveEnrollment extends React.Component {
@@ -13,6 +13,10 @@ class ApproveEnrollment extends React.Component {
   }
   approveEnrollment = (courseId) => () => {
     this.props.approveEnrollment(this.props.user.userId, courseId, this.props.enrolledCourseIdUserIdMapping[courseId]);
+    this.props.getToApproveCourses();
+  }
+  rejectEnrollment = (courseId) => () => {
+    this.props.rejectEnrollment(this.props.user.userId, courseId, this.props.enrolledCourseIdUserIdMapping[courseId]);
     this.props.getToApproveCourses();
   }
   render() {
@@ -40,7 +44,10 @@ class ApproveEnrollment extends React.Component {
                   <td>{userEmail}</td>
                   <td>{course.courseName}</td>
                   <td>{course.courseDescription}</td>
-                  <td><div onClick={this.approveEnrollment(course.courseId)}>Approve</div></td>
+                  <td>
+                    <div onClick={this.approveEnrollment(course.courseId)}>Approve</div>
+                    <div onClick={this.rejectEnrollment(course.courseId)}>Reject</div>
+                  </td>
                 </tr>
               );
             })
@@ -74,6 +81,7 @@ const mapDispatchToProps = (dispatch) => ({
   getToApproveCourses: () => dispatch(getToApproveCourses()),
   getCourses: () => dispatch(getCourses()),
   getAllUsers: () => dispatch(getAllUsers()),
-  approveEnrollment: (adminId, courseId, enrollUserId) => dispatch(approveEnrollment(adminId, courseId, enrollUserId))
+  approveEnrollment: (adminId, courseId, enrollUserId) => dispatch(approveEnrollment(adminId, courseId, enrollUserId)),
+  rejectEnrollment: (adminId, courseId, enrollUserId) => dispatch(rejectEnrollment(adminId, courseId, enrollUserId))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ApproveEnrollment);

@@ -11,7 +11,8 @@ import {
   UPDATE_USER,
   UPLOAD_AVATAR,
   CHANGE_PASSWORD,
-  FETCH_AVATAR_IMAGE
+  FETCH_AVATAR_IMAGE,
+  SAVE_DOCUMENT
 } from "./types";
 
 // Register User
@@ -382,6 +383,26 @@ export const createEvent = (data, userId) => {
   };
   return { type: "API_INVOCATION", payload };
 };
+
+export const saveDocument = (userId, file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("title", file);
+  const url = `/api/documents/users/${userId}/documents`;
+  const payload = {
+    action: SAVE_DOCUMENT,
+    method: "POST",
+    url,
+    apiConfig: {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    },
+    data: formData
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
 
 export const updateEvent = (data, userId) => {
   const url = `/api/users/${userId}/events/${data.eventId}`;

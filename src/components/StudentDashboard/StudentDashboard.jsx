@@ -44,12 +44,6 @@ const menuItems = [
     url: "/dashboard/changePassword"
   },
   {
-    title: "Share",
-    icon: "share",
-    color: "blue-text",
-    url: "/dashboard/share"
-  },
-  {
     title: "Logout",
     icon: "exit_to_app",
     color: "black-text",

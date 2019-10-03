@@ -84,6 +84,7 @@ class DiscussionChat extends React.Component {
                 label="What's on your mind?"
                 value={this.state.chatDesc}
                 s={10}
+                maxlength={900}
               />
               <Button className="blue" waves="light" type="submit">
                 comment

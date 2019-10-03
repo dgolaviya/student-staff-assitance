@@ -86,6 +86,7 @@ class EditNews extends Component {
             onChange={this.onChange}
             label="Event Description"
             value={this.state.eventDesc}
+            maxlength={900}
           />
           <Button className="blue" large waves="light" type="submit">
             Save Changes

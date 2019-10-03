@@ -59,6 +59,16 @@ export const updateUser = (userId, userData) => {
   return { type: "API_INVOCATION", payload };
 };
 
+export const deleteUser = (userId) => {
+  const url = `/api/users/${userId}`;
+  const payload = {
+    action: "DELETE_USER",
+    method: "DELETE",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
 export const uploadAvatar = (userId, file) => {
   const formData = new FormData();
   formData.append("file", file);

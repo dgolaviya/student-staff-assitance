@@ -12,6 +12,10 @@ import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 import DiscussionThread from "../DiscussionThread/DiscussionThread";
 import DiscussionChat from "../DiscussionChat/DiscussionChat";
 import Share from '../Share';
+import Announcements from "../Announcements/Announcements";
+import EditAnnouncement from "../EditAnnouncement/EditAnnouncement";
+import News from "../News/News";
+import EditNews from "../EditNews/EditNews";
 
 const menuItems = [
   {
@@ -43,6 +47,18 @@ const menuItems = [
     icon: "share",
     color: "blue-text",
     url: "/dashboard/share"
+  },
+  {
+    title: "Announcement",
+    icon: "edit",
+    color: "green-text",
+    url: "/dashboard/announcements"
+  },
+  {
+    title: "News",
+    icon: "edit",
+    color: "green-text",
+    url: "/dashboard/news"
   },
   {
     title: "Logout",
@@ -94,6 +110,22 @@ class StaffDashboard extends React.Component {
             exact
             path="/dashboard/discussion-threads/discussion-chats"
             component={DiscussionChat}
+          />
+          <Route
+            exact
+            path="/dashboard/announcements"
+            component={Announcements}
+          />
+          <Route
+            exact
+            path="/dashboard/announcements/createOrUpdate"
+            component={EditAnnouncement}
+          />
+          <Route exact path="/dashboard/news" component={News} />
+          <Route
+            exact
+            path="/dashboard/news/createOrUpdate"
+            component={EditNews}
           />
         </div>
       </div>

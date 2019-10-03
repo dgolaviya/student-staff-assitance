@@ -13,7 +13,6 @@ import DiscussionThread from "../DiscussionThread/DiscussionThread";
 import DiscussionChat from "../DiscussionChat/DiscussionChat";
 import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 import ManageUsers from "../ManageUsers";
-import ManageStaff from "../ManageStaff";
 
 const menuItems = [
   {
@@ -77,11 +76,6 @@ class AdminDashboard extends React.Component {
             exact
             path="/dashboard/manage-users"
             component={ManageUsers}
-          />
-          <Route
-            exact
-            path="/dashboard/manage-staff"
-            component={ManageStaff}
           />
           <Route
             exact

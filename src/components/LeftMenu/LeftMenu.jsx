@@ -47,20 +47,18 @@ class LeftMenu extends React.Component {
             <b>{this.props.emailId}</b>
           </div>
         </div>
-        <div>
-          <ul className="collection menu-items">
-            {menuItems.map(item =>
-              <NavLink to={item.url} key={item.title} activeClassName="active" exact>
-                <MenuItem
-                  icon={item.icon}
-                  color={item.color}
-                  title={item.title}
-                  onClickItem={this.onClickItem}
-                />
-              </NavLink>
-            )}
-          </ul>
-        </div>
+        <ul className="collection menu-items">
+          {menuItems.map(item =>
+            <NavLink to={item.url} key={item.title} activeClassName="active" exact>
+              <MenuItem
+                icon={item.icon}
+                color={item.color}
+                title={item.title}
+                onClickItem={this.onClickItem}
+              />
+            </NavLink>
+          )}
+        </ul>
       </div>
     );
   }

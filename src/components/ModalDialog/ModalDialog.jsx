@@ -19,7 +19,7 @@ export class ModalDialog extends Component {
     const { open, error } = this.props;
     return (
       <Modal open={open} options={{
-        onCloseEnd: this.postActions
+        onCloseEnd: this.props.onCloseEnd ? this.props.onCloseEnd : this.postActions
       }} >
         <div className="modal-row">
           <Icon className={classnames("", {

@@ -283,6 +283,16 @@ export const fetchDepartments = () => {
   return { type: "API_INVOCATION", payload };
 };
 
+export const fetchPrograms = () => {
+  const url = `/api/programs`;
+  const payload = {
+    action: "FETCH_ALL_PROGRAMS",
+    method: "GET",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
 export const fetchProgramsbyDept = deptId => {
   const url = `/api/departments/${deptId}/programs `;
   const payload = {

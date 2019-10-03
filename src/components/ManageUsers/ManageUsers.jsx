@@ -1,8 +1,9 @@
 import React from 'react';
-import { Table } from 'react-materialize';
+import { Table, Button } from 'react-materialize';
+import { Link } from "react-router-dom";
 import { Select } from 'react-materialize';
 import { connect } from "react-redux";
-import { getAllUsers, fetchDepartments, fetchUserRoles, deleteUser } from "../../actions/actions";
+import { getAllUsers, fetchDepartments, fetchUserRoles, fetchPrograms, deleteUser } from "../../actions/actions";
 
 class ManageUsers extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class ManageUsers extends React.Component {
     this.props.getAllUsers();
     this.props.fetchUserRoles();
     this.props.fetchDepartments();
+    this.props.fetchPrograms();
   }
   deleteUser = (userId) => () => {
     this.props.deleteUser(userId);
@@ -28,43 +30,68 @@ class ManageUsers extends React.Component {
     this.setState({ [e.target.id]: e.target.value });
   };
   render() {
-    const { userRoles } = this.props;
+    const { userRoles, allPrograms } = this.props;
+    let progList = {};
+    allPrograms.forEach(p => {
+      progList = { ...progList, [p.progId]: p.progName }
+    });
     let { studentUsers, departments } = this.props;
     studentUsers = this.state.filterUser ? studentUsers.filter(u => u.roleId === this.state.filterUser) : studentUsers;
     studentUsers = this.state.filterDept ? studentUsers.filter(u => u.deptId === this.state.filterDept) : studentUsers;
+    studentUsers = this.state.filterProg ? studentUsers.filter(u => u.progId === this.state.filterProg) : studentUsers;
     const department = departments.find(dept => dept.deptId === this.props.user.deptId) ? departments.find(dept => dept.deptId === this.props.user.deptId)['deptName'] : "";
     return (
       <>
         <div className="container">
           <div style={{ marginTop: "4rem" }} className="row">
-            <h3>Manage Users</h3>
-            <Select
-              s={3}
-              value={this.state.filterUser}
-              id="filterUser"
-              onChange={this.onFilterChange}
-            >
-              <option value="">All users</option>
-              {
-                userRoles.filter(role => role.roleId !== "1").map((role) => {
-                  return <option value={role.roleId} key={role.roleId}>{role.type}</option>;
-                })
-              }
-            </Select>
-            <Select
-              s={3}
-              value={this.state.filterDept}
-              id="filterDept"
-              onChange={this.onFilterChange}
-            >
-              <option value="">All departments</option>
-              {
-                departments.map((dept) => {
-                  return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>;
-                })
-              }
-            </Select>
-            <div className="col s10">
+            <div className="col s12">
+              <h3>Manage Users</h3>
+              <div>
+                <Link to="/dashboard/create-user">
+                  <Button onClick={() => { }}>
+                    Create
+                </Button>
+                </Link>
+              </div>
+              <Select
+                s={3}
+                value={this.state.filterUser}
+                id="filterUser"
+                onChange={this.onFilterChange}
+              >
+                <option value="">All users</option>
+                {
+                  userRoles.filter(role => role.roleId !== "1").map((role) => {
+                    return <option value={role.roleId} key={role.roleId}>{role.type}</option>;
+                  })
+                }
+              </Select>
+              <Select
+                s={3}
+                value={this.state.filterDept}
+                id="filterDept"
+                onChange={this.onFilterChange}
+              >
+                <option value="">All departments</option>
+                {
+                  departments.map((dept) => {
+                    return <option value={dept.deptId} key={dept.deptId}>{dept.deptName}</option>;
+                  })
+                }
+              </Select>
+              <Select
+                s={3}
+                value={this.state.filterProg}
+                id="filterProg"
+                onChange={this.onFilterChange}
+              >
+                <option value="">All programs</option>
+                {
+                  allPrograms.map((prog) => {
+                    return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>;
+                  })
+                }
+              </Select>
               <Table>
                 <thead>
                   <tr>
@@ -90,7 +117,7 @@ class ManageUsers extends React.Component {
                           <td>{user.firstName} {user.lastName}</td>
                           <td>{user.emailId}</td>
                           <td>{department}</td>
-                          <td>{user.progId}</td>
+                          <td>{progList[user.progId]}</td>
                           <td>{user.mobileNo}</td>
                           <td>{role}</td>
                           <td>
@@ -118,6 +145,7 @@ const mapStateToProps = state => {
     user: state.auth.user,
     userRoles: state.auth.userRoles,
     departments: state.auth.departments,
+    allPrograms: state.auth.allPrograms,
     studentUsers: state.auth.allUsers.filter(user => user.roleId !== "1")
   })
 };
@@ -127,6 +155,7 @@ const mapDispatchToProps = (dispatch) => ({
   getAllUsers: () => dispatch(getAllUsers()),
   fetchDepartments: () => dispatch(fetchDepartments()),
   fetchUserRoles: () => dispatch(fetchUserRoles()),
+  fetchPrograms: () => dispatch(fetchPrograms()),
   deleteUser: (userId) => dispatch(deleteUser(userId))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ManageUsers);

@@ -8,7 +8,7 @@ import {
   RESET_AUTH_ERROR,
   FETCH_AVATAR_IMAGE_SUCCESS,
   RESET_PASSWORD_PENDING, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED,
-  GET_ALL_USERS_PENDING, GET_ALL_USERS_SUCCESS, GET_ALL_USERS_FAILED
+  GET_ALL_USERS_PENDING, GET_ALL_USERS_SUCCESS, GET_ALL_USERS_FAILED, FETCH_ALL_PROGRAMS_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -18,6 +18,7 @@ const initialState = {
   allUsers: [],
   departments: [],
   programs: [],
+  allPrograms: [],
   loading: false,
   success: false,
   error: undefined,
@@ -56,6 +57,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         programs: action.payload.data.data
+      }
+    case FETCH_ALL_PROGRAMS_SUCCESS:
+      return {
+        ...state,
+        allPrograms: action.payload.data.data
       }
     case REGISTER_USER_PENDING:
       return {

@@ -94,6 +94,7 @@ class EditAnnouncement extends Component {
             onChange={this.onChange}
             label="Event Description"
             value={this.state.eventDesc}
+            maxlength={900}
           />
           <Select
             id="eventType"

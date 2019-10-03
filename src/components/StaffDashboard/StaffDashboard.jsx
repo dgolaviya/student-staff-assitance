@@ -11,12 +11,13 @@ import ChangePassword from "../ChangePassword";
 import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 import DiscussionThread from "../DiscussionThread/DiscussionThread";
 import DiscussionChat from "../DiscussionChat/DiscussionChat";
-import Share from '../Share';
+import Share from "../Share";
 import Announcements from "../Announcements/Announcements";
 import EditAnnouncement from "../EditAnnouncement/EditAnnouncement";
 import News from "../News/News";
 import EditNews from "../EditNews/EditNews";
 import ActivityLog from '../ActivityLog';
+import StudentListView from "../StudentsListView/StudentListView";
 
 const menuItems = [
   {
@@ -108,11 +109,7 @@ class StaffDashboard extends React.Component {
             path="/dashboard/discussion-threads/createOrUpdate"
             component={EditDiscussionThread}
           />
-          <Route
-            exact
-            path="/dashboard/share"
-            component={Share}
-          />
+          <Route exact path="/dashboard/share" component={Share} />
           <Route
             exact
             path="/dashboard/discussion-threads/discussion-chats"
@@ -138,6 +135,11 @@ class StaffDashboard extends React.Component {
             exact
             path="/dashboard/news/createOrUpdate"
             component={EditNews}
+          />
+          <Route
+            exact
+            path="/dashboard/studentsList"
+            component={StudentListView}
           />
         </div>
       </div>

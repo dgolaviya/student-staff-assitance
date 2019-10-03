@@ -51,14 +51,32 @@
     overflow: auto;
     .item-card {
       border-radius: 5px;
+      .card-content > div {
+        height: 170px;
+      }
       .card-content div {
         display: flex;
         flex-direction: column;
         align-items: center;
         .card-header {
-          font-size: 48px;
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        .card-body {
+          overflow: auto;
+          max-height: 200px;
+          word-break: break-all;
         }
       }
     }
+  }
+}
+
+
+table {
+  table-layout: fixed;
+  word-break: break-all;
+  th, td {
+    vertical-align: top;
   }
 }

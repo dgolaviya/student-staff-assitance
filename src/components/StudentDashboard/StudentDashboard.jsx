@@ -68,7 +68,7 @@ class StudentDashboard extends React.Component {
           logoutUser={logoutUser}
           history={this.props.history}
         />
-        <div className="content col s8 m9 l10">
+        <div className="content col s10 m10 l10">
           <Route exact path="/dashboard" component={StudentLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={EnrollCourse} />

@@ -30,7 +30,7 @@ class LeftMenu extends React.Component {
   render() {
     const { menuItems, userName, firstName, lastName, avatarDetail: { avatar, contentType } } = this.props;
     return (
-      <div className="left-menu col s4 m6 l2">
+      <div className="left-menu col s2 m2 l2">
         <div className="user-details">
           {avatar ? <img
             className="avatar-image circle responsive-img"

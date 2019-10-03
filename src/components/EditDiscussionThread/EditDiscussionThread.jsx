@@ -69,6 +69,7 @@ class EditDiscussionThread extends Component {
             onChange={this.onChange}
             label="Topic Description"
             value={this.state.topicDesc}
+            maxlength={900}
           />
           <Button className="blue" large waves="light" type="submit">
             Save Changes

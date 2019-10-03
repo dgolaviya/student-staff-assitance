@@ -63,8 +63,7 @@ class DiscussionChat extends React.Component {
               ? this.props.discussionChatsRelatedToThread.map((v, i) => (
                   <Card
                     key={i}
-                    className="blue-grey darken-1"
-                    textClassName="white-text"
+                    className="white z-depth-2"
                     title={v.userName + " on " + v.timestamp.substr(0, 10)}
                   >
                     <p>{v.chatDesc}</p>

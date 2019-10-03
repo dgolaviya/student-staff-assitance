@@ -10,6 +10,7 @@ import ApproveEnrollment from "../ApproveEnrollment";
 import { logoutUser } from "../../actions/actions";
 import ChangePassword from "../ChangePassword";
 import DiscussionThread from "../DiscussionThread/DiscussionThread";
+import DiscussionChat from "../DiscussionChat/DiscussionChat";
 import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 
 const menuItems = [
@@ -91,6 +92,11 @@ class AdminDashboard extends React.Component {
             exact
             path="/dashboard/discussion-threads"
             component={DiscussionThread}
+          />
+          <Route
+            exact
+            path="/dashboard/discussion-threads/discussion-chats"
+            component={DiscussionChat}
           />
           <Route
             exact

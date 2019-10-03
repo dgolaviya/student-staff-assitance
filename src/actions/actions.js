@@ -128,8 +128,8 @@ export const getCourses = () => {
   return { type: "API_INVOCATION", payload };
 };
 
-export const getActivityLogs = () => {
-  const url = `/api/activityTrace`;
+export const getActivityLogs = (userId) => {
+  const url = userId ? `/users/${userId}/activityTrace` : `/api/activityTrace`;
   const payload = {
     action: "FETCH_ACTIVITIES",
     method: "GET",

@@ -5,7 +5,12 @@ import { getActivityLogs } from '../../actions/actions';
 
 export class ActivityLog extends Component {
   componentDidMount() {
-    this.props.getActivityLogs();
+    if (this.props.user.roleId === "1") {
+      this.props.getActivityLogs();
+    }
+    else {
+      this.props.getActivityLogs(this.props.user.userId);
+    }
   }
   render() {
     const { activities } = this.props
@@ -36,7 +41,8 @@ export class ActivityLog extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  activities: state.activities
+  activities: state.activities,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({

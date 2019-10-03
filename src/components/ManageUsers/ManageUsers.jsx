@@ -36,7 +36,11 @@ class ManageUsers extends React.Component {
       progList = { ...progList, [p.progId]: p.progName }
     });
     let { studentUsers, departments } = this.props;
-    studentUsers = this.state.filterUser ? studentUsers.filter(u => u.roleId === this.state.filterUser) : studentUsers;
+    if (this.props.location.filterUser) {
+      studentUsers = this.props.location.filterUser ? studentUsers.filter(u => u.roleId === this.props.location.filterUser) : studentUsers;
+    } else {
+      studentUsers = this.state.filterUser ? studentUsers.filter(u => u.roleId === this.state.filterUser) : studentUsers;
+    }
     studentUsers = this.state.filterDept ? studentUsers.filter(u => u.deptId === this.state.filterDept) : studentUsers;
     studentUsers = this.state.filterProg ? studentUsers.filter(u => u.progId === this.state.filterProg) : studentUsers;
     const department = departments.find(dept => dept.deptId === this.props.user.deptId) ? departments.find(dept => dept.deptId === this.props.user.deptId)['deptName'] : "";
@@ -58,6 +62,7 @@ class ManageUsers extends React.Component {
                 value={this.state.filterUser}
                 id="filterUser"
                 onChange={this.onFilterChange}
+                disabled={!!this.props.location.filterUser}
               >
                 <option value="">All users</option>
                 {

@@ -16,20 +16,24 @@ class DiscussionThread extends React.Component {
     return (
       <div>
         <h3>Discussion Threads</h3>
-        <Link to="/dashboard/discussion-threads/createOrUpdate">
-          <Button onClick={() => this.props.setDiscussionThreadEditId("")}>
-            Create
-          </Button>
-        </Link>
+        {this.props.userAccess !== "3" ? (
+          <Link to="/dashboard/discussion-threads/createOrUpdate">
+            <Button onClick={() => this.props.setDiscussionThreadEditId("")}>
+              Create
+            </Button>
+          </Link>
+        ) : (
+          ""
+        )}
         <hr />
         <Table>
           <thead>
             <tr>
-              <td>Topic Name</td>
-              <td>Topic Description</td>
-              <td>Created By</td>
-              <td>Timestamp</td>
-              <td></td>
+              <th>Topic Name</th>
+              <th>Topic Description</th>
+              <th>Created By</th>
+              <th>Timestamp</th>
+              {this.props.userAccess !== "3" ? <th></th> : null}
             </tr>
           </thead>
           <tbody>
@@ -49,18 +53,24 @@ class DiscussionThread extends React.Component {
                       {v.topicName}
                     </Link>
                   </td>
-                  <td>{v.topicDesc.substr(0, 30) + " ..."}</td>
+                  <td>{v.topicDesc.substr(0, 30) + "..."}</td>
                   <td>{v.createdByUserName}</td>
                   <td>{v.timestamp.substr(0, 10)}</td>
-                  <td
-                    onClick={() =>
-                      this.props.setDiscussionThreadEditId(v.discussionThreadId)
-                    }
-                  >
-                    <Link to="/dashboard/discussion-threads/createOrUpdate">
-                      Edit
-                    </Link>
-                  </td>
+                  {this.props.userAccess !== "3" ? (
+                    <td
+                      onClick={() =>
+                        this.props.setDiscussionThreadEditId(
+                          v.discussionThreadId
+                        )
+                      }
+                    >
+                      <Link to="/dashboard/discussion-threads/createOrUpdate">
+                        Edit
+                      </Link>
+                    </td>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               ))
             ) : (
@@ -76,7 +86,8 @@ class DiscussionThread extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  discussionThreads: state.discussions.discussionThreads
+  discussionThreads: state.discussions.discussionThreads,
+  userAccess: state.auth.user.roleId
 });
 
 const mapDispatchToProps = dispatch => ({

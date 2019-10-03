@@ -11,10 +11,30 @@ import {
   CREATE_EVENT_PENDING
 } from "../actions/types";
 
+const blogPosts = [
+  {
+    title: 'Blog Post1',
+    description: 'Blog Post Description'
+  },
+  {
+    title: 'Blog Post2',
+    description: 'Blog Post Description'
+  },
+  {
+    title: 'Blog Post3',
+    description: 'Blog Post Description'
+  },
+  {
+    title: 'Blog Post4',
+    description: 'Blog Post Description'
+  }
+];
+
 const initialState = {
   events: [],
   announcements: [],
   news: [],
+  blogPosts: blogPosts,
   announcementUpdateId: "",
   isAnnouncementsUpdated: false,
   isNewsUpdated: false,

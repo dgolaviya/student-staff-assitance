@@ -11,6 +11,7 @@ import ChangePassword from "../ChangePassword";
 import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 import DiscussionThread from "../DiscussionThread/DiscussionThread";
 import DiscussionChat from "../DiscussionChat/DiscussionChat";
+import Share from '../Share';
 import Announcements from "../Announcements/Announcements";
 import EditAnnouncement from "../EditAnnouncement/EditAnnouncement";
 import News from "../News/News";
@@ -40,6 +41,12 @@ const menuItems = [
     icon: "edit",
     color: "green-text",
     url: "/dashboard/discussion-threads"
+  },
+  {
+    title: "Share",
+    icon: "share",
+    color: "blue-text",
+    url: "/dashboard/share"
   },
   {
     title: "Announcement",
@@ -93,6 +100,11 @@ class StaffDashboard extends React.Component {
             exact
             path="/dashboard/discussion-threads/createOrUpdate"
             component={EditDiscussionThread}
+          />
+          <Route
+            exact
+            path="/dashboard/share"
+            component={Share}
           />
           <Route
             exact

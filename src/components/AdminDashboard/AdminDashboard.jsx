@@ -14,6 +14,7 @@ import DiscussionChat from "../DiscussionChat/DiscussionChat";
 import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 import ManageUsers from "../ManageUsers";
 import CreateUser from "../CreateUser";
+import Share from '../Share';
 
 const menuItems = [
   {
@@ -47,11 +48,17 @@ const menuItems = [
     url: "/dashboard/changePassword"
   },
   {
+    title: "Share",
+    icon: "share",
+    color: "blue-text",
+    url: "/dashboard/share"
+  },
+  {
     title: "Logout",
     icon: "exit_to_app",
     color: "black-text",
     url: ""
-  }
+  },
 ];
 class AdminDashboard extends React.Component {
   render() {
@@ -84,7 +91,7 @@ class AdminDashboard extends React.Component {
             exact
             path="/dashboard/changePassword"
             component={ChangePassword}
-          />{" "}
+          />
           <Route
             exact
             path="/dashboard/discussion-threads"
@@ -94,6 +101,11 @@ class AdminDashboard extends React.Component {
             exact
             path="/dashboard/discussion-threads/discussion-chats"
             component={DiscussionChat}
+          />
+          <Route
+            exact
+            path="/dashboard/share"
+            component={Share}
           />
           <Route
             exact

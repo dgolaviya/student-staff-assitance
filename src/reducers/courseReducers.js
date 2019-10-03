@@ -6,7 +6,8 @@ import {
   FETCH_ENROLLED_COURSES_SUCCESS, FETCH_ENROLLED_COURSES_FAILED,
   FETCH_AVAILABLE_COURSES_SUCCESS, FETCH_AVAILABLE_COURSES_FAILED,
   ENROLL_COURSE_PENDING, ENROLL_COURSE_SUCCESS, ENROLL_COURSE_FAILED, GET_TO_APPROVE_COURSES_SUCCESS, GET_TO_APPROVE_COURSES_FAILED,
-  APPROVE_ENROLLMENT_PENDING, APPROVE_ENROLLMENT_SUCCESS, APPROVE_ENROLLMENT_FAILED
+  APPROVE_ENROLLMENT_PENDING, APPROVE_ENROLLMENT_SUCCESS, APPROVE_ENROLLMENT_FAILED,
+  REJECT_ENROLLMENT_PENDING, REJECT_ENROLLMENT_SUCCESS, REJECT_ENROLLMENT_FAILED
 } from "../actions/types";
 
 const initialState = {
@@ -140,6 +141,21 @@ export default function (state = initialState, action) {
         success: true
       }
     case APPROVE_ENROLLMENT_FAILED:
+      return {
+        ...state,
+        loading: false,
+        success: false
+      }
+    case REJECT_ENROLLMENT_SUCCESS:
+      const deletedEnrollment = action.actualAction.payload.data;
+      const newToApprovedCourses = state.toApproveCourses.filter(c => c.enrollCourseId.courseId !== deletedEnrollment.courseId);
+      return {
+        ...state,
+        toApproveCourses: newToApprovedCourses,
+        loading: false,
+        success: true
+      }
+    case REJECT_ENROLLMENT_FAILED:
       return {
         ...state,
         loading: false,

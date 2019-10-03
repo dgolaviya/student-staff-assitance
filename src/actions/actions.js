@@ -19,13 +19,8 @@ import {
 export const registerUser = (userData, history) => {
   const url = `/api/users`;
   const payload = {
-    action: "REGISTER_USER",
-    method: "POST",
-    // apiConfig: {
-    //   headers: {
-    //     Accept: 'application/json'
-    //   }
-    // },
+    action: 'REGISTER_USER',
+    method: 'POST',
     url,
     data: userData
   };
@@ -177,8 +172,31 @@ export const approveEnrollment = (adminId, courseId, enrolledUserId) => {
   };
   return { type: "API_INVOCATION", payload };
 };
+export const rejectEnrollment = (adminId, courseId, enrolledUserId) => {
+  const url = `/api/enrolledCourse`;
+  const payload = {
+    action: 'REJECT_ENROLLMENT',
+    method: 'DELETE',
+    url,
+    data: {
+      userId: enrolledUserId,
+      courseId
+    }
+  };
+  return { type: "API_INVOCATION", payload };
+};
 
-export const loginUser = userData => {
+export const getAllUsers = () => {
+  const url = `/api/users`;
+  const payload = {
+    action: 'GET_ALL_USERS',
+    method: 'GET',
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const loginUser = (userData) => {
   const url = `/api/users/login?userNameOrEmailId=${userData.userNameOrEmailId}&password=${userData.password}`;
   const payload = {
     action: "LOGIN_USER",

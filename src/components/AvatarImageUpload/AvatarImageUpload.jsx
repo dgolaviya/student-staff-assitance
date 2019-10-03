@@ -8,33 +8,48 @@ import './styles.scss';
 
 class AvatarImageUpload extends Component {
   state = {
-    fileData: undefined
+    fileData: '',
+    imagePreviewUrl: ''
   }
   componentDidMount() {
-     this.props.fetchAvatarImage(this.props.userId);
+    this.props.fetchAvatarImage(this.props.userId);
   }
   setFile = (e) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.onloadend = () => {
+      this.setState({
+        fileData: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+    reader.readAsDataURL(file);
     this.setState({ fileData: e.target.files[0] });
   }
   submitImage = (e) => {
     e.preventDefault();
     this.props.saveAvatar(this.props.userId, this.state.fileData);
+    setTimeout(() => {
+      this.props.fetchAvatarImage(this.props.userId);
+    }, 1500);
   }
   render() {
     const { avatarDetail: { avatar, contentType } } = this.props;
+    let { imagePreviewUrl } = this.state;
+    let imagePreview = avatar ? <img
+      className="avatar-image circle responsive-img"
+      alt=""
+      src={`data:${contentType};base64, ${avatar}`}
+    /> : <img alt="" src={defaultAvatar} className="avatar-image circle responsive-img" />;
+    if (imagePreviewUrl) {
+      imagePreview = (<img alt="" src={imagePreviewUrl} className="avatar-image circle responsive-img" />);
+    }
     return (
-      <form className="user-avatar-container" onSubmit={this.submitImage} enctype="multipart/form-data">
+      <form className="user-avatar-container" onSubmit={this.submitImage} encType="multipart/form-data">
         <div>
           <label htmlFor="avatar-upload">
-            {avatar ? <img
-              className="avatar-image circle responsive-img"
-              alt=""
-              src={`data:${contentType};base64, ${avatar}`}
-            /> : <img
-                className="avatar-image circle responsive-img"
-                alt=""
-                src={defaultAvatar}
-              />}
+            {imagePreview}
           </label>
         </div>
         <input

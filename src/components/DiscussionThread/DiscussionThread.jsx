@@ -32,7 +32,7 @@ class DiscussionThread extends React.Component {
               <th>Topic Name</th>
               <th>Topic Description</th>
               <th>Created By</th>
-              <th>Timestamp</th>
+              <th>Date</th>
               {this.props.userAccess !== "3" ? <th></th> : null}
             </tr>
           </thead>

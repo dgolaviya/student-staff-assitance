@@ -27,7 +27,7 @@ class News extends React.Component {
               <th>Event Name</th>
               <th>Event Description</th>
               <th>Created By</th>
-              <th>Timestamp</th>
+              <th>Date</th>
               {this.props.userAccess !== "3" ? <th></th> : null}
             </tr>
           </thead>

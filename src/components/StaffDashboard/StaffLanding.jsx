@@ -15,28 +15,28 @@ class StaffLanding extends React.Component {
         <Col m={3} s={6}>
           <Link to="/dashboard/studentsList">
             <Card className="blue item-card lighten-2">
-              <Icon large>account_circle</Icon>
-              <div className="card-header">30</div>
-              <div>Students List</div>
+              <Icon large className="black-text">account_circle</Icon>
+              <div className="card-header black-text">30</div>
+              <div className="black-text">Students List</div>
             </Card>
           </Link>
         </Col>
         <Col m={3} s={6}>
           <Link to="/dashboard/announcements">
             <Card className="blue item-card lighten-2">
-              <Icon large>android</Icon>
-              <div className="card-header">{this.props.announcementsCount}</div>
-              <div>Announcements Notification</div>
+              <Icon large className="black-text">android</Icon>
+              <div className="card-header black-text">{this.props.announcementsCount}</div>
+              <div className="black-text">Announcements Notification</div>
             </Card>
           </Link>
         </Col>
         <Col m={3} s={6}>
           <Link to="/dashboard/news">
             <Card className="blue item-card lighten-2">
-              <Icon large>announcement</Icon>
+              <Icon large className="black-text">announcement</Icon>
 
-              <div className="card-header">{this.props.newsCount}</div>
-              <div>News Notification</div>
+              <div className="card-header black-text">{this.props.newsCount}</div>
+              <div className="black-text">News Notification</div>
             </Card>
           </Link>
         </Col>

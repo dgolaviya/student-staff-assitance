@@ -15,6 +15,7 @@ import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 import ManageUsers from "../ManageUsers";
 import CreateUser from "../CreateUser";
 import Share from '../Share';
+import ActivityLog from '../ActivityLog';
 
 const menuItems = [
   {
@@ -52,6 +53,12 @@ const menuItems = [
     icon: "share",
     color: "blue-text",
     url: "/dashboard/share"
+  },
+  {
+    title: "Activities",
+    icon: "accessibility",
+    color: "red-text",
+    url: "/dashboard/activities"
   },
   {
     title: "Logout",
@@ -106,6 +113,11 @@ class AdminDashboard extends React.Component {
             exact
             path="/dashboard/share"
             component={Share}
+          />
+          <Route
+            exact
+            path="/dashboard/activities"
+            component={ActivityLog}
           />
           <Route
             exact

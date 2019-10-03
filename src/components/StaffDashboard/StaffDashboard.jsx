@@ -16,6 +16,7 @@ import Announcements from "../Announcements/Announcements";
 import EditAnnouncement from "../EditAnnouncement/EditAnnouncement";
 import News from "../News/News";
 import EditNews from "../EditNews/EditNews";
+import ActivityLog from '../ActivityLog';
 
 const menuItems = [
   {
@@ -59,6 +60,12 @@ const menuItems = [
     icon: "edit",
     color: "green-text",
     url: "/dashboard/news"
+  },
+  {
+    title: "Activities",
+    icon: "accessibility",
+    color: "red-text",
+    url: "/dashboard/activities"
   },
   {
     title: "Logout",
@@ -120,6 +127,11 @@ class StaffDashboard extends React.Component {
             exact
             path="/dashboard/announcements/createOrUpdate"
             component={EditAnnouncement}
+          />
+          <Route
+            exact
+            path="/dashboard/activities"
+            component={ActivityLog}
           />
           <Route exact path="/dashboard/news" component={News} />
           <Route

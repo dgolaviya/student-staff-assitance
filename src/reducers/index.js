@@ -4,11 +4,13 @@ import courseReducers from "./courseReducers";
 import errorReducer from "./errorReducers";
 import discussionThreadReducer from "./discussionThreadReducer";
 import eventsReducer from "./eventsReducer";
+import activityReducer from './activityReducer';
 
 export default combineReducers({
   auth: authReducer,
   course: courseReducers,
   errors: errorReducer,
   discussions: discussionThreadReducer,
-  events: eventsReducer
+  events: eventsReducer,
+  activities: activityReducer
 });

@@ -10,6 +10,7 @@ import { logoutUser } from "../../actions/actions";
 import ChangePassword from "../ChangePassword";
 import DiscussionThread from '../DiscussionThread/DiscussionThread';
 import DiscussionChat from '../DiscussionChat/DiscussionChat';
+import ActivityLog from '../ActivityLog';
 
 const menuItems = [
   {
@@ -44,6 +45,12 @@ const menuItems = [
     url: "/dashboard/changePassword"
   },
   {
+    title: "Activities",
+    icon: "accessibility",
+    color: "red-text",
+    url: "/dashboard/activities"
+  },
+  {
     title: "Logout",
     icon: "exit_to_app",
     color: "black-text",
@@ -74,6 +81,11 @@ class StudentDashboard extends React.Component {
             exact
             path="/dashboard/discussion-threads"
             component={DiscussionThread}
+          />
+          <Route
+            exact
+            path="/dashboard/activities"
+            component={ActivityLog}
           />
           <Route
             exact

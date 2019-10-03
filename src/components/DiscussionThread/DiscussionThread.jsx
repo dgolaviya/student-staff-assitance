@@ -17,7 +17,7 @@ class DiscussionThread extends React.Component {
       <div>
         <h3>Discussion Threads</h3>
         <Link to="/dashboard/discussion-threads/createOrUpdate">
-          <Button onClick={this.props.setDiscussionThreadEditId("")}>
+          <Button onClick={() => this.props.setDiscussionThreadEditId("")}>
             Create
           </Button>
         </Link>
@@ -36,7 +36,19 @@ class DiscussionThread extends React.Component {
             {this.props.discussionThreads.length > 0 ? (
               this.props.discussionThreads.map((v, i) => (
                 <tr key={i}>
-                  <td>{v.topicName}</td>
+                  <td>
+                    <Link
+                      to={{
+                        pathname:
+                          "/dashboard/discussion-threads/discussion-chats",
+                        discussionThreadId: v.discussionThreadId,
+                        topicName: v.topicName,
+                        topicDesc: v.topicDesc
+                      }}
+                    >
+                      {v.topicName}
+                    </Link>
+                  </td>
                   <td>{v.topicDesc.substr(0, 30) + " ..."}</td>
                   <td>{v.createdByUserName}</td>
                   <td>{v.timestamp.substr(0, 10)}</td>
@@ -53,7 +65,7 @@ class DiscussionThread extends React.Component {
               ))
             ) : (
               <tr>
-                <td colspan="5">No Data Yet!</td>
+                <td colSpan="5">No Data Yet!</td>
               </tr>
             )}
           </tbody>

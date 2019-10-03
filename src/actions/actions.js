@@ -19,8 +19,8 @@ import {
 export const registerUser = (userData, history) => {
   const url = `/api/users`;
   const payload = {
-    action: 'REGISTER_USER',
-    method: 'POST',
+    action: "REGISTER_USER",
+    method: "POST",
     url,
     data: userData
   };
@@ -175,8 +175,8 @@ export const approveEnrollment = (adminId, courseId, enrolledUserId) => {
 export const rejectEnrollment = (adminId, courseId, enrolledUserId) => {
   const url = `/api/enrolledCourse`;
   const payload = {
-    action: 'REJECT_ENROLLMENT',
-    method: 'DELETE',
+    action: "REJECT_ENROLLMENT",
+    method: "DELETE",
     url,
     data: {
       userId: enrolledUserId,
@@ -189,14 +189,14 @@ export const rejectEnrollment = (adminId, courseId, enrolledUserId) => {
 export const getAllUsers = () => {
   const url = `/api/users`;
   const payload = {
-    action: 'GET_ALL_USERS',
-    method: 'GET',
+    action: "GET_ALL_USERS",
+    method: "GET",
     url
   };
   return { type: "API_INVOCATION", payload };
 };
 
-export const loginUser = (userData) => {
+export const loginUser = userData => {
   const url = `/api/users/login?userNameOrEmailId=${userData.userNameOrEmailId}&password=${userData.password}`;
   const payload = {
     action: "LOGIN_USER",
@@ -319,4 +319,25 @@ export const updateDiscussionThread = (data, userId) => {
 
 export const setDiscussionThreadEditId = discussionThreadId => {
   return { type: "SET_DISCUSSION_THREAD_EDIT_ID", payload: discussionThreadId };
+};
+
+export const fetchDiscussionChats = discussionThreadId => {
+  const url = `/api/discussionThreads/${discussionThreadId}/discussionChats`;
+  const payload = {
+    action: "FETCH_DISCUSSION_CHATS",
+    method: "GET",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const createDiscussionChat = (data, userId, discussionThreadId) => {
+  const url = `/api/users/${userId}/discussionThreads/${discussionThreadId}/discussionChats`;
+  const payload = {
+    action: "CREATE_DISCUSSION_CHAT",
+    method: "POST",
+    url,
+    data: data
+  };
+  return { type: "API_INVOCATION", payload };
 };

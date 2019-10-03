@@ -10,6 +10,7 @@ import { logoutUser } from "../../actions/actions";
 import ChangePassword from "../ChangePassword";
 import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
 import DiscussionThread from "../DiscussionThread/DiscussionThread";
+import DiscussionChat from "../DiscussionChat/DiscussionChat";
 
 const menuItems = [
   {
@@ -76,6 +77,11 @@ class StaffDashboard extends React.Component {
             exact
             path="/dashboard/discussion-threads/createOrUpdate"
             component={EditDiscussionThread}
+          />
+          <Route
+            exact
+            path="/dashboard/discussion-threads/discussion-chats"
+            component={DiscussionChat}
           />
         </div>
       </div>

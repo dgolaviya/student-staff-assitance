@@ -9,7 +9,13 @@ import {
   CREATE_DISCUSSION_THREAD_FAILED,
   CREATE_DISCUSSION_THREAD_SUCCESS,
   CREATE_DISCUSSION_THREAD_PENDING,
-  SET_DISCUSSION_THREAD_EDIT_ID
+  SET_DISCUSSION_THREAD_EDIT_ID,
+  FETCH_DISCUSSION_CHATS_PENDING,
+  FETCH_DISCUSSION_CHATS_SUCCESS,
+  FETCH_DISCUSSION_CHATS_FAILED,
+  CREATE_DISCUSSION_CHAT_PENDING,
+  CREATE_DISCUSSION_CHAT_SUCCESS,
+  CREATE_DISCUSSION_CHAT_FAILED
 } from "../actions/types";
 
 const initialState = {
@@ -17,8 +23,10 @@ const initialState = {
   discussionChats: [],
   discussionThreadUpdateId: "",
   isDiscussionThreadsUpdated: false,
+  isDiscussionChatsUpdated: false,
   loading: false,
-  success: false
+  success: false,
+  discussionChatsRelatedToThread: []
 };
 
 export default function(state = initialState, action) {
@@ -43,6 +51,26 @@ export default function(state = initialState, action) {
         loading: false,
         success: false
       };
+    case FETCH_DISCUSSION_CHATS_PENDING:
+      return {
+        ...state,
+        loading: true,
+        success: false
+      };
+    case FETCH_DISCUSSION_CHATS_SUCCESS:
+      return {
+        ...state,
+        discussionChatsRelatedToThread: action.payload.data.data,
+        loading: false,
+        success: true,
+        isDiscussionChatsUpdated: false
+      };
+    case FETCH_DISCUSSION_CHATS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        success: false
+      };
     case CREATE_DISCUSSION_THREAD_PENDING:
       return {
         ...state,
@@ -57,6 +85,25 @@ export default function(state = initialState, action) {
         isDiscussionThreadsUpdated: true
       };
     case CREATE_DISCUSSION_THREAD_FAILED:
+      return {
+        ...state,
+        loading: false,
+        success: false
+      };
+    case CREATE_DISCUSSION_CHAT_PENDING:
+      return {
+        ...state,
+        loading: true,
+        success: false
+      };
+    case CREATE_DISCUSSION_CHAT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        isDiscussionChatsUpdated: true
+      };
+    case CREATE_DISCUSSION_CHAT_FAILED:
       return {
         ...state,
         loading: false,

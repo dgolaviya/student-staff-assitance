@@ -19,8 +19,17 @@ class EditDiscussionThread extends Component {
     updatedBy: this.props.updatedBy,
     updatedByUserName: this.props.updatedByUserName
   };
+
   componentDidMount() {}
-  componentDidUpdate(prevProps) {}
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isDiscussionThreadsUpdated) {
+      this.setState({
+        topicName: "",
+        topicDesc: ""
+      });
+    }
+  }
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -96,7 +105,8 @@ const mapStateToProps = state => {
 
   return {
     ...data,
-    userId: state.auth.user.userId
+    userId: state.auth.user.userId,
+    isDiscussionThreadsUpdated: state.discussions.isDiscussionThreadsUpdated
   };
 };
 

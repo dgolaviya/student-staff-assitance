@@ -69,6 +69,7 @@ class AdminDashboard extends React.Component {
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={CreateCourse} />
           <Route exact path="/dashboard/create-user" component={CreateUser} />
+          <Route exact path="/dashboard/edit-user" render={(props) => <EditProfile {...props} />} />
           <Route
             exact
             path="/dashboard/approve-enrollment"

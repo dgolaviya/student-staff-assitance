@@ -122,6 +122,9 @@ class ManageUsers extends React.Component {
                           <td>{role}</td>
                           <td>
                             <div onClick={this.deleteUser(user.userId)}>Delete</div>
+                            <div>
+                              <Link to={{ pathname: '/dashboard/edit-user', user }} >Edit</Link>
+                            </div>
                           </td>
                         </tr>
                       );

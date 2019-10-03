@@ -115,12 +115,14 @@ class EditProfile extends Component {
     )
   }
 }
-const mapStateToProps = (state) => ({
-  user: state.auth.user,
-  departments: state.auth.departments,
-  programs: state.auth.programs,
-  userRoles: state.auth.userRoles,
-})
+const mapStateToProps = (state, ownProps) => {
+  return ({
+    user: ownProps.location.user ? ownProps.location.user : state.auth.user,
+    departments: state.auth.departments,
+    programs: state.auth.programs,
+    userRoles: state.auth.userRoles,
+  });
+}
 
 const mapDispatchToProps = dispatch => ({
   fetchDepartments: () => dispatch(fetchDepartments()),

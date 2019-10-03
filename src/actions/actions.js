@@ -59,7 +59,7 @@ export const updateUser = (userId, userData) => {
   return { type: "API_INVOCATION", payload };
 };
 
-export const deleteUser = (userId) => {
+export const deleteUser = userId => {
   const url = `/api/users/${userId}`;
   const payload = {
     action: "DELETE_USER",
@@ -356,6 +356,38 @@ export const createDiscussionChat = (data, userId, discussionThreadId) => {
   const payload = {
     action: "CREATE_DISCUSSION_CHAT",
     method: "POST",
+    url,
+    data: data
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const fetchEvents = () => {
+  const url = `/api/events`;
+  const payload = {
+    action: "FETCH_EVENTS",
+    method: "GET",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const createEvent = (data, userId) => {
+  const url = `/api/users/${userId}/events`;
+  const payload = {
+    action: "CREATE_EVENT",
+    method: "POST",
+    url,
+    data: data
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const updateEvent = (data, userId) => {
+  const url = `/api/users/${userId}/events/${data.eventId}`;
+  const payload = {
+    action: "UPDATE_EVENT",
+    method: "PUT",
     url,
     data: data
   };

@@ -114,7 +114,7 @@ class EditAnnouncement extends Component {
             Save Changes
           </Button>
           <br />
-          <Link to="/dashboard/news">
+          <Link to="/dashboard/announcements">
             <Button large waves="light" type="cancel">
               Cancel
             </Button>

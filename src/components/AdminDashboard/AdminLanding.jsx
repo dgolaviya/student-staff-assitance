@@ -16,11 +16,6 @@ const AdminLanding = (props) => {
             {/* <div className="card-header">10</div> */}
             <div>User accounts</div>
           </Card>
-          <Card className="blue item-card lighten-2" onClick={() => props.history.push('/dashboard/manage-staff')}>
-            <Icon large>check</Icon>
-            {/* <div className="card-header">10</div> */}
-            <div>Staff accounts</div>
-          </Card>
         </Col>
       </Row>
     </>

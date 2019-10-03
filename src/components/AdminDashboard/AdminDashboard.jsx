@@ -11,6 +11,8 @@ import { logoutUser } from "../../actions/actions";
 import ChangePassword from "../ChangePassword";
 import DiscussionThread from "../DiscussionThread/DiscussionThread";
 import EditDiscussionThread from "../EditDiscussionThread/EditDiscussionThread";
+import ManageUsers from "../ManageUsers";
+import ManageStaff from "../ManageStaff";
 
 const menuItems = [
   {
@@ -30,18 +32,6 @@ const menuItems = [
     icon: "history",
     color: "purple-text",
     url: "/dashboard/courses"
-  },
-  {
-    title: "Staff",
-    icon: "collections",
-    color: "green-text",
-    url: "/dashboard/staff"
-  },
-  {
-    title: "Student",
-    icon: "web",
-    color: "blue-text",
-    url: "/dashboard/student"
   },
   {
     title: "Discussion Threads",
@@ -81,6 +71,16 @@ class AdminDashboard extends React.Component {
             exact
             path="/dashboard/approve-enrollment"
             component={ApproveEnrollment}
+          />
+          <Route
+            exact
+            path="/dashboard/manage-users"
+            component={ManageUsers}
+          />
+          <Route
+            exact
+            path="/dashboard/manage-staff"
+            component={ManageStaff}
           />
           <Route
             exact

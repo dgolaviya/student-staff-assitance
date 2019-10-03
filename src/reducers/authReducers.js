@@ -37,6 +37,11 @@ export default function (state = initialState, action) {
         ...state,
         loading: true
       };
+    case FETCH_USER_ROLES_SUCCESS:
+      return {
+        ...state,
+        userRoles: action.payload.data.data
+      }
     case GET_ALL_USERS_SUCCESS:
       return {
         ...state,

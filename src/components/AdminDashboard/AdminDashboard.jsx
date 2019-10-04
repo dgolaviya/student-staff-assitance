@@ -38,25 +38,25 @@ const menuItems = [
   },
   {
     title: "Discussion Threads",
-    icon: "edit",
+    icon: "chat",
     color: "green-text",
     url: "/dashboard/discussion-threads"
   },
   {
     title: "ChangePassword",
-    icon: "history",
+    icon: "security",
     color: "purple-text",
     url: "/dashboard/changePassword"
   },
   {
-    title: "Share",
-    icon: "share",
+    title: "Articles",
+    icon: "book",
     color: "blue-text",
     url: "/dashboard/share"
   },
   {
     title: "Activities",
-    icon: "accessibility",
+    icon: "list",
     color: "red-text",
     url: "/dashboard/activities"
   },

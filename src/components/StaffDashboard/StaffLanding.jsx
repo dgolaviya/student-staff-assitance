@@ -17,7 +17,7 @@ class StaffLanding extends React.Component {
           <Link to="/dashboard/studentsList">
             <Card className="blue item-card lighten-2">
               <Icon large className="black-text">
-                account_circle
+                face
               </Icon>
               <div className="card-header black-text">
                 {this.props.studentsCount}
@@ -30,7 +30,7 @@ class StaffLanding extends React.Component {
           <Link to="/dashboard/announcements">
             <Card className="blue item-card lighten-2">
               <Icon large className="black-text">
-                android
+                announcement
               </Icon>
               <div className="card-header black-text">
                 {this.props.announcementsCount}
@@ -43,7 +43,7 @@ class StaffLanding extends React.Component {
           <Link to="/dashboard/news">
             <Card className="blue item-card lighten-2">
               <Icon large className="black-text">
-                announcement
+                info
               </Icon>
 
               <div className="card-header black-text">

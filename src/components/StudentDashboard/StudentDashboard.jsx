@@ -34,25 +34,25 @@ const menuItems = [
   },
   {
     title: "Articles",
-    icon: "share",
+    icon: "book",
     color: "blue-text",
     url: "/dashboard/documents"
   },
   {
     title: "Discussion Threads",
-    icon: "edit",
+    icon: "chat",
     color: "green-text",
     url: "/dashboard/discussion-threads"
   },
   {
     title: "ChangePassword",
-    icon: "history",
+    icon: "security",
     color: "purple-text",
     url: "/dashboard/changePassword"
   },
   {
     title: "Report",
-    icon: "accessibility",
+    icon: "list",
     color: "red-text",
     url: "/dashboard/report"
   },

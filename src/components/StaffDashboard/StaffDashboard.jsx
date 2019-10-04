@@ -35,13 +35,13 @@ const menuItems = [
   },
   {
     title: "ChangePassword",
-    icon: "history",
+    icon: "security",
     color: "purple-text",
     url: "/dashboard/changePassword"
   },
   {
     title: "Discussion Threads",
-    icon: "edit",
+    icon: "chat",
     color: "green-text",
     url: "/dashboard/discussion-threads"
   },
@@ -53,25 +53,25 @@ const menuItems = [
   },
   {
     title: "Articles",
-    icon: "share",
+    icon: "book",
     color: "blue-text",
     url: "/dashboard/documents"
   },
   {
     title: "Announcement",
-    icon: "edit",
+    icon: "announcement",
     color: "green-text",
     url: "/dashboard/announcements"
   },
   {
     title: "News",
-    icon: "edit",
+    icon: "info",
     color: "green-text",
     url: "/dashboard/news"
   },
   {
     title: "Report",
-    icon: "accessibility",
+    icon: "list",
     color: "red-text",
     url: "/dashboard/report"
   },

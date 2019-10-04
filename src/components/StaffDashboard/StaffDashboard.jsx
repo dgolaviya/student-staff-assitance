@@ -52,7 +52,7 @@ const menuItems = [
     url: "/dashboard/share"
   },
   {
-    title: "Documents",
+    title: "Articles",
     icon: "share",
     color: "blue-text",
     url: "/dashboard/documents"

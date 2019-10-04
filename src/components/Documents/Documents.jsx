@@ -50,7 +50,7 @@ class Documents extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.props.documents.map((v, i) => (
+                  {this.props.users.length > 0 && this.props.documents.length > 0 ? this.props.documents.map((v, i) => (
                     <tr key={i}>
                       <td>{v.docTitle}</td>
                       <td>{v.docDesc}</td>
@@ -68,7 +68,7 @@ class Documents extends React.Component {
                         </a>
                       </td>
                     </tr>
-                  ))}
+                  )) : null}
                 </tbody>
               </Table>
             </div>

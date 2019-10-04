@@ -11,6 +11,7 @@ import ChangePassword from "../ChangePassword";
 import DiscussionThread from '../DiscussionThread/DiscussionThread';
 import DiscussionChat from '../DiscussionChat/DiscussionChat';
 import ActivityLog from '../ActivityLog';
+import Documents from '../Documents/Documents';
 
 const menuItems = [
   {
@@ -31,7 +32,12 @@ const menuItems = [
     color: "purple-text",
     url: "/dashboard/courses"
   },
-
+  {
+    title: "Articles",
+    icon: "share",
+    color: "blue-text",
+    url: "/dashboard/documents"
+  },
   {
     title: "Discussion Threads",
     icon: "edit",
@@ -92,6 +98,7 @@ class StudentDashboard extends React.Component {
             path="/dashboard/report"
             component={ActivityLog}
           />
+          <Route exact path="/dashboard/documents" component={Documents} />
         </div>
       </div>
     );

@@ -41,44 +41,44 @@ export default function(state = initialState, action) {
         loading: false,
         success: false
       };
-    case CREATE_DOCUMENT_PENDING:
-      return {
-        ...state,
-        loading: true,
-        success: false
-      };
-    case CREATE_DOCUMENT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        success: true,
-        isDocumentUpdated: true
-      };
-    case CREATE_DOCUMENT_FAILED:
-      return {
-        ...state,
-        loading: false,
-        success: false
-      };
-    case UPDATE_DOCUMENT_PENDING:
-      return {
-        ...state,
-        loading: true,
-        success: false
-      };
-    case UPDATE_DOCUMENT_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        success: true,
-        isDocumentUpdated: true
-      };
-    case UPDATE_DOCUMENT_FAILED:
-      return {
-        ...state,
-        loading: false,
-        success: false
-      };
+    // case CREATE_DOCUMENT_PENDING:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //     success: false
+    //   };
+    // case CREATE_DOCUMENT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     success: true,
+    //     isDocumentUpdated: true
+    //   };
+    // case CREATE_DOCUMENT_FAILED:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     success: false
+    //   };
+    // case UPDATE_DOCUMENT_PENDING:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //     success: false
+    //   };
+    // case UPDATE_DOCUMENT_SUCCESS:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     success: true,
+    //     isDocumentUpdated: true
+    //   };
+    // case UPDATE_DOCUMENT_FAILED:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //     success: false
+    //   };
 
     default:
       return state;

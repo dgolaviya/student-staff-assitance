@@ -62,6 +62,7 @@ class Documents extends React.Component {
                           href={
                             "data:" + v.contentType + ";base64," + v.docFile
                           }
+                          target="_blank"
                         >
                           FILE
                         </a>

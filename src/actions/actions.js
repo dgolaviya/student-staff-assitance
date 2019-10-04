@@ -128,10 +128,12 @@ export const getCourses = () => {
   return { type: "API_INVOCATION", payload };
 };
 
-export const getActivityLogs = (userId) => {
-  console.log('userId', userId);
-  const url = userId ? `/api/users/${userId}/activityTrace` : `/api/activityTrace`;
-  console.log('url', url);
+export const getActivityLogs = userId => {
+  console.log("userId", userId);
+  const url = userId
+    ? `/api/users/${userId}/activityTrace`
+    : `/api/activityTrace`;
+  console.log("url", url);
   const payload = {
     action: "FETCH_ACTIVITIES",
     method: "GET",
@@ -415,7 +417,6 @@ export const saveDocument = (userId, file, data) => {
   return { type: "API_INVOCATION", payload };
 };
 
-
 export const updateEvent = (data, userId) => {
   const url = `/api/users/${userId}/events/${data.eventId}`;
   const payload = {
@@ -423,6 +424,16 @@ export const updateEvent = (data, userId) => {
     method: "PUT",
     url,
     data: data
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const fetchDocuments = () => {
+  const url = `/api/`;
+  const payload = {
+    action: "FETCH_DOCUMENTS",
+    method: "GET",
+    url
   };
   return { type: "API_INVOCATION", payload };
 };

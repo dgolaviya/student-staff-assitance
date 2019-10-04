@@ -9,11 +9,17 @@ import './styles.scss';
 class AvatarImageUpload extends Component {
   state = {
     fileData: '',
-    imagePreviewUrl: ''
+    imagePreviewUrl: '',
+    avatarError: undefined
   }
   componentDidMount() {
     this.props.fetchAvatarImage(this.props.userId);
   }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.avatarError) {
+  //     this.setState({ avatarError: true });
+  //   }
+  // }
   setFile = (e) => {
     e.preventDefault();
     let reader = new FileReader();
@@ -52,6 +58,7 @@ class AvatarImageUpload extends Component {
             {imagePreview}
           </label>
         </div>
+        {this.props.avatarError ? <span className="red-text">Image size too large</span> : null}
         <input
           type="file"
           id="avatar-upload"
@@ -76,7 +83,8 @@ class AvatarImageUpload extends Component {
 
 const mapStateToProps = (state) => ({
   userId: state.auth.user.userId,
-  avatarDetail: state.auth.avatarDetail
+  avatarDetail: state.auth.avatarDetail,
+  avatarError: state.auth.avatarError
 })
 
 const mapDispatchToProps = dispatch => ({

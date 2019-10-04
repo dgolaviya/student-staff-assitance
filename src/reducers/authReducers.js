@@ -8,7 +8,7 @@ import {
   RESET_AUTH_ERROR,
   FETCH_AVATAR_IMAGE_SUCCESS,
   RESET_PASSWORD_PENDING, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED,
-  GET_ALL_USERS_PENDING, GET_ALL_USERS_SUCCESS, GET_ALL_USERS_FAILED, FETCH_ALL_PROGRAMS_SUCCESS
+  GET_ALL_USERS_PENDING, GET_ALL_USERS_SUCCESS, GET_ALL_USERS_FAILED, FETCH_ALL_PROGRAMS_SUCCESS, UPLOAD_AVATAR_FAILED, UPLOAD_AVATAR_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -22,7 +22,8 @@ const initialState = {
   loading: false,
   success: false,
   error: undefined,
-  avatarDetail: {}
+  avatarDetail: {},
+  avatarError: false
 };
 
 export default function (state = initialState, action) {
@@ -116,6 +117,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         avatarDetail: action.payload.data.data
+      }
+    case UPLOAD_AVATAR_SUCCESS:
+      return {
+        ...state,
+        avatarError: false
+      }
+    case UPLOAD_AVATAR_FAILED:
+      return {
+        ...state,
+        avatarError: true
       }
     case LOGIN_USER_SUCCESS:
       localStorage.setItem('user', JSON.stringify(action.payload.data.data));

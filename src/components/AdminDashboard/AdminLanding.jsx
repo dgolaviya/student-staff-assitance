@@ -23,19 +23,19 @@ class AdminLanding extends React.Component {
           </Col>
           <Col m={3} s={6}>
             <Card className="blue item-card lighten-2">
-              <Link to={{ pathname: '/dashboard/manage-users', filterUser: "3" }}>
-                <Icon large className="black-text">face</Icon>
-                <div className="card-header black-text">{this.props.studentUsers.length || 0}</div>
-                <div className="black-text">Students</div>
+              <Link to={{ pathname: '/dashboard/manage-users', filterUser: "2" }}>
+                <Icon large className="black-text">group</Icon>
+                <div className="card-header black-text">{this.props.staffUsers.length || 0}</div>
+                <div className="black-text">Staff users</div>
               </Link>
             </Card>
           </Col>
           <Col m={3} s={6}>
             <Card className="blue item-card lighten-2">
-              <Link to={{ pathname: '/dashboard/manage-users', filterUser: "2" }}>
-                <Icon large className="black-text">supervised_user_cirlce</Icon>
-                <div className="card-header black-text">{this.props.staffUsers.length || 0}</div>
-                <div className="black-text">Staff users</div>
+              <Link to={{ pathname: '/dashboard/manage-users', filterUser: "3" }}>
+                <Icon large className="black-text">face</Icon>
+                <div className="card-header black-text">{this.props.studentUsers.length || 0}</div>
+                <div className="black-text">Students</div>
               </Link>
             </Card>
           </Col>

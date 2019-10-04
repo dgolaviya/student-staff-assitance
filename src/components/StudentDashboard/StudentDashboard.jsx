@@ -51,12 +51,6 @@ const menuItems = [
     url: "/dashboard/changePassword"
   },
   {
-    title: "Report",
-    icon: "list",
-    color: "red-text",
-    url: "/dashboard/report"
-  },
-  {
     title: "Logout",
     icon: "exit_to_app",
     color: "black-text",

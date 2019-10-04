@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Button, Textarea, Icon,  } from 'react-materialize';
+import { TextInput, Button, Textarea, Icon, } from 'react-materialize';
 import { connect } from 'react-redux';
 import { saveDocument } from '../../actions/actions'
 
@@ -7,7 +7,13 @@ export class Share extends Component {
 
   state = {
     fileData: '',
-    fileName: ''
+    fileName: '',
+    docTitle: '',
+    docDesc: '',
+    docType: 'Article'
+  }
+  onChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
   }
 
   setFile = (e) => {
@@ -17,7 +23,12 @@ export class Share extends Component {
 
   saveDocument = (e) => {
     e.preventDefault();
-    this.props.saveDocument(this.props.userId, this.state.fileData);
+    const data = {
+      docTitle: this.state.docTitle,
+      docDesc: this.state.docDesc,
+      docType: this.state.docType
+    }
+    this.props.saveDocument(this.props.userId, this.state.fileData, JSON.stringify(data));
   }
 
   render() {
@@ -25,15 +36,15 @@ export class Share extends Component {
       <div className="edit-profile">
         <form onSubmit={this.saveDocument} className="edit-profile-form">
           <TextInput
-            id="title"
+            id="docTitle"
             onChange={this.onChange}
             label="Title"
-            value={this.state.title}
+            value={this.state.docTitle}
           />
-          <Textarea label="Description" />
+          <Textarea label="Description" id="docDesc" onChange={this.onChange} />
           <TextInput disabled value={this.state.fileName} />
           <label htmlFor="doc">
-            <Icon className="green-text" large>cloud_upload</Icon>
+            <Icon className="green-text" medium >cloud_upload</Icon>
           </label>
           <input
             type="file"
@@ -61,7 +72,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveDocument: (userId, file) => dispatch(saveDocument(userId, file))
+  saveDocument: (userId, file, data) => dispatch(saveDocument(userId, file, data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Share);

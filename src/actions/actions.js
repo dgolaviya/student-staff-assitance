@@ -394,11 +394,11 @@ export const createEvent = (data, userId) => {
   return { type: "API_INVOCATION", payload };
 };
 
-export const saveDocument = (userId, file) => {
+export const saveDocument = (userId, file, data) => {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("title", file);
-  const url = `/api/documents/users/${userId}/documents`;
+  formData.append("data", data);
+  const url = `/api/users/${userId}/documents`;
   const payload = {
     action: SAVE_DOCUMENT,
     method: "POST",

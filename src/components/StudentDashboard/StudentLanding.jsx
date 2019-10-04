@@ -24,6 +24,7 @@ class StudentLanding extends React.Component {
                   </Card>
                 </Col>
               ))}
+              {!this.props.news.length ? <p>No data yet!</p> : null}
             </Row>
             <h5>Blog</h5>
             <Row style={{ padding: '0 25px' }}>
@@ -50,6 +51,7 @@ class StudentLanding extends React.Component {
                   </Card>
                 </Col>
               ))}
+              {!this.props.announcements.length ? <p>No data yet!</p> : null}
             </Row>
           </div>
         </div>

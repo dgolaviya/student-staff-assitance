@@ -129,7 +129,9 @@ export const getCourses = () => {
 };
 
 export const getActivityLogs = (userId) => {
-  const url = userId ? `/users/${userId}/activityTrace` : `/api/activityTrace`;
+  console.log('userId', userId);
+  const url = userId ? `/api/users/${userId}/activityTrace` : `/api/activityTrace`;
+  console.log('url', url);
   const payload = {
     action: "FETCH_ACTIVITIES",
     method: "GET",

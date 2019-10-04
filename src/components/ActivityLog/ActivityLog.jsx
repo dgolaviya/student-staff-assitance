@@ -46,7 +46,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getActivityLogs: () => dispatch(getActivityLogs())
+  getActivityLogs: (userId) => dispatch(getActivityLogs(userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActivityLog);

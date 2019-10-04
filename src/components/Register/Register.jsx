@@ -70,24 +70,35 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
-    const newUser = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      userName: this.state.username,
-      emailId: this.state.email,
-      mobileNo: this.state.mobile,
-      deptId: this.state.dept,
-      progId: this.state.program,
-      password: this.state.password,
-      roleId: this.state.userType
-    };
-    if (this.state.userType === "1" || this.state.userType === "2") {
-      delete newUser.deptId;
-      delete newUser.progId;
+    if (this.state.password === this.state.password2) {
+      const newUser = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        userName: this.state.username,
+        emailId: this.state.email,
+        mobileNo: this.state.mobile,
+        deptId: this.state.dept,
+        progId: this.state.program,
+        password: this.state.password,
+        roleId: this.state.userType
+      };
+      if (this.state.userType === "1" || this.state.userType === "2") {
+        delete newUser.deptId;
+        delete newUser.progId;
+      }
+      this.props.registerUser(newUser, this.props.history);
+      this.setState({ showModal: true, errors: {} });
+    } else {
+      this.setState(prevState => (
+        {
+          errors: {
+            ...prevState.errors,
+            password: 'Passwords must match'
+          }
+        }
+      ));
     }
-    this.props.registerUser(newUser, this.props.history);
-    this.setState({ showModal: true });
+
   };
 
   resetShowModal = () => {

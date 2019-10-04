@@ -63,10 +63,10 @@ const menuItems = [
     url: "/dashboard/news"
   },
   {
-    title: "Activities",
+    title: "Report",
     icon: "accessibility",
     color: "red-text",
-    url: "/dashboard/activities"
+    url: "/dashboard/report"
   },
   {
     title: "Logout",
@@ -125,11 +125,6 @@ class StaffDashboard extends React.Component {
             path="/dashboard/announcements/createOrUpdate"
             component={EditAnnouncement}
           />
-          <Route
-            exact
-            path="/dashboard/activities"
-            component={ActivityLog}
-          />
           <Route exact path="/dashboard/news" component={News} />
           <Route
             exact
@@ -140,6 +135,11 @@ class StaffDashboard extends React.Component {
             exact
             path="/dashboard/studentsList"
             component={StudentListView}
+          />
+          <Route
+            exact
+            path="/dashboard/report"
+            component={ActivityLog}
           />
         </div>
       </div>

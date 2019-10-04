@@ -4,7 +4,8 @@ import courseReducers from "./courseReducers";
 import errorReducer from "./errorReducers";
 import discussionThreadReducer from "./discussionThreadReducer";
 import eventsReducer from "./eventsReducer";
-import activityReducer from './activityReducer';
+import activityReducer from "./activityReducer";
+import documentsReducer from "./documentsReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   errors: errorReducer,
   discussions: discussionThreadReducer,
   events: eventsReducer,
-  activities: activityReducer
+  activities: activityReducer,
+  documents: documentsReducer
 });

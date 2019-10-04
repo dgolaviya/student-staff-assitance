@@ -16,8 +16,9 @@ import Announcements from "../Announcements/Announcements";
 import EditAnnouncement from "../EditAnnouncement/EditAnnouncement";
 import News from "../News/News";
 import EditNews from "../EditNews/EditNews";
-import ActivityLog from '../ActivityLog';
+import ActivityLog from "../ActivityLog";
 import StudentListView from "../StudentsListView/StudentListView";
+import Documents from "../Documents/Documents";
 
 const menuItems = [
   {
@@ -49,6 +50,12 @@ const menuItems = [
     icon: "share",
     color: "blue-text",
     url: "/dashboard/share"
+  },
+  {
+    title: "Articles",
+    icon: "share",
+    color: "blue-text",
+    url: "/dashboard/documents"
   },
   {
     title: "Announcement",
@@ -136,11 +143,8 @@ class StaffDashboard extends React.Component {
             path="/dashboard/studentsList"
             component={StudentListView}
           />
-          <Route
-            exact
-            path="/dashboard/report"
-            component={ActivityLog}
-          />
+          <Route exact path="/dashboard/report" component={ActivityLog} />
+          <Route exact path="/dashboard/documents" component={Documents} />
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ export class ActivityLog extends Component {
     const { activities } = this.props
     return (
       <div>
-        <h3>Activity Trace Logs</h3>
+        <h3>Activity/Report</h3>
         <Table>
           <thead>
             <tr>

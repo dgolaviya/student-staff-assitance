@@ -132,7 +132,10 @@ export default function (state = initialState, action) {
         isAsuthenticated: false
       }
     case LOGOUT_USER:
-      return { ...initialState }
+      {
+        localStorage.removeItem('user');
+        return { ...initialState }
+      }
     case RESET_AUTH_ERROR: {
       return {
         ...state,

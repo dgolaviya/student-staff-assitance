@@ -97,71 +97,73 @@ class AdminDashboard extends React.Component {
           logoutUser={logoutUser}
           history={this.props.history}
         />
-        <div className="content col s8 m9 l10">
-          <Header />
-          <Route exact path="/dashboard" component={AdminLanding} />
-          <Route exact path="/dashboard/profile" component={EditProfile} />
-          <Route exact path="/dashboard/courses" component={CreateCourse} />
-          <Route exact path="/dashboard/create-user" component={CreateUser} />
-          <Route exact path="/dashboard/edit-user" render={(props) => <EditProfile {...props} />} />
-          <Route
-            exact
-            path="/dashboard/approve-enrollment"
-            component={ApproveEnrollment}
-          />
-          <Route
-            exact
-            path="/dashboard/manage-users"
-            component={ManageUsers}
-          />
-          <Route
-            exact
-            path="/dashboard/changePassword"
-            component={ChangePassword}
-          />
-          <Route
-            exact
-            path="/dashboard/discussion-threads"
-            component={DiscussionThread}
-          />
-          <Route
-            exact
-            path="/dashboard/announcements"
-            component={Announcements}
-          />
-          <Route
-            exact
-            path="/dashboard/announcements/createOrUpdate"
-            component={EditAnnouncement}
-          />
-          <Route exact path="/dashboard/news" component={News} />
-          <Route
-            exact
-            path="/dashboard/news/createOrUpdate"
-            component={EditNews}
-          />
-          <Route
-            exact
-            path="/dashboard/discussion-threads/discussion-chats"
-            component={DiscussionChat}
-          />
-          <Route
-            exact
-            path="/dashboard/share"
-            component={Share}
-          />
-          <Route
-            exact
-            path="/dashboard/activities"
-            component={ActivityLog}
-          />
-          <Route
-            exact
-            path="/dashboard/discussion-threads/createOrUpdate"
-            component={EditDiscussionThread}
-          />
-          <Route exact path="/dashboard/contact-us" component={ContactUs} />
-          <Footer />
+        <div className="right-content">
+          <div className="content col s12">
+            <Header />
+            <Route exact path="/dashboard" component={AdminLanding} />
+            <Route exact path="/dashboard/profile" component={EditProfile} />
+            <Route exact path="/dashboard/courses" component={CreateCourse} />
+            <Route exact path="/dashboard/create-user" component={CreateUser} />
+            <Route exact path="/dashboard/edit-user" render={(props) => <EditProfile {...props} />} />
+            <Route
+              exact
+              path="/dashboard/approve-enrollment"
+              component={ApproveEnrollment}
+            />
+            <Route
+              exact
+              path="/dashboard/manage-users"
+              component={ManageUsers}
+            />
+            <Route
+              exact
+              path="/dashboard/changePassword"
+              component={ChangePassword}
+            />
+            <Route
+              exact
+              path="/dashboard/discussion-threads"
+              component={DiscussionThread}
+            />
+            <Route
+              exact
+              path="/dashboard/announcements"
+              component={Announcements}
+            />
+            <Route
+              exact
+              path="/dashboard/announcements/createOrUpdate"
+              component={EditAnnouncement}
+            />
+            <Route exact path="/dashboard/news" component={News} />
+            <Route
+              exact
+              path="/dashboard/news/createOrUpdate"
+              component={EditNews}
+            />
+            <Route
+              exact
+              path="/dashboard/discussion-threads/discussion-chats"
+              component={DiscussionChat}
+            />
+            <Route
+              exact
+              path="/dashboard/share"
+              component={Share}
+            />
+            <Route
+              exact
+              path="/dashboard/activities"
+              component={ActivityLog}
+            />
+            <Route
+              exact
+              path="/dashboard/discussion-threads/createOrUpdate"
+              component={EditDiscussionThread}
+            />
+            <Route exact path="/dashboard/contact-us" component={ContactUs} />
+            <Footer />
+          </div>
         </div>
       </div>
     );

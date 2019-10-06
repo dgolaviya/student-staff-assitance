@@ -96,61 +96,63 @@ class StaffDashboard extends React.Component {
           logoutUser={logoutUser}
           history={this.props.history}
         />
-        <div className="content col s8 m9 l10">
-          <Header />
-          <Route exact path="/dashboard" component={StaffLanding} />
-          <Route exact path="/dashboard/profile" component={EditProfile} />
-          <Route
-            exact
-            path="/dashboard/enroll-course"
-            component={EnrollCourse}
-          />
-          <Route
-            exact
-            path="/dashboard/changePassword"
-            component={ChangePassword}
-          />
-          <Route
-            exact
-            path="/dashboard/discussion-threads"
-            component={DiscussionThread}
-          />
-          <Route
-            exact
-            path="/dashboard/discussion-threads/createOrUpdate"
-            component={EditDiscussionThread}
-          />
-          <Route exact path="/dashboard/share" component={Share} />
-          <Route
-            exact
-            path="/dashboard/discussion-threads/discussion-chats"
-            component={DiscussionChat}
-          />
-          <Route
-            exact
-            path="/dashboard/announcements"
-            component={Announcements}
-          />
-          <Route
-            exact
-            path="/dashboard/announcements/createOrUpdate"
-            component={EditAnnouncement}
-          />
-          <Route exact path="/dashboard/news" component={News} />
-          <Route
-            exact
-            path="/dashboard/news/createOrUpdate"
-            component={EditNews}
-          />
-          <Route
-            exact
-            path="/dashboard/studentsList"
-            component={StudentListView}
-          />
-          <Route exact path="/dashboard/report" component={ActivityLog} />
-          <Route exact path="/dashboard/documents" component={Documents} />
-          <Route exact path="/dashboard/contact-us" component={ContactUs} />
-          <Footer />
+        <div className="right-content">
+          <div className="content col s12">
+            <Header />
+            <Route exact path="/dashboard" component={StaffLanding} />
+            <Route exact path="/dashboard/profile" component={EditProfile} />
+            <Route
+              exact
+              path="/dashboard/enroll-course"
+              component={EnrollCourse}
+            />
+            <Route
+              exact
+              path="/dashboard/changePassword"
+              component={ChangePassword}
+            />
+            <Route
+              exact
+              path="/dashboard/discussion-threads"
+              component={DiscussionThread}
+            />
+            <Route
+              exact
+              path="/dashboard/discussion-threads/createOrUpdate"
+              component={EditDiscussionThread}
+            />
+            <Route exact path="/dashboard/share" component={Share} />
+            <Route
+              exact
+              path="/dashboard/discussion-threads/discussion-chats"
+              component={DiscussionChat}
+            />
+            <Route
+              exact
+              path="/dashboard/announcements"
+              component={Announcements}
+            />
+            <Route
+              exact
+              path="/dashboard/announcements/createOrUpdate"
+              component={EditAnnouncement}
+            />
+            <Route exact path="/dashboard/news" component={News} />
+            <Route
+              exact
+              path="/dashboard/news/createOrUpdate"
+              component={EditNews}
+            />
+            <Route
+              exact
+              path="/dashboard/studentsList"
+              component={StudentListView}
+            />
+            <Route exact path="/dashboard/report" component={ActivityLog} />
+            <Route exact path="/dashboard/documents" component={Documents} />
+            <Route exact path="/dashboard/contact-us" component={ContactUs} />
+            <Footer />
+          </div>
         </div>
       </div>
     );

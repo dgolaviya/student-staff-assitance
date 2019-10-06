@@ -1,15 +1,23 @@
 @import "./scss/_globals.scss";
 .App {
   height: 100vh;
+  overflow: hidden;
 }
 .row {
   margin-bottom: 0 !important;
 }
 .dashboard {
   height: 100%;
+  .right-content {
+    margin-left: 225px;
+    overflow: auto;
+    height: 100%;
+  }
   .left-menu {
     padding: 0;
     height: 100%;
+    position: fixed;
+    overflow: auto;
     background-color: olivedrab;
     .user-details {
       display: flex;

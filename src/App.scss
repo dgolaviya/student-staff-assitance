@@ -2,6 +2,9 @@
 .App {
   height: 100vh;
 }
+.row {
+  margin-bottom: 0 !important;
+}
 .dashboard {
   height: 100%;
   .left-menu {
@@ -61,6 +64,7 @@
         .card-header {
           font-size: 24px;
           margin-bottom: 10px;
+          word-break: break-all;
         }
         .card-body {
           overflow: auto;

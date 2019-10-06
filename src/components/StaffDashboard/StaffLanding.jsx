@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchEvents, getAllUsers } from "../../actions/actions";
-import { Row, Col, Card, Icon } from "react-materialize";
+import { Row, Col, Card, Icon, CardPanel } from "react-materialize";
 
 class StaffLanding extends React.Component {
   componentDidMount() {
@@ -13,6 +13,12 @@ class StaffLanding extends React.Component {
   render() {
     return (
       <Row style={{ padding: "0 25px" }}>
+        <div className="col s12">
+          <CardPanel className="teal white-text p-10">
+            <p>Hi, <b>{this.props.user.firstName} {this.props.user.lastName}</b><br />
+              <b><i>Welcome to ABC University academic staff portal</i></b></p>
+          </CardPanel>
+        </div>
         <Col m={3} s={6}>
           <Link to="/dashboard/studentsList">
             <Card className="blue item-card lighten-2">
@@ -61,7 +67,8 @@ class StaffLanding extends React.Component {
 const mapStateToProps = state => ({
   announcementsCount: state.events.announcements.length,
   newsCount: state.events.news.length,
-  studentsCount: state.auth.allUsers.filter(user => user.roleId === "3").length
+  studentsCount: state.auth.allUsers.filter(user => user.roleId === "3").length,
+  user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({

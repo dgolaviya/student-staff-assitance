@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Icon } from 'react-materialize';
+import { Card, Row, Col, Icon, CardPanel } from 'react-materialize';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { getAllUsers } from "../../actions/actions";
@@ -12,6 +12,12 @@ class AdminLanding extends React.Component {
     return (
       <>
         <Row style={{ padding: '0 25px' }}>
+          <div className="col s12">
+            <CardPanel className="teal white-text p-10">
+              <p>Hi, <b>{this.props.user.firstName} {this.props.user.lastName}</b><br />
+                <b><i>Welcome to ABC University admin portal</i></b></p>
+            </CardPanel>
+          </div>
           <Col m={3} s={6}>
             <Card className="blue item-card lighten-2">
               <Link to="/dashboard/approve-enrollment">
@@ -48,7 +54,8 @@ class AdminLanding extends React.Component {
 const mapStateToProps = state => {
   return ({
     studentUsers: state.auth.allUsers.filter(user => user.roleId === "3"),
-    staffUsers: state.auth.allUsers.filter(user => user.roleId === "2")
+    staffUsers: state.auth.allUsers.filter(user => user.roleId === "2"),
+    user: state.auth.user
   })
 };
 

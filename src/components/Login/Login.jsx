@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { loginUser, fetchUserRoles } from "../../actions/actions";
 import Header from "../Header";
+import Footer from "../Footer";
 
 class Login extends Component {
   constructor() {
@@ -130,6 +131,7 @@ class Login extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }

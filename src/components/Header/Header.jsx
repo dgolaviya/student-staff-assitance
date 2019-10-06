@@ -4,7 +4,7 @@ import './styles.scss';
 
 const Header = () => {
   return (
-    <div className="z-depth-2 blue darken-4">
+    <div className="z-depth-2 blue darken-4 mb-10">
       <div className="logo">
         <img src={logo} alt="" />
       </div>

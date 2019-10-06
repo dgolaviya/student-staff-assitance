@@ -16,6 +16,13 @@ import ManageUsers from "../ManageUsers";
 import CreateUser from "../CreateUser";
 import Share from '../Share';
 import ActivityLog from '../ActivityLog';
+import Header from "../Header";
+import Footer from "../Footer";
+import ContactUs from "../ContactUs";
+import Announcements from "../Announcements/Announcements";
+import EditAnnouncement from "../EditAnnouncement/EditAnnouncement";
+import EditNews from "../EditNews/EditNews";
+import News from "../News/News";
 
 const menuItems = [
   {
@@ -55,6 +62,18 @@ const menuItems = [
     url: "/dashboard/share"
   },
   {
+    title: "Announcement",
+    icon: "announcement",
+    color: "green-text",
+    url: "/dashboard/announcements"
+  },
+  {
+    title: "News",
+    icon: "info",
+    color: "green-text",
+    url: "/dashboard/news"
+  },
+  {
     title: "Activities",
     icon: "list",
     color: "red-text",
@@ -79,6 +98,7 @@ class AdminDashboard extends React.Component {
           history={this.props.history}
         />
         <div className="content col s8 m9 l10">
+          <Header />
           <Route exact path="/dashboard" component={AdminLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={CreateCourse} />
@@ -106,6 +126,22 @@ class AdminDashboard extends React.Component {
           />
           <Route
             exact
+            path="/dashboard/announcements"
+            component={Announcements}
+          />
+          <Route
+            exact
+            path="/dashboard/announcements/createOrUpdate"
+            component={EditAnnouncement}
+          />
+          <Route exact path="/dashboard/news" component={News} />
+          <Route
+            exact
+            path="/dashboard/news/createOrUpdate"
+            component={EditNews}
+          />
+          <Route
+            exact
             path="/dashboard/discussion-threads/discussion-chats"
             component={DiscussionChat}
           />
@@ -124,6 +160,8 @@ class AdminDashboard extends React.Component {
             path="/dashboard/discussion-threads/createOrUpdate"
             component={EditDiscussionThread}
           />
+          <Route exact path="/dashboard/contact-us" component={ContactUs} />
+          <Footer />
         </div>
       </div>
     );

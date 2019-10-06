@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { resetPassword } from "../../actions/actions";
 import Header from "../Header";
+import Footer from "../Footer";
 
 class ResetPassword extends Component {
   constructor() {
@@ -106,6 +107,7 @@ class ResetPassword extends Component {
             </div>
           </div>
         </div>
+        <Footer />>
       </>
     );
   }

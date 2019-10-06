@@ -12,6 +12,9 @@ import DiscussionThread from '../DiscussionThread/DiscussionThread';
 import DiscussionChat from '../DiscussionChat/DiscussionChat';
 import ActivityLog from '../ActivityLog';
 import Documents from '../Documents/Documents';
+import Header from '../Header';
+import Footer from '../Footer';
+import ContactUs from '../ContactUs';
 
 const menuItems = [
   {
@@ -69,6 +72,7 @@ class StudentDashboard extends React.Component {
           history={this.props.history}
         />
         <div className="content col s10 m10 l10">
+          <Header />
           <Route exact path="/dashboard" component={StudentLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route exact path="/dashboard/courses" component={EnrollCourse} />
@@ -93,6 +97,8 @@ class StudentDashboard extends React.Component {
             component={ActivityLog}
           />
           <Route exact path="/dashboard/documents" component={Documents} />
+          <Route exact path="/dashboard/contact-us" component={ContactUs} />
+          <Footer />
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import { Card, Row, Col, Icon } from 'react-materialize';
+import { Card, Row, Col, Icon, CardPanel } from 'react-materialize';
 import { fetchEvents } from "../../actions/actions";
 
 
@@ -12,6 +12,12 @@ class StudentLanding extends React.Component {
   render() {
     return (
       <div className="row">
+        <div className="col s12">
+          <CardPanel className="teal white-text p-10">
+            <p>Hi, <b>{this.props.user.firstName} {this.props.user.lastName}</b><br />
+            <b><i>Welcome to ABC University student portal</i></b></p>
+          </CardPanel>
+        </div>
         <div className="col s8">
           <div style={{ marginTop: "4rem" }}>
             <h5>News</h5>
@@ -69,7 +75,8 @@ StudentLanding.propTypes = {
 const mapStateToProps = state => ({
   announcements: state.events.announcements,
   news: state.events.news,
-  blogPosts: state.events.blogPosts
+  blogPosts: state.events.blogPosts,
+  user: state.auth.user
 });
 
 

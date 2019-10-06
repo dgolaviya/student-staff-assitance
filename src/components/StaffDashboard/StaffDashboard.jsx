@@ -19,6 +19,9 @@ import EditNews from "../EditNews/EditNews";
 import ActivityLog from "../ActivityLog";
 import StudentListView from "../StudentsListView/StudentListView";
 import Documents from "../Documents/Documents";
+import Header from "../Header";
+import Footer from "../Footer";
+import ContactUs from "../ContactUs";
 
 const menuItems = [
   {
@@ -94,6 +97,7 @@ class StaffDashboard extends React.Component {
           history={this.props.history}
         />
         <div className="content col s8 m9 l10">
+          <Header />
           <Route exact path="/dashboard" component={StaffLanding} />
           <Route exact path="/dashboard/profile" component={EditProfile} />
           <Route
@@ -145,6 +149,8 @@ class StaffDashboard extends React.Component {
           />
           <Route exact path="/dashboard/report" component={ActivityLog} />
           <Route exact path="/dashboard/documents" component={Documents} />
+          <Route exact path="/dashboard/contact-us" component={ContactUs} />
+          <Footer />
         </div>
       </div>
     );

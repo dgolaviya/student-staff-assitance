@@ -7,6 +7,7 @@ import classnames from "classnames";
 import { registerUser, fetchUserRoles, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
 import ModalDialog from '../ModalDialog';
 import Header from '../Header';
+import Footer from "../Footer";
 class Register extends Component {
   constructor() {
     super();
@@ -289,6 +290,7 @@ class Register extends Component {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }

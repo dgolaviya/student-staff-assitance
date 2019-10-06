@@ -44,6 +44,8 @@ class ManageUsers extends React.Component {
     studentUsers = this.state.filterDept ? studentUsers.filter(u => u.deptId === this.state.filterDept) : studentUsers;
     studentUsers = this.state.filterProg ? studentUsers.filter(u => u.progId === this.state.filterProg) : studentUsers;
     const department = departments.find(dept => dept.deptId === this.props.user.deptId) ? departments.find(dept => dept.deptId === this.props.user.deptId)['deptName'] : "";
+    let deptList = {}
+    departments.forEach(d => deptList = {...deptList, [d.deptId]: d.deptName});
     return (
       <>
         <div className="container">
@@ -121,7 +123,7 @@ class ManageUsers extends React.Component {
                           <td>{user.userName}</td>
                           <td>{user.firstName} {user.lastName}</td>
                           <td>{user.emailId}</td>
-                          <td>{department}</td>
+                          <td>{deptList[user.deptId]}</td>
                           <td>{progList[user.progId]}</td>
                           <td>{user.mobileNo}</td>
                           <td>{role}</td>

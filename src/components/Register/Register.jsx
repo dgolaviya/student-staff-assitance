@@ -110,7 +110,7 @@ class Register extends Component {
     const { errors } = this.state;
     const { departments, programs, userRoles } = this.props;
     return (
-      <>
+      <div className="content" style={{ overflow: 'auto', height: '100%' }}>
         <Header />
         <div className="container">
           <div className="row" style={{ marginTop: "4rem" }}>
@@ -118,7 +118,7 @@ class Register extends Component {
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                 <h4>
                   <b>Register</b> below
-                </h4>
+                  </h4>
                 <p className="grey-text text-darken-1">
                   Already have an account? <Link to="/login">Log in</Link>
                 </p>
@@ -279,7 +279,7 @@ class Register extends Component {
                     className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                   >
                     Sign up
-                  </button>
+                    </button>
                   <ModalDialog
                     resetShowModal={this.resetShowModal}
                     history={this.props.history}
@@ -291,7 +291,7 @@ class Register extends Component {
           </div>
         </div>
         <Footer />
-      </>
+      </div>
     );
   }
 }

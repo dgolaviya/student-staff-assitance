@@ -56,7 +56,7 @@ class ResetPassword extends Component {
     const { errors } = this.state;
 
     return (
-      <>
+      <div className="content" style={{ overflow: 'auto', height: '100%' }}>
         <Header />
         <div className="container">
           {this.state.success ? <Toast options={{ html: 'Success! Please check your email.' }} /> : null}
@@ -107,8 +107,8 @@ class ResetPassword extends Component {
             </div>
           </div>
         </div>
-        <Footer />>
-      </>
+        <Footer />
+      </div>
     );
   }
 }

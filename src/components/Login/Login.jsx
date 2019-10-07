@@ -56,7 +56,7 @@ class Login extends Component {
 
     return (
 
-      <>
+      <div className="content" style={{ overflow: 'auto', height: '100%' }}>
         <Header />
         <div className="container">
           <div style={{ marginTop: "4rem" }} className="row">
@@ -132,7 +132,7 @@ class Login extends Component {
           </div>
         </div>
         <Footer />
-      </>
+      </div>
     );
   }
 }

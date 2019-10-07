@@ -15,6 +15,8 @@ import Documents from '../Documents/Documents';
 import Header from '../Header';
 import Footer from '../Footer';
 import ContactUs from '../ContactUs';
+import News from '../News/News';
+import Announcements from '../Announcements/Announcements';
 
 const menuItems = [
   {
@@ -46,6 +48,18 @@ const menuItems = [
     icon: "book",
     color: "blue-text",
     url: "/dashboard/documents"
+  },
+  {
+    title: "Announcement",
+    icon: "announcement",
+    color: "green-text",
+    url: "/dashboard/announcements"
+  },
+  {
+    title: "News",
+    icon: "info",
+    color: "green-text",
+    url: "/dashboard/news"
   },
   {
     title: "Discussion Threads",
@@ -81,6 +95,12 @@ class StudentDashboard extends React.Component {
               exact
               path="/dashboard/changePassword"
               component={ChangePassword}
+            />
+            <Route exact path="/dashboard/news" component={News} />
+            <Route
+              exact
+              path="/dashboard/announcements"
+              component={Announcements}
             />
             <Route
               exact

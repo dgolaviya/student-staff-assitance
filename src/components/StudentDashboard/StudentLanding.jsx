@@ -3,15 +3,24 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Icon, CardPanel } from 'react-materialize';
-import { fetchEvents, fetchDocuments } from "../../actions/actions";
+import { fetchEvents, fetchDocuments, fetchDepartments, fetchPrograms } from "../../actions/actions";
 
 
 class StudentLanding extends React.Component {
   componentDidMount() {
     this.props.fetchEvents();
     this.props.fetchDocuments();
+    this.props.fetchDepartments();
+    this.props.fetchPrograms();
   }
   render() {
+    const { allPrograms, departments, user } = this.props;
+    let progList = {};
+    let deptList = {}
+    allPrograms.forEach(p => {
+      progList = { ...progList, [p.progId]: p.progName }
+    });
+    departments.forEach(d => deptList = { ...deptList, [d.deptId]: d.deptName });
     return (
       <>
         <div className="row">
@@ -19,6 +28,8 @@ class StudentLanding extends React.Component {
             <CardPanel className="blue lighten-2 white-text p-10">
               <p>Hi, <b>{this.props.user.firstName} {this.props.user.lastName}</b><br />
                 <b><i>Welcome to ABC University student portal</i></b></p>
+                <p><b>Department: </b>{deptList[user.deptId]}<br/>
+                <b>Program: </b>{progList[user.progId]}</p>
             </CardPanel>
           </div>
         </div>
@@ -57,7 +68,7 @@ class StudentLanding extends React.Component {
           <div className="col s12">
             <Row>
               <h5 className="p-10">Blog</h5>
-              <div class="blogs-home">
+              <div className="blogs-home">
                 {this.props.blogPosts.map((post, index) => (
                   <Col s={3} key={index}>
                     <Card className="blue item-card lighten-2">
@@ -86,12 +97,16 @@ const mapStateToProps = state => ({
   news: state.events.news,
   blogPosts: state.events.blogPosts,
   documents: state.documents.documents,
-  user: state.auth.user
+  user: state.auth.user,
+  departments: state.auth.departments,
+  allPrograms: state.auth.allPrograms
 });
 
 
 const mapDispatchToProps = (dispatch) => ({
   fetchEvents: () => dispatch(fetchEvents()),
-  fetchDocuments: () => dispatch(fetchDocuments())
+  fetchDocuments: () => dispatch(fetchDocuments()),
+  fetchDepartments: () => dispatch(fetchDepartments()),
+  fetchPrograms: () => dispatch(fetchPrograms())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(StudentLanding);

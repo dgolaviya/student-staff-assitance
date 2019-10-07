@@ -13,7 +13,7 @@ class StudentLanding extends React.Component {
     return (
       <div className="row">
         <div className="col s12">
-          <CardPanel className="teal white-text p-10">
+          <CardPanel className="blue lighten-2 white-text p-10">
             <p>Hi, <b>{this.props.user.firstName} {this.props.user.lastName}</b><br />
             <b><i>Welcome to ABC University student portal</i></b></p>
           </CardPanel>

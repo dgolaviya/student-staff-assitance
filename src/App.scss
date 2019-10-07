@@ -18,7 +18,7 @@
     height: 100%;
     position: fixed;
     overflow: auto;
-    background-color: olivedrab;
+    border-right: 1px solid #ccc;
     .user-details {
       display: flex;
       flex-direction: column;

@@ -21,7 +21,7 @@ class StaffLanding extends React.Component {
         </div>
         <Col m={3} s={6}>
           <Link to="/dashboard/studentsList">
-            <Card className="blue item-card lighten-2">
+            <Card className="blue lighten-2 item-card lighten-2">
               <Icon large className="black-text">
                 face
               </Icon>

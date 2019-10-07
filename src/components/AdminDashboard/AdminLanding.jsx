@@ -13,7 +13,7 @@ class AdminLanding extends React.Component {
       <>
         <Row style={{ padding: '0 25px' }}>
           <div className="col s12">
-            <CardPanel className="teal white-text p-10">
+            <CardPanel className="blue lighten-2 white-text p-10">
               <p>Hi, <b>{this.props.user.firstName} {this.props.user.lastName}</b><br />
                 <b><i>Welcome to ABC University admin portal</i></b></p>
             </CardPanel>

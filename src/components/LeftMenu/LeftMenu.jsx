@@ -41,7 +41,7 @@ class LeftMenu extends React.Component {
               alt=""
               src={defaultAvatar}
             />}
-          <span className="user-name center-align"><b>{userName}</b></span>
+          <span className="user-name center-align black-text"><b>{userName}</b></span>
           <div className="user-skills black-text">
             <b>{`${firstName} ${lastName}`}</b>
             <b>{this.props.emailId}</b>

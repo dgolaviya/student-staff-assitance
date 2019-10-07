@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Card, Row, Col, Icon, CardPanel } from 'react-materialize';
-import { fetchEvents } from "../../actions/actions";
+import { fetchEvents, fetchDocuments } from "../../actions/actions";
 
 
 class StudentLanding extends React.Component {
   componentDidMount() {
     this.props.fetchEvents();
+    this.props.fetchDocuments();
   }
   render() {
     return (
@@ -90,6 +91,7 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchEvents: () => dispatch(fetchEvents())
+  fetchEvents: () => dispatch(fetchEvents()),
+  fetchDocuments: () => dispatch(fetchDocuments())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(StudentLanding);

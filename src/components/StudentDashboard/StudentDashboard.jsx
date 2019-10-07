@@ -30,6 +30,12 @@ const menuItems = [
     url: "/dashboard/profile"
   },
   {
+    title: "ChangePassword",
+    icon: "security",
+    color: "purple-text",
+    url: "/dashboard/changePassword"
+  },
+  {
     title: "Courses",
     icon: "history",
     color: "purple-text",
@@ -46,12 +52,6 @@ const menuItems = [
     icon: "chat",
     color: "green-text",
     url: "/dashboard/discussion-threads"
-  },
-  {
-    title: "ChangePassword",
-    icon: "security",
-    color: "purple-text",
-    url: "/dashboard/changePassword"
   },
   {
     title: "Logout",

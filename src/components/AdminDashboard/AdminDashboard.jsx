@@ -23,6 +23,7 @@ import Announcements from "../Announcements/Announcements";
 import EditAnnouncement from "../EditAnnouncement/EditAnnouncement";
 import EditNews from "../EditNews/EditNews";
 import News from "../News/News";
+import Documents from "../Documents/Documents";
 
 const menuItems = [
   {
@@ -38,6 +39,12 @@ const menuItems = [
     url: "/dashboard/profile"
   },
   {
+    title: "Change Password",
+    icon: "security",
+    color: "purple-text",
+    url: "/dashboard/changePassword"
+  },
+  {
     title: "Courses",
     icon: "history",
     color: "purple-text",
@@ -50,16 +57,16 @@ const menuItems = [
     url: "/dashboard/discussion-threads"
   },
   {
-    title: "ChangePassword",
-    icon: "security",
-    color: "purple-text",
-    url: "/dashboard/changePassword"
+    title: "Create Article",
+    icon: "publish",
+    color: "blue-text",
+    url: "/dashboard/share"
   },
   {
     title: "Articles",
     icon: "book",
     color: "blue-text",
-    url: "/dashboard/share"
+    url: "/dashboard/documents"
   },
   {
     title: "Announcement",
@@ -151,6 +158,7 @@ class AdminDashboard extends React.Component {
               path="/dashboard/share"
               component={Share}
             />
+            <Route exact path="/dashboard/documents" component={Documents} />
             <Route
               exact
               path="/dashboard/activities"

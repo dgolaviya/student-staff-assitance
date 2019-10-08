@@ -59,6 +59,10 @@ class EditProfile extends Component {
       progId: program,
       roleId: this.props.user.roleId
     }
+    if(this.props.user.roleId === "1") {
+      delete userData.deptId;
+      delete userData.progId;
+    }
     this.props.updateUser(this.props.user.userId, userData);
   }
 

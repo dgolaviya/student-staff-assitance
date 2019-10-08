@@ -34,7 +34,7 @@ class Documents extends React.Component {
     this.props.deleteDocument(docId);
     setTimeout(() => {
       this.props.fetchDocuments();
-    },1000);
+    }, 1000);
   }
   render() {
     const userDictionary = {};
@@ -75,7 +75,9 @@ class Documents extends React.Component {
                           FILE
                         </a>
                       </td>
-                      <td><a href="javascript:;" onClick={this.deleteDocument(v.docId)}>Delete</a></td>
+                      <td>
+                        {this.props.currentUser.roleId === "1" ? <a href="javascript:;" onClick={this.deleteDocument(v.docId)}>Delete</a> : ''}
+                      </td>
                     </tr>
                   )) : null}
                 </tbody>
@@ -93,7 +95,8 @@ Documents.propTypes = {};
 const mapStateToProps = state => {
   return {
     users: state.auth.allUsers,
-    documents: state.documents.documents
+    documents: state.documents.documents,
+    currentUser: state.auth.user
   };
 };
 

@@ -64,7 +64,7 @@ class Documents extends React.Component {
                       <td>{v.docDesc}</td>
                       <td>{v.docType}</td>
                       <td>{userDictionary[v.createdBy].userName}</td>
-                      <td>{v.timestamp.substr(0, 10)}</td>
+                      <td>{new Date(v.timestamp).toISOString().substr(0,10)}</td>
                       <td>
                         <a
                           href={

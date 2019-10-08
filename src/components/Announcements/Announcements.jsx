@@ -1,12 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { setDiscussionThreadEditId, fetchEvents } from "../../actions/actions";
+import { setDiscussionThreadEditId, fetchEvents, deleteEvent } from "../../actions/actions";
 import { Table, Button } from "react-materialize";
 
 class Announcements extends React.Component {
   componentDidMount() {
     this.props.fetchEvents();
+  }
+
+  deleteEvent = (eventId) => () => {
+    this.props.deleteEvent(eventId);
+    setTimeout(() => {
+      this.props.fetchEvents();
+    },1000);
   }
 
   render() {
@@ -63,6 +70,7 @@ class Announcements extends React.Component {
                       >
                         Edit
                       </Link>
+                      <div>{this.props.userAccess === "1" ? <a href="javascript:;" onClick={this.deleteEvent(v.eventId)}>Delete</a> : ''}</div>
                     </td>
                   ) : (
                     ""
@@ -87,7 +95,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchEvents: () => dispatch(fetchEvents())
+  fetchEvents: () => dispatch(fetchEvents()),
+  deleteEvent: (eventId) => dispatch(deleteEvent(eventId))
 });
 
 export default connect(

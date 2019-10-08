@@ -110,6 +110,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+        loginError: false,
         isAuthenticated: false,
         user: {}
       }
@@ -133,12 +134,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
+        loginError: false,
         isAuthenticated: true,
         user: action.payload.data.data
       }
     case LOGIN_USER_FAILED:
       return {
         ...state,
+        loginError: true,
         loading: false,
         isAsuthenticated: false
       }

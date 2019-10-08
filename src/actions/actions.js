@@ -352,6 +352,16 @@ export const updateDiscussionThread = (data, userId) => {
   return { type: "API_INVOCATION", payload };
 };
 
+export const deleteDiscussionThread = discussionThreadId => {
+  const url = `/api/discussionThreads/${discussionThreadId}`;
+  const payload = {
+    action: "DELETE_DISCUSSION_THREAD",
+    method: "DELETE",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
 export const setDiscussionThreadEditId = discussionThreadId => {
   return { type: "SET_DISCUSSION_THREAD_EDIT_ID", payload: discussionThreadId };
 };
@@ -382,6 +392,16 @@ export const fetchEvents = () => {
   const payload = {
     action: "FETCH_EVENTS",
     method: "GET",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
+export const deleteEvent = (eventId) => {
+  const url = `/api/events/${eventId}`;
+  const payload = {
+    action: "DELETE_EVENT",
+    method: "DELETE",
     url
   };
   return { type: "API_INVOCATION", payload };

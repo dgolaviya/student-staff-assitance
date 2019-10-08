@@ -1,12 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchEvents } from "../../actions/actions";
+import { fetchEvents, deleteEvent } from "../../actions/actions";
 import { Table, Button } from "react-materialize";
 
 class News extends React.Component {
   componentDidMount() {
     this.props.fetchEvents();
+  }
+
+  deleteEvent = (eventId) => () => {
+    this.props.deleteEvent(eventId);
+    setTimeout(() => {
+      this.props.fetchEvents();
+    },1000);
   }
 
   render() {
@@ -18,8 +25,8 @@ class News extends React.Component {
             <Button>Create</Button>
           </Link>
         ) : (
-          ""
-        )}
+            ""
+          )}
         <hr />
         <Table>
           <thead>
@@ -38,7 +45,7 @@ class News extends React.Component {
                   <td>{v.eventName}</td>
                   <td>{v.eventDesc}</td>
                   <td>{v.createdByUsername}</td>
-                  <td>{v.timestamp.substr(0, 10)}</td>
+                  <td>{new Date(v.timestamp).toISOString().substr(0,10)}</td>
                   {this.props.userAccess !== "3" ? (
                     <td>
                       <Link
@@ -61,17 +68,18 @@ class News extends React.Component {
                       >
                         Edit
                       </Link>
+                      <div>{this.props.userAccess === "1" ? <a href="javascript:;" onClick={this.deleteEvent(v.eventId)}>Delete</a> : ''}</div>
                     </td>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
                 </tr>
               ))
             ) : (
-              <tr>
-                <td colSpan="6">No Data Yet!</td>
-              </tr>
-            )}
+                <tr>
+                  <td colSpan="6">No Data Yet!</td>
+                </tr>
+              )}
           </tbody>
         </Table>
       </div>
@@ -85,7 +93,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchEvents: () => dispatch(fetchEvents())
+  fetchEvents: () => dispatch(fetchEvents()),
+  deleteEvent: (eventId) => dispatch(deleteEvent(eventId))
 });
 
 export default connect(

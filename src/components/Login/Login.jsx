@@ -69,6 +69,8 @@ class Login extends Component {
                   Don't have an account? <Link to="/register">Register</Link>
                 </p>
               </div>
+              {this.props.loginError ?
+              <div className="red-text p-10">Invalid credentials! Please check and try again.</div> : null}
               <form onSubmit={this.onSubmit}>
                 <div className="input-field col s12">
                   <input
@@ -145,6 +147,7 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  loginError: state.auth.loginError,
   errors: state.errors
 });
 

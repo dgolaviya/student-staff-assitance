@@ -3,13 +3,21 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   fetchDiscussionThreads,
-  setDiscussionThreadEditId
+  setDiscussionThreadEditId,
+  deleteDiscussionThread
 } from "../../actions/actions";
 import { Table, Button } from "react-materialize";
 
 class DiscussionThread extends React.Component {
   componentDidMount() {
     this.props.fetchDiscussionThreads();
+  }
+
+  deleteDiscussionThread = (discussionThreadId) => () => {
+    this.props.deleteDiscussionThread(discussionThreadId);
+    setTimeout(() => {
+      this.props.fetchDiscussionThreads();
+    }, 1000);
   }
 
   render() {
@@ -23,8 +31,8 @@ class DiscussionThread extends React.Component {
             </Button>
           </Link>
         ) : (
-          ""
-        )}
+            ""
+          )}
         <hr />
         <Table>
           <thead>
@@ -33,7 +41,7 @@ class DiscussionThread extends React.Component {
               <th>Topic Description</th>
               <th>Created By</th>
               <th>Date</th>
-              {this.props.userAccess !== "3" ? <th></th> : null}
+              {this.props.userAccess !== "3" ? <th>Action</th> : null}
             </tr>
           </thead>
           <tbody>
@@ -55,7 +63,7 @@ class DiscussionThread extends React.Component {
                   </td>
                   <td>{v.topicDesc.substr(0, 30) + "..."}</td>
                   <td>{v.createdByUserName}</td>
-                  <td>{v.timestamp.substr(0, 10)}</td>
+                  <td>{new Date(v.timestamp).toISOString().substr(0,10)}</td>
                   {this.props.userAccess !== "3" ? (
                     <td
                       onClick={() =>
@@ -67,17 +75,20 @@ class DiscussionThread extends React.Component {
                       <Link to="/dashboard/discussion-threads/createOrUpdate">
                         Edit
                       </Link>
+                      <div>{this.props.userAccess === "1" ?
+                  <a href="javascript:;" onClick={this.deleteDiscussionThread(v.discussionThreadId)}>Delete</a> : ''}</div>
                     </td>
                   ) : (
-                    ""
-                  )}
+                      ""
+                    )}
+
                 </tr>
               ))
             ) : (
-              <tr>
-                <td colSpan="5">No Data Yet!</td>
-              </tr>
-            )}
+                <tr>
+                  <td colSpan="5">No Data Yet!</td>
+                </tr>
+              )}
           </tbody>
         </Table>
       </div>
@@ -93,7 +104,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchDiscussionThreads: () => dispatch(fetchDiscussionThreads()),
   setDiscussionThreadEditId: discussionThreadId =>
-    dispatch(setDiscussionThreadEditId(discussionThreadId))
+    dispatch(setDiscussionThreadEditId(discussionThreadId)),
+  deleteDiscussionThread: discussionThreadId =>
+    dispatch(deleteDiscussionThread(discussionThreadId))
 });
 
 export default connect(

@@ -138,6 +138,13 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
         user: action.payload.data.data
       }
+    case 'FETCH_USER_SUCCESS': {
+      localStorage.setItem('user', JSON.stringify(action.payload.data.data));
+      return {
+        ...state,
+        user: action.payload.data.data
+      }
+    }
     case LOGIN_USER_FAILED:
       return {
         ...state,

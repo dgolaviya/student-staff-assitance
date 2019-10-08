@@ -60,6 +60,16 @@ export const updateUser = (userId, userData) => {
   return { type: "API_INVOCATION", payload };
 };
 
+export const fetchUser = (userId) => {
+  const url = `/api/users/${userId}`;
+  const payload = {
+    action: 'FETCH_USER',
+    method: "GET",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};
+
 export const deleteUser = userId => {
   const url = `/api/users/${userId}`;
   const payload = {

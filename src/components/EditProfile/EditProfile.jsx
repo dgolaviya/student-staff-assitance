@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TextInput, Select, Button } from 'react-materialize';
 
-import { updateUser, fetchUserRoles, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
+import { updateUser, fetchUserRoles, fetchUser, fetchDepartments, fetchProgramsbyDept } from "../../actions/actions";
 import AvatarImageUpload from '../AvatarImageUpload';
 import './styles.scss';
 class EditProfile extends Component {
@@ -64,6 +64,9 @@ class EditProfile extends Component {
       delete userData.progId;
     }
     this.props.updateUser(this.props.user.userId, userData);
+    setTimeout(() => {
+      this.props.fetchUser(this.props.user.userId);
+    }, 1500);
   }
 
   render() {
@@ -132,6 +135,7 @@ const mapDispatchToProps = dispatch => ({
   fetchDepartments: () => dispatch(fetchDepartments()),
   fetchUserRoles: () => dispatch(fetchUserRoles()),
   updateUser: (userId, userData) => dispatch(updateUser(userId, userData)),
+  fetchUser: (userId) => dispatch(fetchUser(userId)),
   fetchProgramsbyDept: (deptId) => dispatch(fetchProgramsbyDept(deptId))
 });
 

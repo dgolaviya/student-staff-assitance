@@ -35,6 +35,8 @@ class ManageUsers extends React.Component {
     allPrograms.forEach(p => {
       progList = { ...progList, [p.progId]: p.progName }
     });
+    const uniquePrograms = Object.values(progList).filter((v, i) => Object.values(progList).indexOf(v) === i);
+    // allPrograms = allPrograms.filter(p => Object.values(progList).includesp.progName)
     let { studentUsers, departments } = this.props;
     if (this.props.location.filterUser) {
       studentUsers = this.props.location.filterUser ? studentUsers.filter(u => u.roleId === this.props.location.filterUser) : studentUsers;
@@ -42,7 +44,7 @@ class ManageUsers extends React.Component {
       studentUsers = this.state.filterUser ? studentUsers.filter(u => u.roleId === this.state.filterUser) : studentUsers;
     }
     studentUsers = this.state.filterDept ? studentUsers.filter(u => u.deptId === this.state.filterDept) : studentUsers;
-    studentUsers = this.state.filterProg ? studentUsers.filter(u => u.progId === this.state.filterProg) : studentUsers;
+    studentUsers = this.state.filterProg ? studentUsers.filter(u => progList[u.progId] === this.state.filterProg) : studentUsers;
     const department = departments.find(dept => dept.deptId === this.props.user.deptId) ? departments.find(dept => dept.deptId === this.props.user.deptId)['deptName'] : "";
     let deptList = {}
     departments.forEach(d => deptList = {...deptList, [d.deptId]: d.deptName});
@@ -94,8 +96,8 @@ class ManageUsers extends React.Component {
               >
                 <option value="">All programs</option>
                 {
-                  allPrograms.map((prog) => {
-                    return <option value={prog.progId} key={prog.progId}>{prog.progName}</option>;
+                  uniquePrograms.map((prog) => {
+                    return <option value={prog} key={prog}>{prog}</option>;
                   })
                 }
               </Select>
@@ -128,7 +130,7 @@ class ManageUsers extends React.Component {
                           <td>{user.mobileNo}</td>
                           <td>{role}</td>
                           <td>
-                            <div onClick={this.deleteUser(user.userId)}>Delete</div>
+                            <div><a href="javascript:;" onClick={this.deleteUser(user.userId)}>Delete</a></div>
                             <div>
                               <Link to={{ pathname: '/dashboard/edit-user', user }} >Edit</Link>
                             </div>

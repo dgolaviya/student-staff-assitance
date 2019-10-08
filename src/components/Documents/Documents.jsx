@@ -9,7 +9,8 @@ import {
   fetchUserRoles,
   fetchPrograms,
   deleteUser,
-  fetchDocuments
+  fetchDocuments,
+  deleteDocument
 } from "../../actions/actions";
 
 class Documents extends React.Component {
@@ -29,6 +30,12 @@ class Documents extends React.Component {
   onFilterChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
+  deleteDocument = (docId) => () => {
+    this.props.deleteDocument(docId);
+    setTimeout(() => {
+      this.props.fetchDocuments();
+    },1000);
+  }
   render() {
     const userDictionary = {};
     this.props.users.map((v, i) => (userDictionary[v.userId] = { ...v }));
@@ -46,7 +53,8 @@ class Documents extends React.Component {
                     <th>Type</th>
                     <th>Created By</th>
                     <th>Timestamp</th>
-                    <th></th>
+                    <th>File</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -67,6 +75,7 @@ class Documents extends React.Component {
                           FILE
                         </a>
                       </td>
+                      <td><a href="javascript:;" onClick={this.deleteDocument(v.docId)}>Delete</a></td>
                     </tr>
                   )) : null}
                 </tbody>
@@ -90,7 +99,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getAllUsers: () => dispatch(getAllUsers()),
-  fetchDocuments: () => dispatch(fetchDocuments())
+  fetchDocuments: () => dispatch(fetchDocuments()),
+  deleteDocument: (docId) => dispatch(deleteDocument(docId))
 });
 export default connect(
   mapStateToProps,

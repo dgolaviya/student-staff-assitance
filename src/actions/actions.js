@@ -437,3 +437,13 @@ export const fetchDocuments = () => {
   };
   return { type: "API_INVOCATION", payload };
 };
+
+export const deleteDocument = (docId) => {
+  const url = `/api/documents/${docId}`;
+  const payload = {
+    action: "DELETE_DOCUMENT",
+    method: "DELETE",
+    url
+  };
+  return { type: "API_INVOCATION", payload };
+};

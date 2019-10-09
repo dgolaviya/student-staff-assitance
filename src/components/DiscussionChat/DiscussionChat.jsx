@@ -64,7 +64,7 @@ class DiscussionChat extends React.Component {
                   <Card
                     key={i}
                     className="white z-depth-2"
-                    title={v.userName + " on " + v.timestamp.substr(0, 10)}
+                    title={v.userName + " on " + new Date(v.timestamp).toISOString().substr(0, 10)}
                   >
                     <p>{v.chatDesc}</p>
                   </Card>
